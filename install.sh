@@ -4,40 +4,10 @@
 
 # TODO: oh-my-zsh
 
-formulae=(
-awscli
-neovim
-golang
-python
-wget
-hub
-gnupg
-pinentry-mac
-salt
-black
-shellcheck
-tidy-html5
-ag
-z
-ctags
-fzf
-sshuttle
-ranger
-)
-
-casks=(
-visual-studio-code
-docker
-telegram-desktop
-iterm2
-keybase
-spotify
-notion
-figma
-)
-
-brew install "${formulae[@]}"
-brew cask install "${casks[@]}"
+is_darwin=$(uname | grep -i darwin)
+if [ -n "$is_darwin" ]; then
+	./mac.sh
+fi
 
 # TODO: virtualenv
 # TODO: install `black` linter
@@ -51,6 +21,6 @@ brew cask install "${casks[@]}"
 pip3 install --user pycodestyle pyflakes flake8 vim-vint proselint yamllint
 
 # Node
-nvm install stable
+# nvm install stable
 npm -g i jshint jsxhint jsonlint stylelint sass-lint raml-cop markdownlint-cli write-good tern
 
