@@ -8,7 +8,6 @@ formulae=(
 awscli
 neovim
 golang
-python@2
 python
 wget
 hub
@@ -22,6 +21,8 @@ ag
 z
 ctags
 fzf
+sshuttle
+ranger
 )
 
 casks=(
