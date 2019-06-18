@@ -19,7 +19,7 @@ z
 ctags
 fzf
 sshuttle
-ffmpeg
+ffmpeg # converting audio files, can skip
 ranger
 )
 
@@ -28,10 +28,10 @@ visual-studio-code
 docker
 telegram-desktop
 iterm2
-keybase
+keybase # public key stuff, can skip
 spotify
-notion
-figma
+notion # cloud notes, can skip
+figma # graphic design, can skip
 postgres
 google-chrome
 )
