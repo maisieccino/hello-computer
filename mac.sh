@@ -5,6 +5,7 @@ awscli
 neovim
 golang
 python
+python@2
 wget
 hub
 gnupg
@@ -18,6 +19,7 @@ z
 ctags
 fzf
 sshuttle
+ffmpeg
 ranger
 )
 
@@ -30,6 +32,8 @@ keybase
 spotify
 notion
 figma
+postgres
+google-chrome
 )
 
 brew install "${formulae[@]}"
