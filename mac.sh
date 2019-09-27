@@ -1,39 +1,45 @@
 #!/bin/bash
 
 formulae=(
+ag
 awscli
-neovim
+black
+ctags
+ffmpeg # converting audio files, can skip
+fluxctl
+fzf
+gnupg
 golang
+htop
+hub
+istioctl
+jq
+neovim
+pinentry-mac
 python
 python@2
-wget
-hub
-gnupg
-pinentry-mac
-salt
-black
-shellcheck
-tidy-html5
-ag
-z
-ctags
-fzf
-sshuttle
-ffmpeg # converting audio files, can skip
 ranger
+salt
+shellcheck
+sshuttle
+stow
+tidy-html5
+wget
+z
 )
 
 casks=(
-visual-studio-code
 docker
-telegram-desktop
+figma # graphic design, can skip
+gimp
+google-chrome
 iterm2
 keybase # public key stuff, can skip
-spotify
 notion # cloud notes, can skip
-figma # graphic design, can skip
 postgres
-google-chrome
+spotify
+telegram-desktop
+visual-studio-code
 )
 
 brew install "${formulae[@]}"

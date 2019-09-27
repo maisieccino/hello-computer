@@ -1,0 +1,39 @@
+# Give your commit a short explanatory title
+# You can start by specifying a commit type category
+# <-----  Using a maximum of 50 characters  ----->
+ 
+ 
+# Describe in detail what has been changed
+# <-----   Try to limit each line to a maximum of 72 characters   ----->
+ 
+ 
+# Explain why this change is being made
+# <-----   Try to limit each line to a maximum of 72 characters   ----->
+ 
+ 
+# Provide links or keys to any relevant tickets, articles or other resources
+# Note: If you're on bug/feature branch create via Jira, your commit-message
+#       git-hook should recognize it and automatically append the ticket for
+#       you. If this commit relates to other tickets then add them manually.
+# Example: Jira ticket VOYAG-1247
+ 
+# ----------------------------- COMMIT END ----------------------------
+# Available commit type categories:
+#    Feat     - new feature
+#    Fix      - bug fix
+#    Refactor - refactoring production code
+#    Style    - formatting, missing semi colons, etc; no code change
+#    Docs     - changes to documentation
+#    Test     - adding or refactoring tests; no production code change
+#    Chore    - updating grunt tasks etc; no production code change
+# ---------------------------------------------------------------------
+# Remember:
+#    - Lines starting with '#' will be ignored
+#    - An empty message aborts the commit
+#    - Capitalize the subject line
+#    - Use the imperative mood in the subject line
+#    - Do not end the subject line with a period
+#    - Separate subject from body with a blank line
+#    - Use the body to explain what and why vs. how
+#    - Can use multiple lines with "-" for bullet points in body
+# ---------------------------------------------------------------------
