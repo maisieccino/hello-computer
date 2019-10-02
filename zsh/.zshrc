@@ -100,5 +100,10 @@ function docker_size {
     docker image inspect "${1}" | jq '.[0].Size' | numfmt --to=iec-i --suffix=B
 }
 
+# Set the current context's namespace.
+function kube_ns() {
+    kubectl config set-context --current --namespace "${1}"
+}
+
 # secrets
 source ~/.secrets
