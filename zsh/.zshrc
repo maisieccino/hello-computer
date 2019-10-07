@@ -4,9 +4,6 @@ export ZSH="/Users/matt/.oh-my-zsh"
 # ZSH_THEME="lambda"
 PROMPT="λ "
 
-# Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
-
 COMPLETION_WAITING_DOTS="true"
 
 plugins=(
@@ -107,3 +104,9 @@ function kube_ns() {
 
 # secrets
 source ~/.secrets
+
+# Generates a checksum for a given directory. Useful for checking for Helm chart
+# regressions.
+function checksum_dir {
+    find "${1}" -type f | xargs cat | sha256sum | cut -d' ' -f1
+}
