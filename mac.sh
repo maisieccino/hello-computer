@@ -40,8 +40,10 @@ docker
 figma # graphic design, can skip
 gimp
 google-chrome
+insomnia
 iterm2
 keybase # public key stuff, can skip
+ngrok
 notion # cloud notes, can skip
 postgres
 spotify

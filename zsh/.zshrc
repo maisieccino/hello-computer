@@ -1,6 +1,8 @@
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/matt/.oh-my-zsh"
 
+export PATH="${PATH}:${HOME}/bin"
+
 # ZSH_THEME="lambda"
 PROMPT="λ "
 
