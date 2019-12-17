@@ -14,7 +14,6 @@ else
 	git clone https://github.com/rafi/vim-config "${repo_path}"
 	ln -s "${repo_path}" ~/.vim
 	cd "${repo_path}"
-	./venv.sh
 	pip3 install pynvim
 	make test
 	make

@@ -1,12 +1,14 @@
 #!/bin/bash
 
-# TODO: chsh
-
-# TODO: oh-my-zsh
-
-if (uname | grep -i darwin >/dev/null); then
+if (uname -a | grep -i -e ubuntu -e debian >/dev/null); then
+	./deb.sh
+elif (uname | grep -i darwin >/dev/null); then
 	./mac.sh
 fi
+
+chsh -s /bin/zsh ${USER}
+# oh-my-zsh
+# sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 # TODO: virtualenv
 
@@ -18,9 +20,25 @@ fi
 ./vim.sh
 # linters
 pip3 install --user pycodestyle pyflakes flake8 vim-vint proselint yamllint
+
 # Node
 # nvm install stable
-npm -g i jshint jsxhint jsonlint stylelint sass-lint raml-cop markdownlint-cli write-good tern
+npms=(
+	jshint
+	jsonlint
+	jsxhint
+	markdownlint-cli
+	raml-cop
+	sass-lint
+	stylelint
+	tern
+	write-good
+)
+if (uname -s | grep -i linux >/dev/null); then
+	sudo npm -g i "${npms[@]}"
+elif (uname -s | grep -i darwin >/dev/null); then
+	sudo npm -g i "${npms[@]}"
+fi
 
 # Stow dotfiles
 stows=(
@@ -29,6 +47,6 @@ stows=(
 	zsh
 )
 
-for stow in $stows; do
+for stow in "${stows[@]}"; do
 	stow -v -t ~ "${stow}"
 done
