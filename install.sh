@@ -1,9 +1,9 @@
 #!/bin/bash
 
-if (uname -a | grep -i -e ubuntu -e debian >/dev/null); then
-	./deb.sh
-elif (uname | grep -i darwin >/dev/null); then
+if (uname | grep -i darwin >/dev/null); then
 	./mac.sh
+else
+	./deb.sh
 fi
 
 chsh -s /bin/zsh ${USER}
@@ -44,6 +44,15 @@ stows=(
 	zsh
 )
 
+
 for stow in "${stows[@]}"; do
 	stow -v -t ~ "${stow}"
 done
+
+# pip packages
+pip3s=(
+	virtualenvwrapper
+)
+for pip in "${pip3s[@]}"; do
+	pip3 install "${pip}"
+fi

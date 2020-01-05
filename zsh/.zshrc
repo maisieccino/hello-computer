@@ -5,6 +5,9 @@ export PATH="${PATH}:${HOME}/bin"
 
 # ZSH_THEME="lambda"
 PROMPT='λ '
+if (stat "${HOME}/.remote" >/dev/null); then
+	PROMPT="${HOST} λ "
+fi
 
 COMPLETION_WAITING_DOTS="true"
 
@@ -38,13 +41,13 @@ export NVM_DIR="$HOME/.nvm"
 
 # virtualenv
 export WORKON_HOME=$HOME/venvs
-if (uname -a | grep -i ubuntu >/dev/null); then
-    export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-    source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
-else
+if (uname -a | grep -i darwin >/dev/null); then
     export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
     export PATH=$PATH:${HOME}/Library/Python/3.8/bin
     source /usr/local/bin/virtualenvwrapper.sh
+else
+    export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+    source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
 fi
 
 # GitHub CLI

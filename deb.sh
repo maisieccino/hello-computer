@@ -19,6 +19,7 @@ packages=(
 	python3-pip
 	python3-virtualenv
 	python3-wheel
+	silversearcher-ag
 	stow
 	telegram-desktop
 	vim
@@ -39,10 +40,12 @@ classic_snaps=(
 
 sudo apt install -y "${packages[@]}"
 
-for snap in "${snaps[@]}"; do
-	sudo snap install "${snap}"
-done
+if (which snap >/dev/null); then
+	for snap in "${snaps[@]}"; do
+		sudo snap install "${snap}"
+	done
+	for snap in "${classic_snaps[@]}"; do
+		sudo snap install --classic "${snap}"
+	done
+fi
 
-for snap in "${classic_snaps[@]}"; do
-	sudo snap install --classic "${snap}"
-done
