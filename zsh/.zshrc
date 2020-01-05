@@ -1,10 +1,10 @@
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/matt/.oh-my-zsh"
+export ZSH="${HOME}/.oh-my-zsh"
 
 export PATH="${PATH}:${HOME}/bin"
 
 # ZSH_THEME="lambda"
-PROMPT="λ "
+PROMPT='λ '
 
 COMPLETION_WAITING_DOTS="true"
 
@@ -40,7 +40,7 @@ export NVM_DIR="$HOME/.nvm"
 
 # virtualenv
 export WORKON_HOME=$HOME/venvs
-export PATH=$PATH:/Users/matt/Library/Python/3.7/bin
+export PATH=$PATH:${HOME}/Library/Python/3.8/bin
 export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
 source /usr/local/bin/virtualenvwrapper.sh
 
@@ -103,6 +103,7 @@ function docker_size {
 function kube_ns() {
     kubectl config set-context --current --namespace "${1}"
 }
+export FLUX_FORWARD_NAMESPACE="flux"
 
 # secrets
 source ~/.secrets
@@ -112,3 +113,10 @@ source ~/.secrets
 function checksum_dir {
     find "${1}" -type f | xargs cat | sha256sum | cut -d' ' -f1
 }
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+
+if (uname | grep -i darwin >/dev/null); then
+    export PATH="/usr/local/opt/python@3.8/bin:$PATH"
+fi

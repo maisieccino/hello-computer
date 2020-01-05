@@ -2,3 +2,7 @@
 .DS_STORE
 .venv
 values-local.yaml
+/core.*
+.stignore
+okteto.yml
+.idea

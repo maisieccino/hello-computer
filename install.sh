@@ -20,7 +20,7 @@ fi
 pip3 install --user pycodestyle pyflakes flake8 vim-vint proselint yamllint
 # Node
 # nvm install stable
-npm -g i jshint jsxhint jsonlint stylelint sass-lint raml-cop markdownlint-cli write-good tern
+npm -g i jshint jsxhint jsonlint stylelint sass-lint raml-cop markdownlint-cli write-good tern insomnia-importers
 
 # Stow dotfiles
 stows=(
