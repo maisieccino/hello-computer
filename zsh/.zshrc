@@ -26,8 +26,6 @@ source $ZSH/oh-my-zsh.sh
 
 export EDITOR=vim
 
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -40,9 +38,14 @@ export NVM_DIR="$HOME/.nvm"
 
 # virtualenv
 export WORKON_HOME=$HOME/venvs
-export PATH=$PATH:${HOME}/Library/Python/3.8/bin
-export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
-source /usr/local/bin/virtualenvwrapper.sh
+if (uname -a | grep -i ubuntu >/dev/null); then
+    export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+    source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
+else
+    export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
+    export PATH=$PATH:${HOME}/Library/Python/3.8/bin
+    source /usr/local/bin/virtualenvwrapper.sh
+fi
 
 # GitHub CLI
 alias git=hub
@@ -114,9 +117,11 @@ function checksum_dir {
     find "${1}" -type f | xargs cat | sha256sum | cut -d' ' -f1
 }
 
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
-
-if (uname | grep -i darwin >/dev/null); then
+# syntax highlighting
+if (uname -a | grep -i darwin >/dev/null); then
     export PATH="/usr/local/opt/python@3.8/bin:$PATH"
+    test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+    source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+else
+    source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
