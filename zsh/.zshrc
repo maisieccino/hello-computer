@@ -5,7 +5,7 @@ export PATH="${PATH}:${HOME}/bin"
 
 # ZSH_THEME="lambda"
 PROMPT='λ '
-if (stat "${HOME}/.remote" >/dev/null); then
+if (stat "${HOME}/.remote" >/dev/null 2>/dev/null); then
 	PROMPT="${HOST} λ "
 fi
 
