@@ -55,4 +55,4 @@ pip3s=(
 )
 for pip in "${pip3s[@]}"; do
 	pip3 install "${pip}"
-fi
+done
