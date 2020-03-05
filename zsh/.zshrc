@@ -12,7 +12,7 @@ fi
 COMPLETION_WAITING_DOTS="true"
 
 plugins=(
-# aws
+# aws - aws-cli package sorts this for us.
 django
 docker
 helm
@@ -29,11 +29,6 @@ source $ZSH/oh-my-zsh.sh
 
 export EDITOR=vim
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-
 # NVM
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -42,9 +37,6 @@ export NVM_DIR="$HOME/.nvm"
 # virtualenv
 export WORKON_HOME=$HOME/venvs
 if (uname -a | grep -i darwin >/dev/null); then
-    export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
-    export PATH=$PATH:${HOME}/Library/Python/3.8/bin
-    source /usr/local/bin/virtualenvwrapper.sh
 else
     export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
     source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
@@ -66,6 +58,7 @@ fi
 
 # Go
 export GOPATH=$HOME/go
+export GOPRIVATE="github.com/limejump"
 export PATH=$GOPATH/bin:$PATH
 
 ####################
@@ -122,9 +115,25 @@ function checksum_dir {
 
 # syntax highlighting
 if (uname -a | grep -i darwin >/dev/null); then
-    export PATH="/usr/local/opt/python@3.8/bin:$PATH"
     test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
     source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 else
     source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
+
+fpath=(/usr/local/share/zsh-completions $fpath)
+
+function authorizeme () {
+  prod_group_id=sg-c8e2fdad
+  preprod_group_id=sg-a93173cc
+  description="Matt Remote $(date +%F)"
+  my_ip=$(curl -s 'https://api.ipify.org?format=json' \
+    | python -c "import sys, json; print(json.load(sys.stdin)['ip'])")/32
+ 
+  aws ec2 authorize-security-group-ingress \
+    --group-id $preprod_group_id \
+    --ip-permissions IpProtocol=tcp,FromPort=22,ToPort=22,IpRanges="[{CidrIp=$my_ip,Description=$description}]"
+      aws ec2 authorize-security-group-ingress \
+        --group-id $prod_group_id \
+        --ip-permissions IpProtocol=tcp,FromPort=22,ToPort=22,IpRanges="[{CidrIp=$my_ip,Description=$description}]"
+}

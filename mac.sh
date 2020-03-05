@@ -9,35 +9,30 @@ fi
 
 formulae=(
 ag
-awscli
-black
 ctags
 ffmpeg # converting audio files, can skip
 fluxctl
 fzf
 gnupg
 golang
-httpie
 htop
 hub
 istioctl
 jq
 kafka
-neovim
 nmap
 pinentry-mac
 pipenv
-python
-python@2
+pyenv
 ranger
-salt
 shellcheck
-sshuttle
 stow
+swig
 tidy-html5
 tmux
 wget
 z
+zmq
 )
 
 casks=(
@@ -49,6 +44,7 @@ google-chrome
 insomnia
 iterm2
 keybase # public key stuff, can skip
+mactex-no-gui
 ngrok
 notion # cloud notes, can skip
 postgres

@@ -6,3 +6,4 @@ values-local.yaml
 .stignore
 okteto.yml
 .idea
+.python-version

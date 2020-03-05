@@ -1,2 +1,6 @@
-- { repo: rhysd/accelerated-jk, if: 0 }
-- { repo: dracula/vim, name: dracula, script_type: colors }
+---
+- repo: rhysd/accelerated-jk
+  if: 0
+- repo: dracula/vim
+  name: dracula
+  script_type: colors
