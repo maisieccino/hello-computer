@@ -9,6 +9,7 @@ packages=(
 	gnupg
 	htop
 	hub
+	libffi-dev
 	nodejs
 	npm
 	python
@@ -22,6 +23,7 @@ packages=(
 	silversearcher-ag
 	stow
 	telegram-desktop
+	tmux
 	vim
 	virtualenvwrapper
 	wget

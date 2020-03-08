@@ -5,7 +5,7 @@ set clipboard=unnamed
 set cursorline
 set cursorcolumn
 
-let g:python3_host_prog='/Users/matt/.pyenv/shims/python'
+let g:python3_host_prog='~/.pyenv/shims/python'
 
 colorscheme dracula
 

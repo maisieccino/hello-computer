@@ -11,6 +11,13 @@ fi
 
 COMPLETION_WAITING_DOTS="true"
 
+# PyEnv
+if (stat "${HOME}/.pyenv/bin" >/dev/null 2>/dev/null); then
+  export PATH="${HOME}/.pyenv/bin:${PATH}"
+  eval "$(pyenv init -)"
+  eval "$(pyenv virtualenv-init -)"
+fi
+
 plugins=(
 # aws - aws-cli package sorts this for us.
 django
