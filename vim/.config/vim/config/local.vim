@@ -5,7 +5,7 @@ set clipboard=unnamed
 set cursorline
 set cursorcolumn
 
-let g:python3_host_prog='~/.pyenv/shims/python'
+let g:python3_host_prog=expand('~/.pyenv/shims/python')
 
 colorscheme dracula
 
@@ -13,6 +13,6 @@ colorscheme dracula
 let g:go_fmt_command = 'goimports'
 
 " Neomake
-let g:neomake_tempfile_dir = '~/.cache/vim/neomake%:p:h'
+let g:neomake_tempfile_dir = expand('~/.cache/vim/neomake%:p:h')
 
 autocmd FileType pullrequest set fo+=t
