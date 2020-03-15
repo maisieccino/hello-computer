@@ -38,6 +38,7 @@ sudo npm -g i "${npms[@]}"
 # Stow dotfiles
 stows=(
 	git
+	rvm
 	tmux
 	vim
 	zsh

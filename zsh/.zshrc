@@ -97,7 +97,7 @@ function elevate_last_command() {
 alias fuck=elevate_last_command
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
+export PATH="${HOME}/.rvm/bin:${PATH}"
 
 function latest_tag {
     echo "latest tag: $(git tag -l | sort -r --version-sort | head -n1)"

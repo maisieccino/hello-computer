@@ -1,9 +1,11 @@
 #!/bin/bash -xe
 
 PYTHON_LATEST="3.8.1"
+PYTHON2_LATEST="2.7.6"
 
 pyenv install -s "${PYTHON_LATEST}"
-pyenv global "${PYTHON_LATEST}"
+pyenv install -s "${PYTHON2_LATEST}"
+pyenv global "${PYTHON_LATEST}" "${PYTHON2_LATEST}"
 
 pips=(
 	PyYAML
