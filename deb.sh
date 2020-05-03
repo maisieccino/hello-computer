@@ -5,8 +5,10 @@ packages=(
 	chromium-codecs-ffmpeg-extra
 	curl
 	fzf
+	gnome-sushi
 	gnome-tweak-tool
 	gnupg
+	golang
 	htop
 	hub
 	libffi-dev
