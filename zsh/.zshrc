@@ -5,6 +5,16 @@ unsetopt AUTO_CD
 
 export PATH="${PATH}:${HOME}/bin"
 
+# Use brew-installed cURL (with OpenSSL support).
+if (uname -a | grep -i darwin >/dev/null); then
+    export LDFLAGS="-L/usr/local/opt/curl-openssl/lib"
+    export CPPFLAGS="-I/usr/local/opt/curl-openssl/include"
+    export PKG_CONFIG_PATH="/usr/local/opt/curl-openssl/lib/pkgconfig"
+
+    # And symlink for helm2
+    alias helm2=/usr/local/opt/helm@2/bin/helm
+fi
+
 # ZSH_THEME="lambda"
 PROMPT='λ '
 if (stat "${HOME}/.remote" >/dev/null 2>/dev/null); then
@@ -135,14 +145,38 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 function authorizeme () {
   prod_group_id=sg-c8e2fdad
   preprod_group_id=sg-a93173cc
-  description="Matt Remote $(date +%F)"
+  description="Matt B Remote $(date +%F)"
   my_ip=$(curl -s 'https://api.ipify.org?format=json' \
     | python -c "import sys, json; print(json.load(sys.stdin)['ip'])")/32
- 
+
   aws ec2 authorize-security-group-ingress \
     --group-id $preprod_group_id \
     --ip-permissions IpProtocol=tcp,FromPort=22,ToPort=22,IpRanges="[{CidrIp=$my_ip,Description=$description}]"
       aws ec2 authorize-security-group-ingress \
         --group-id $prod_group_id \
         --ip-permissions IpProtocol=tcp,FromPort=22,ToPort=22,IpRanges="[{CidrIp=$my_ip,Description=$description}]"
+}
+
+function get-ecr-token() {
+  aws ecr get-authorization-token \
+    | jq -r '.authorizationData[0].authorizationToken' \
+    | base64 -d \
+    | cut -d':' -f2
+}
+
+function update-registry-secret() {
+  kubectl delete secret $1 --ignore-not-found
+  kubectl create secret docker-registry $1 \
+    --docker-server=$2 \
+    --docker-username=$3 \
+    --docker-password=$(cat /dev/stdin) \
+    --docker-email=$4
+}
+
+function ecr-registry-secret() {
+  export secret_name="${1}"
+  export docker_server="https://${AWS_ACCOUNT}.dkr.ecr.eu-west-1.amazonaws.com"
+  export docker_email="${ECR_EMAIL}"
+
+  get-ecr-token | update-registry-secret "${secret_name}" "${docker_server}" "AWS" "${docker_email}"
 }

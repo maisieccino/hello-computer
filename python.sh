@@ -1,6 +1,6 @@
 #!/bin/bash -xe
 
-PYTHON_LATEST="3.8.1"
+PYTHON_LATEST="3.8.2"
 PYTHON2_LATEST="2.7.6"
 
 pyenv install -s "${PYTHON_LATEST}"
