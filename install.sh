@@ -17,6 +17,10 @@ chsh -s /bin/zsh ${USER}
 
 ## Install vim config and extra tools
 ./vim.sh
+
+# Golang-specific stuff.
+./go.sh
+
 # linters
 
 # Node
