@@ -20,3 +20,6 @@ else
 	make test
 	make
 fi
+
+vim -V1 -es -i NONE -N -u config/init.vim -c "try | exe ':GoInstallBinaries' | finally | qall\! | endtry"
+

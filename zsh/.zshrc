@@ -125,8 +125,8 @@ function kube_ns() {
 }
 export FLUX_FORWARD_NAMESPACE="flux"
 
-# secrets
-source ~/.secrets
+# Secrets.
+[ -f ~/.secrets ] && source ~/.secrets
 
 # Generates a checksum for a given directory. Useful for checking for Helm chart
 # regressions.

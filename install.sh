@@ -15,11 +15,11 @@ chsh -s /bin/zsh ${USER}
 # TODO: iTerm dracula theme
 # https://raw.githubusercontent.com/dracula/iterm/master/Dracula.itermcolors
 
-## Install vim config and extra tools
-./vim.sh
-
 # Golang-specific stuff.
 ./go.sh
+
+## Install vim config and extra tools
+./vim.sh
 
 # linters
 
