@@ -18,10 +18,13 @@ chsh -s /bin/zsh ${USER}
 # Golang-specific stuff.
 ./go.sh
 
-## Install vim config and extra tools
+# Install vim config and extra tools
 ./vim.sh
 
-# linters
+# Fetch secrets.
+if [ -z "${SKIP_OP}" ]; then
+	./op.sh
+fi
 
 # Node
 # nvm install stable
