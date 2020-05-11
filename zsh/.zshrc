@@ -41,7 +41,7 @@ kubectl
 osx
 pip
 salt
-# virtualenvwrapper
+vault
 )
 
 source $ZSH/oh-my-zsh.sh
