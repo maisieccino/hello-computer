@@ -14,6 +14,7 @@ packages=(
 	jq
 	kubectl
 	libffi-dev
+	make
 	nodejs
 	nmap
 	npm
@@ -28,7 +29,6 @@ packages=(
 	vim
 	virtualenvwrapper
 	vsftpd
-	wget
 	xclip
 	zsh
 	zsh-syntax-highlighting
@@ -46,7 +46,7 @@ classic_snaps=(
 )
 
 # Fetch aptitude keys.
-curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+wget -q -O- https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 
 # Add extra repositories.
 echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
