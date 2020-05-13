@@ -44,6 +44,7 @@ google-chrome
 insomnia
 iterm2
 keybase # public key stuff, can skip
+krisp
 mactex-no-gui
 ngrok
 notion # cloud notes, can skip
