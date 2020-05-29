@@ -42,7 +42,12 @@ snaps=(
 )
 
 classic_snaps=(
+	intellij-idea-community,
 	microk8s
+)
+
+beta_snaps=(
+	kafka
 )
 
 # Fetch aptitude keys.
@@ -62,6 +67,9 @@ if (which snap >/dev/null); then
 	done
 	for snap in "${classic_snaps[@]}"; do
 		sudo snap install --classic "${snap}"
+	done
+	for snap in "${beta_snaps[@]}"; do
+		sudo snap install --beta "${snap}"
 	done
 fi
 
