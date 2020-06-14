@@ -27,7 +27,7 @@ packages=(
 	stow
 	telegram-desktop
 	tmux
-	vim
+	vim-gtk3
 	virtualenvwrapper
 	vsftpd
 	xclip

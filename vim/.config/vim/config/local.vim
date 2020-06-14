@@ -1,6 +1,6 @@
 set number relativenumber
 
-set clipboard=unnamed
+set clipboard=unnamedplus
 
 set cursorline
 set cursorcolumn
