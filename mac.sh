@@ -25,6 +25,7 @@ pinentry-mac
 pipenv
 pyenv
 ranger
+reattach-to-user-namespace
 shellcheck
 stow
 swig
