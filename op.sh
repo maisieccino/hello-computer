@@ -32,8 +32,8 @@ else
 fi
 
 # Fetch files.
-op get private-key > ~/.ssh/id_rsa
-op get public-key > ~/.ssh/id_rsa.pub
+op get document private-key > ~/.ssh/id_rsa
+op get document public-key > ~/.ssh/id_rsa.pub
 
 popd
 rm -r "${dir}"
