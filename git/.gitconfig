@@ -5,7 +5,7 @@
 [user]
 	signingkey = 9CA4BF7F0DCC39CB
 	name = Matt Bell
-	email = matt@mbell.me
+	email = matt@mbell.dev
 [color]
 	branch = auto
 	diff = auto
@@ -22,3 +22,5 @@
 	path = ~/.lj.gitconfig
 [includeIf "gitdir:~/go/src/github.com/limejump/"]
 	path = ~/.lj.gitconfig
+[pull]
+	rebase = false

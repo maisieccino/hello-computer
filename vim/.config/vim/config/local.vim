@@ -18,11 +18,3 @@ let g:neomake_tempfile_dir = expand('~/.cache/vim/neomake%:p:h')
 
 autocmd FileType pullrequest set fo+=t
 autocmd FileType helm set expandtab
-
-let b:ale_fixers = {
-	\'terraform': ['terraform']
-	\}
-
-let b:ale_linters = {
-	\'terraform': ['tflint']
-	\}

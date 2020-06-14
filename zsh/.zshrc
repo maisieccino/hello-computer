@@ -36,7 +36,7 @@ django
 docker
 helm
 git
-go
+golang
 kubectl
 osx
 pip
