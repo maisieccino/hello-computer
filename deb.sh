@@ -18,6 +18,7 @@ packages=(
 	nodejs
 	nmap
 	npm
+	postgresql-client
 	python3
 	python3-pip
 	python3-virtualenv
@@ -42,6 +43,7 @@ snaps=(
 )
 
 classic_snaps=(
+	helm
 	intellij-idea-community,
 	microk8s
 )
