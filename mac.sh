@@ -50,6 +50,7 @@ mactex-no-gui
 ngrok
 notion # cloud notes, can skip
 postgres
+slack
 spotify
 telegram-desktop
 visual-studio-code

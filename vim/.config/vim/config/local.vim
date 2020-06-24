@@ -1,6 +1,10 @@
 set number relativenumber
 
-set clipboard=unnamedplus
+if system('uname -s') ==? "Darwin\n"
+	set clipboard=unnamed
+else
+	set clipboard=unnamedplus
+endif
 
 set cursorline
 set cursorcolumn
