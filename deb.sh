@@ -1,35 +1,48 @@
 #!/bin/bash
 
 packages=(
-	chromium-codecs-ffmpeg-extra
+	# chromium-codecs-ffmpeg-extra
 	curl
 	docker.io
+	fonts-noto-color-emoji
 	fzf
+	gimp
 	gnome-sushi
 	gnome-tweak-tool
 	gnupg
 	golang
+	heif-thumbnailer
 	htop
 	hub
+	ifuse
 	jq
 	kubectl
 	libffi-dev
 	make
+	mpv
+	neofetch
+	net-tools
 	nodejs
 	nmap
 	npm
+	openshot
+	openssh-server
 	postgresql-client
+	psensor
 	python3
 	python3-pip
 	python3-virtualenv
 	python3-wheel
+	ranger
 	silversearcher-ag
 	stow
-	telegram-desktop
+	systemd-coredump
+	testdisk
 	tmux
 	vim-gtk3
 	virtualenvwrapper
 	vsftpd
+	wireshark-gtk
 	xclip
 	zsh
 	zsh-syntax-highlighting
@@ -37,9 +50,11 @@ packages=(
 
 snaps=(
 	chromium
+	discord
 	doctl
 	opera
 	spotify
+	telegram-desktop
 )
 
 classic_snaps=(
