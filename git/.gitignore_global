@@ -8,3 +8,4 @@ okteto.yml
 okteto
 .idea
 .python-version
+telepresence.log

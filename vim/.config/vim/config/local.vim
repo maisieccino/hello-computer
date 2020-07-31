@@ -19,5 +19,9 @@ let g:go_fmt_command = 'goimports'
 " Neomake
 let g:neomake_tempfile_dir = expand('~/.cache/vim/neomake%:p:h')
 
-autocmd FileType pullrequest set fo+=t
-autocmd FileType helm set expandtab
+augroup github
+	autocmd FileType pullrequest set fo+=t
+augroup end!
+augroup helm
+	autocmd FileType helm set expandtab
+augroup end!
