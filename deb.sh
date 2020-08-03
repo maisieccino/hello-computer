@@ -46,6 +46,7 @@ packages=(
 	xclip
 	zsh
 	zsh-syntax-highlighting
+	wireguard
 )
 
 snaps=(
@@ -58,6 +59,7 @@ snaps=(
 )
 
 classic_snaps=(
+	code
 	helm
 	intellij-idea-community,
 	microk8s
