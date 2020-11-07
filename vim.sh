@@ -21,5 +21,5 @@ else
 	make
 fi
 
-vim -V1 -es -i NONE -N -u config/init.vim -c "try | exe ':GoInstallBinaries' | finally | qall\! | endtry"
+# vim -V1 -es -i NONE -N -u config/init.vim -c "try | exe ':GoInstallBinaries' | finally | qall\! | endtry"
 

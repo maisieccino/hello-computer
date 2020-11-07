@@ -4,6 +4,7 @@ packages=(
 	# chromium-codecs-ffmpeg-extra
 	curl
 	docker.io
+	dropbear-initramfs
 	fonts-noto-color-emoji
 	fzf
 	gimp
@@ -17,7 +18,11 @@ packages=(
 	ifuse
 	jq
 	kubectl
+	libbz2-dev
 	libffi-dev
+	libreadline-dev
+	libsqlite3-dev
+	libssl-dev
 	make
 	mpv
 	neofetch
@@ -34,9 +39,11 @@ packages=(
 	python3-virtualenv
 	python3-wheel
 	ranger
+	signal-desktop
 	silversearcher-ag
 	stow
 	systemd-coredump
+	tailscale
 	testdisk
 	tmux
 	vim-gtk3
@@ -70,12 +77,18 @@ beta_snaps=(
 )
 
 # Fetch aptitude keys.
-wget -q -O- https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+curl https://pkgs.tailscale.com/stable/ubuntu/focal.gpg | sudo apt-key add -
+curl https://keybase.io/docs/server_security/code_signing_key.asc | sudo apt-key add -
+curl 'https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x8cf63ad3f06fc659' | sudo apt-key add -
+curl -s https://updates.signal.org/desktop/apt/keys.asc | sudo apt-key add -
 
 # Add extra repositories.
 echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
 echo "deb http://ppa.launchpad.net/jonathonf/vim/ubuntu focal main" | sudo tee /etc/apt/sources.list.d/jonathonf.list
 echo "deb http://prerelease.keybase.io/deb stable main" | sudo tee /etc/apt/sources.list.d/keybase.list
+curl https://pkgs.tailscale.com/stable/ubuntu/focal.list | sudo tee /etc/apt/sources.list.d/tailscale.list
+echo "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main" | sudo tee -a /etc/apt/sources.list.d/signal-xenial.list
 
 sudo apt update
 sudo apt install -y "${packages[@]}"
