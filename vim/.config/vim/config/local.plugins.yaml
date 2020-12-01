@@ -3,4 +3,3 @@
   if: 0
 - repo: dracula/vim
   name: dracula
-  script_type: colors
