@@ -5,6 +5,7 @@ packages=(
 	curl
 	docker.io
 	dropbear-initramfs
+	ethtool
 	fonts-noto-color-emoji
 	fzf
 	gimp
@@ -46,6 +47,7 @@ packages=(
 	tailscale
 	testdisk
 	tmux
+	vault
 	vim-gtk3
 	virtualenvwrapper
 	vsftpd
@@ -82,6 +84,7 @@ curl https://pkgs.tailscale.com/stable/ubuntu/focal.gpg | sudo apt-key add -
 curl https://keybase.io/docs/server_security/code_signing_key.asc | sudo apt-key add -
 curl 'https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x8cf63ad3f06fc659' | sudo apt-key add -
 curl -s https://updates.signal.org/desktop/apt/keys.asc | sudo apt-key add -
+curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
 
 # Add extra repositories.
 echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
@@ -89,6 +92,7 @@ echo "deb http://ppa.launchpad.net/jonathonf/vim/ubuntu focal main" | sudo tee /
 echo "deb http://prerelease.keybase.io/deb stable main" | sudo tee /etc/apt/sources.list.d/keybase.list
 curl https://pkgs.tailscale.com/stable/ubuntu/focal.list | sudo tee /etc/apt/sources.list.d/tailscale.list
 echo "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main" | sudo tee -a /etc/apt/sources.list.d/signal-xenial.list
+echo "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee -a /etc/apt/sources.list.d/hashicorp.list
 
 sudo apt update
 sudo apt install -y "${packages[@]}"
