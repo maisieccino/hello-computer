@@ -10,6 +10,7 @@ fi
 formulae=(
 ag
 ctags
+doctl
 ffmpeg # converting audio files, can skip
 fluxctl
 fzf
