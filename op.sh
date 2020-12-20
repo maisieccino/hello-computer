@@ -4,16 +4,21 @@
 # This script installs the 1password CLI. #
 ###########################################
 
-op_version="v0.10.0"
 
-dir=$(mktemp -d)
-pushd "${dir}"
+if [ -eq "$(uname)" Linux ]; then
+	dir=$(mktemp -d)
+	pushd "${dir}"
+	op_version="v1.8.0"
+	arch=${arch:-amd64}
 
-curl -Lo op.zip https://cache.agilebits.com/dist/1P/op/pkg/${op_version}/op_linux_amd64_${op_version}.zip
-unzip op.zip
-gpg --receive-keys 3FEF9748469ADBE15DA7CA80AC2D62742012EA22
-gpg --verify op.sig op
-cp op ~/bin/op
+	curl -Lo op.zip https://cache.agilebits.com/dist/1P/op/pkg/${op_version}/op_linux_${arch}_${op_version}.zip
+	unzip op.zip
+	gpg --receive-keys 3FEF9748469ADBE15DA7CA80AC2D62742012EA22
+	gpg --verify op.sig op
+	cp op ~/bin/op
+	popd
+	rm -r "${dir}"
+fi
 
 # Get email
 echo "1Password account email?"
@@ -34,6 +39,3 @@ fi
 # Fetch files.
 op get document private-key > ~/.ssh/id_rsa
 op get document public-key > ~/.ssh/id_rsa.pub
-
-popd
-rm -r "${dir}"

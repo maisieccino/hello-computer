@@ -26,6 +26,8 @@ COMPLETION_WAITING_DOTS="true"
 # PyEnv
 if (stat "${HOME}/.pyenv/bin" >/dev/null 2>/dev/null); then
   export PATH="${HOME}/.pyenv/bin:${PATH}"
+fi
+if (which pyenv >/dev/null 2>/dev/null); then
   eval "$(pyenv init -)"
 fi
 

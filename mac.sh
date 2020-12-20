@@ -37,6 +37,7 @@ zmq
 )
 
 casks=(
+1password-cli
 docker
 figma # graphic design, can skip
 gimp
@@ -46,13 +47,12 @@ insomnia
 iterm2
 keybase # public key stuff, can skip
 krisp
-mactex-no-gui
+neovim
 ngrok
 notion # cloud notes, can skip
 postgres
 slack
 spotify
-telegram-desktop
 visual-studio-code
 vnc-viewer
 wireshark
