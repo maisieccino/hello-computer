@@ -41,12 +41,10 @@ casks=(
 docker
 figma # graphic design, can skip
 gimp
-goland # optional, golang editor
 google-chrome
 insomnia
 iterm2
 keybase # public key stuff, can skip
-krisp
 neovim
 ngrok
 notion # cloud notes, can skip
@@ -55,7 +53,6 @@ slack
 spotify
 visual-studio-code
 vnc-viewer
-wireshark
 )
 
 # Needed before you can install the kafka keg.
