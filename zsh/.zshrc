@@ -5,6 +5,10 @@ unsetopt AUTO_CD
 
 export PATH="${PATH}:${HOME}/bin"
 
+if (uname -a | grep -i darwin >/dev/null); then
+  export PATH="/opt/brew/bin:/opt/brew/sbin:$PATH"
+fi
+
 # Use brew-installed cURL (with OpenSSL support).
 if (uname -a | grep -i darwin >/dev/null); then
     export LDFLAGS="-L/usr/local/opt/curl-openssl/lib"
@@ -45,9 +49,12 @@ salt
 vault
 )
 
+if (uname -a | grep -i darwin>/dev/null); then
+  [[ -d /opt/brew/share/zsh/site-functions/ ]] && fpath+=(/opt/brew/share/zsh/site-functions/)
+fi
 source $ZSH/oh-my-zsh.sh
 
-export EDITOR=vim
+export EDITOR=nvim
 
 # NVM
 export NVM_DIR="$HOME/.nvm"
@@ -77,10 +84,12 @@ fi
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f /usr/share/doc/fzf/examples/key-bindings.zsh ] && source /usr/share/doc/fzf/examples/key-bindings.zsh
 [ -f /usr/share/doc/fzf/examples/completion.zsh ] && source /usr/share/doc/fzf/examples/completion.zsh
+[ -f /opt/brew/opt/fzf/shell/key-bindings.zsh ] && source /opt/brew/opt/fzf/shell/key-bindings.zsh
+[ -f /opt/brew/opt/fzf/shell/completion.zsh ] && source /opt/brew/opt/fzf/shell/completion.zsh
 
 # Go
 export GOPATH=$HOME/go
-export GOPRIVATE="github.com/limejump"
+export GOPRIVATE="*.apple.com"
 export PATH=$GOPATH/bin:$PATH
 
 ####################
@@ -135,7 +144,7 @@ function checksum_dir {
 # syntax highlighting
 if (uname -a | grep -i darwin >/dev/null); then
     test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-    source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    source /opt/brew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 else
     source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi

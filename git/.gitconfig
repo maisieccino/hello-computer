@@ -1,26 +1,26 @@
 [commit]
-	gpgsign = true
+    gpgsign = true
 [core]
-	excludesfile = ~/.gitignore_global
+    excludesfile = ~/.gitignore_global
 [user]
-	signingkey = 9CA4BF7F0DCC39CB
-	name = Matt Bell
-	email = matt@mbell.dev
+    signingkey = 9CA4BF7F0DCC39CB
+    name = Maisie Bell
+    email = maisie@mbell.dev
 [color]
-	branch = auto
-	diff = auto
-	interactive = auto
-	status = auto
-[alias]
-	lol = log --graph --decorate --pretty=oneline --abbrev-commit
-	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
-	lolalt = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    branch = auto
+    diff = auto
+    interactive = auto
+    status = auto
 [url "ssh://git@github.com/"]
-	insteadOf = https://github.com/
-
-[includeIf "gitdir:~/github.com/limejump/"]
-	path = ~/.lj.gitconfig
-[includeIf "gitdir:~/go/src/github.com/limejump/"]
-	path = ~/.lj.gitconfig
+    insteadOf = https://github.com/
 [pull]
-	rebase = false
+    rebase = false
+[filter "lfs"]
+    process = git-lfs filter-process
+    required = true
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+[init]
+    defaultBranch = main
+[includeIf "gitdir/i:~/work/**"]
+    path = ~/.work.gitconfig

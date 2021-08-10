@@ -11,6 +11,7 @@ pips=(
 	PyYAML
 	awscli
 	black
+	dazel
 	flake8
 	httpie
 	ipython
