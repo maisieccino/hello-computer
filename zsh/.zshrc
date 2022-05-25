@@ -7,6 +7,8 @@ export PATH="${PATH}:${HOME}/bin"
 
 if (uname -a | grep -i darwin >/dev/null); then
   export PATH="/opt/brew/bin:/opt/brew/sbin:$PATH"
+  # For M1 Macs
+  export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
 fi
 
 # Use brew-installed cURL (with OpenSSL support).
@@ -24,6 +26,9 @@ PROMPT='λ '
 if (stat "${HOME}/.remote" >/dev/null 2>/dev/null); then
 	PROMPT="${HOST} λ "
 fi
+if (uname -a | grep -i darwin >/dev/null); then
+  PROMPT='🍎 '
+fi
 
 COMPLETION_WAITING_DOTS="true"
 
@@ -40,20 +45,18 @@ fi
 
 plugins=(
 # aws - aws-cli package sorts this for us.
-django
 docker
 helm
 git
 golang
 kubectl
-osx
+macos
 pip
-salt
 vault
 )
 
 if (uname -a | grep -i darwin>/dev/null); then
-  [[ -d /opt/brew/share/zsh/site-functions/ ]] && fpath+=(/opt/brew/share/zsh/site-functions/)
+  [[ -d $(brew --prefix)/share/zsh/site-functions/ ]] && fpath+=($(brew --prefix)/share/zsh/site-functions/)
 fi
 source $ZSH/oh-my-zsh.sh
 
@@ -87,8 +90,8 @@ fi
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f /usr/share/doc/fzf/examples/key-bindings.zsh ] && source /usr/share/doc/fzf/examples/key-bindings.zsh
 [ -f /usr/share/doc/fzf/examples/completion.zsh ] && source /usr/share/doc/fzf/examples/completion.zsh
-[ -f /opt/brew/opt/fzf/shell/key-bindings.zsh ] && source /opt/brew/opt/fzf/shell/key-bindings.zsh
-[ -f /opt/brew/opt/fzf/shell/completion.zsh ] && source /opt/brew/opt/fzf/shell/completion.zsh
+[ -f $(brew --prefix)/opt/fzf/shell/key-bindings.zsh ] && source $(brew --prefix)/opt/fzf/shell/key-bindings.zsh
+[ -f $(brew --prefix)/opt/fzf/shell/completion.zsh ] && source $(brew --prefix)/opt/fzf/shell/completion.zsh
 
 # Go
 export GOPATH=$HOME/go
@@ -147,7 +150,7 @@ function checksum_dir {
 # syntax highlighting
 if (uname -a | grep -i darwin >/dev/null); then
     test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-    source /opt/brew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 else
     source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi

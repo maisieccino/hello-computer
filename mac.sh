@@ -14,17 +14,18 @@ doctl
 ffmpeg # converting audio files, can skip
 fluxctl
 fzf
+git-lfs
 gnupg
 golang
 htop
 hub
 istioctl
 jq
-kafka
 neovim
 nmap
 pinentry-mac
 pipenv
+postgresql
 pyenv
 ranger
 reattach-to-user-namespace
@@ -36,6 +37,7 @@ tmux
 wget
 z
 zmq
+zsh-syntax-highlighting
 )
 
 casks=(

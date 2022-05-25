@@ -24,3 +24,5 @@
     defaultBranch = main
 [includeIf "gitdir/i:~/work/**"]
     path = ~/.work.gitconfig
+[merge]
+    tool = nvimdiff
