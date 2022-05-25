@@ -21,6 +21,7 @@ hub
 istioctl
 jq
 kafka
+neovim
 nmap
 pinentry-mac
 pipenv
@@ -46,19 +47,16 @@ google-chrome
 insomnia
 iterm2
 keybase # public key stuff, can skip
-neovim
 ngrok
 notion # cloud notes, can skip
-postgres
-slack
 spotify
 visual-studio-code
 vnc-viewer
 )
 
 # Needed before you can install the kafka keg.
-brew cask install homebrew/cask-versions/adoptopenjdk8
+brew install --cask homebrew/cask-versions/adoptopenjdk8
 
 brew install "${formulae[@]}"
-brew cask install "${casks[@]}"
+brew install --cask "${casks[@]}"
 
