@@ -6,9 +6,10 @@ unsetopt AUTO_CD
 export PATH="${PATH}:${HOME}/bin"
 
 if (uname -a | grep -i darwin >/dev/null); then
-  export PATH="/opt/brew/bin:/opt/brew/sbin:$PATH"
   # For M1 Macs
   export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+else
+  export PATH="/opt/brew/bin:/opt/brew/sbin:$PATH"
 fi
 
 # Use brew-installed cURL (with OpenSSL support).
@@ -195,3 +196,8 @@ function ecr-registry-secret() {
 
   get-ecr-token | update-registry-secret "${secret_name}" "${docker_server}" "AWS" "${docker_email}"
 }
+
+# rbenv
+if which rbenv; then
+  eval "$(rbenv init -)"
+fi
