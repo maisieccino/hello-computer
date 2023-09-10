@@ -28,7 +28,7 @@ if (stat "${HOME}/.remote" >/dev/null 2>/dev/null); then
 	PROMPT="${HOST} λ "
 fi
 if (uname -a | grep -i darwin >/dev/null); then
-  PROMPT='🍎 '
+  PROMPT='$ '
 fi
 
 COMPLETION_WAITING_DOTS="true"

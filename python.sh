@@ -4,8 +4,8 @@ PYTHON_LATEST="3.10.3"
 PYTHON2_LATEST="2.7.18"
 
 pyenv install -s "${PYTHON_LATEST}"
-pyenv install -s "${PYTHON2_LATEST}"
-pyenv global "${PYTHON_LATEST}" "${PYTHON2_LATEST}"
+#pyenv install -s "${PYTHON2_LATEST}"
+pyenv global "${PYTHON_LATEST}" 
 
 pips=(
 	PyYAML

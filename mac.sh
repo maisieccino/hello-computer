@@ -9,9 +9,10 @@ fi
 
 formulae=(
 ag
+bat
 ctags
 doctl
-ffmpeg # converting audio files, can skip
+ffmpeg
 fluxctl
 fzf
 git-lfs
@@ -25,7 +26,7 @@ neovim
 nmap
 pinentry-mac
 pipenv
-postgresql
+postgresql@15
 pyenv
 ranger
 reattach-to-user-namespace

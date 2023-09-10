@@ -27,9 +27,7 @@ cp ./local.plugins.yaml "${HOME}/.config/vim/config"
 cp ./local.vim "${HOME}/.config/vim/config"
 
 work_repo_path="${HOME}/work/mbell/hello-computer"
-stat "${work_repo_path}" >/dev/null
-work_repo_exists=$?
-if [ "${work_repo_exists}" -eq "0" ]; then
+if [ -f "${work_repo_path}" ]; then
 	cat "${work_repo_path}/local.work.vim" >> ${repo_path}/config/local.vim
 	cat "${work_repo_path}/local.work.yaml" >> ${repo_path}/config/local.plugins.yaml
 
