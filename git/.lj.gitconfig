@@ -1,9 +1,0 @@
-[user]
-	name = Matt Bell
-	email = matthew.bell@limejump.com
-[commit]
-	template = ~/.gitmessage
-[push]
-	default = simple
-[core]
-	# hooksPath = /var/git/hooks
