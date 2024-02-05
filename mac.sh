@@ -22,6 +22,7 @@ htop
 hub
 istioctl
 jq
+lazygit
 neovim
 nmap
 pinentry-mac
