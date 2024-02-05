@@ -21,17 +21,3 @@ else
 	make
 	popd
 fi
-
-# vim -V1 -es -i NONE -N -u config/init.vim -c "try | exe ':GoInstallBinaries' | finally | qall\! | endtry"
-cp ./local.plugins.yaml "${HOME}/.config/vim/config"
-cp ./local.vim "${HOME}/.config/vim/config"
-
-work_repo_path="${HOME}/work/mbell/hello-computer"
-if [ -f "${work_repo_path}" ]; then
-	cat "${work_repo_path}/local.work.vim" >> ${repo_path}/config/local.vim
-	cat "${work_repo_path}/local.work.yaml" >> ${repo_path}/config/local.plugins.yaml
-
-	pushd "${repo_path}" || exit
-	make update
-	popd || exit
-fi

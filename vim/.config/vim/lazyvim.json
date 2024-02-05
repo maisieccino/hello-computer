@@ -1,0 +1,17 @@
+{
+  "extras": [
+    "lazyvim.plugins.extras.formatting.prettier",
+    "lazyvim.plugins.extras.lang.json",
+    "rafi.plugins.extras.coding.copilot",
+    "rafi.plugins.extras.coding.editorconfig",
+    "rafi.plugins.extras.lang.go",
+    "rafi.plugins.extras.lang.yaml",
+    "rafi.plugins.extras.lsp.gtd",
+    "rafi.plugins.extras.ui.goto-preview",
+    "rafi.plugins.extras.ui.incline"
+  ],
+  "news": [
+
+  ],
+  "version": 2
+}

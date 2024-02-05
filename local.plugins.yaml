@@ -1,8 +1,0 @@
----
-- repo: rhysd/accelerated-jk
-  if: 0
-- repo: dracula/vim
-  name: dracula
-- repo: scrooloose/vim-slumlord
-- repo: aklt/plantuml-syntax
-- repo: rodjek/vim-puppet

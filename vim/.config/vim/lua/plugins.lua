@@ -6,5 +6,9 @@ return {
 		config = function()
 			vim.cmd.colorscheme("dracula")
 		end
+	},
+	{
+		'rafi.plugins.extras.coding.copilot',
+		enabled = false,
 	}
 }
