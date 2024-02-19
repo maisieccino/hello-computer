@@ -2,6 +2,7 @@
   "extras": [
     "lazyvim.plugins.extras.formatting.prettier",
     "lazyvim.plugins.extras.lang.json",
+    "lazyvim.plugins.extras.test.core",
     "rafi.plugins.extras.coding.copilot",
     "rafi.plugins.extras.coding.editorconfig",
     "rafi.plugins.extras.lang.go",
