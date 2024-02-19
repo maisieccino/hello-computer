@@ -3,7 +3,7 @@
 [core]
     excludesfile = ~/.gitignore_global
 [user]
-    ; signingkey = 9CA4BF7F0DCC39CB
+    signingkey = 6413B9D409C2525799987FD0213831CC3ED4F1C
     name = Maisie Bell
 	email = 4870168+maisieccino@users.noreply.github.com
 [color]
