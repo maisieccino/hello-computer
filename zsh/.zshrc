@@ -22,8 +22,8 @@ if (uname -a | grep -i darwin >/dev/null); then
     alias helm2=/usr/local/opt/helm@2/bin/helm
 fi
 
-# ZSH_THEME="lambda"
-PROMPT='λ '
+ZSH_THEME="cypher"
+# PROMPT='$ '
 if (stat "${HOME}/.remote" >/dev/null 2>/dev/null); then
 	PROMPT="${HOST} λ "
 fi
