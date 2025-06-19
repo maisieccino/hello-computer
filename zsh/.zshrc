@@ -11,17 +11,17 @@ if (uname -a | grep -i darwin >/dev/null); then
 else
   export PATH="/opt/brew/bin:/opt/brew/sbin:$PATH"
 fi
-
-# Use brew-installed cURL (with OpenSSL support).
-if (uname -a | grep -i darwin >/dev/null); then
-    export LDFLAGS="-L/usr/local/opt/curl-openssl/lib"
-    export CPPFLAGS="-I/usr/local/opt/curl-openssl/include"
-    export PKG_CONFIG_PATH="/usr/local/opt/curl-openssl/lib/pkgconfig"
-
-    # And symlink for helm2
-    alias helm2=/usr/local/opt/helm@2/bin/helm
-fi
-
+#
+# # Use brew-installed cURL (with OpenSSL support).
+# if (uname -a | grep -i darwin >/dev/null); then
+#     export LDFLAGS="-L/opt/homebrew/curl-openssl/lib"
+#     export CPPFLAGS="-I/usr/local/opt/curl-openssl/include"
+#     export PKG_CONFIG_PATH="/usr/local/opt/curl-openssl/lib/pkgconfig"
+#
+#     # And symlink for helm2
+#     alias helm2=/usr/local/opt/helm@2/bin/helm
+# fi
+#
 ZSH_THEME="cypher"
 # PROMPT='$ '
 if (stat "${HOME}/.remote" >/dev/null 2>/dev/null); then
@@ -201,3 +201,13 @@ function ecr-registry-secret() {
 if which rbenv; then
   eval "$(rbenv init -)"
 fi
+
+# Activate Mise
+eval "$(mise activate zsh)"
+export PATH=/Users/maisiebell/.local/bin:$PATH
+source /opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
+source /opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
+export CLOUDSDK_PYTHON=/Users/maisiebell/.pyenv/versions/3.9.10/bin/python
+export OAUTHLIB_RELAX_TOKEN_SCOPE=1
+source /Users/maisiebell/src/github.com/monzo/analytics/dbt/misc/shell/source.sh
+export TFENV_ARCH=amd64

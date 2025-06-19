@@ -7,8 +7,14 @@ return {
 			vim.cmd.colorscheme('dracula')
 		end,
 	},
-	-- {
-	-- 	dir = "~/src/github.com/monzo/wearedev/tools/editors/nvim/nvim-monzo",
-	-- 	name = "monzo",
-	-- }
+	{
+		{
+			import = 'rafi.plugins.telescope',
+			opts = {
+				defaults = {
+					initial_mode = 'normal',
+				},
+			},
+		},
+	},
 }
