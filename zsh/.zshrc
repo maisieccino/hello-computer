@@ -198,16 +198,22 @@ function ecr-registry-secret() {
 }
 
 # rbenv
-if which rbenv; then
+if which rbenv >/dev/null; then
   eval "$(rbenv init -)"
 fi
 
 # Activate Mise
-eval "$(mise activate zsh)"
+if (which mise >/dev/null); then
+  eval "$(mise activate zsh)"
+fi
+
 export PATH=/Users/maisiebell/.local/bin:$PATH
-source /opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
-source /opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
-export CLOUDSDK_PYTHON=/Users/maisiebell/.pyenv/versions/3.9.10/bin/python
-export OAUTHLIB_RELAX_TOKEN_SCOPE=1
-source /Users/maisiebell/src/github.com/monzo/analytics/dbt/misc/shell/source.sh
+
+if [ -f ~/src/github.com/monzo ]; then
+  source /opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
+  source /opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
+  export CLOUDSDK_PYTHON=/Users/maisiebell/.pyenv/versions/3.9.10/bin/python
+  export OAUTHLIB_RELAX_TOKEN_SCOPE=1
+  source /Users/maisiebell/src/github.com/monzo/analytics/dbt/misc/shell/source.sh
+fi
 export TFENV_ARCH=amd64
