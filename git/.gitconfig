@@ -5,7 +5,7 @@
 [user]
     signingkey = 6413B9D409C2525799987FD0213831CC3ED4F1CA
     name = Maisie Bell
-	email = 4870168+maisieccino@users.noreply.github.com
+    email = 4870168+maisieccino@users.noreply.github.com
 [color]
     branch = auto
     diff = auto
@@ -27,4 +27,4 @@
 [merge]
     tool = nvimdiff
 [gpg]
-	program = /opt/homebrew/bin/gpg
+    program = gpg
