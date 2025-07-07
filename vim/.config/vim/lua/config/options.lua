@@ -33,3 +33,9 @@ if vim.fn.filereadable(vim.fn.expand("$HOME/src/github.com/monzo")) then
 		vim.fn.expand("$HOME/src/github.com/monzo"),
 	})
 end
+
+-- Reload waybar on saving config
+vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+	pattern = { "*waybar/style.css", "*waybar/config.jsonc" },
+	command = "!killall waybar && hyprctl dispatch exec waybar",
+})
