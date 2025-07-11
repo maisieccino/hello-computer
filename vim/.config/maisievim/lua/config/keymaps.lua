@@ -18,6 +18,10 @@ map("n", "<localleader>f", "<leader>ff", { remap = true, desc = "Find files (Roo
 map("n", "<localleader>F", "<leader>FF", { remap = true, desc = "Find files (cwd)" })
 map("n", "<localleader>g", "<leader>sg", { remap = true, desc = "Grep (Root dir)" })
 map("n", "<localleader>G", "<leader>sG", { remap = true, desc = "Grep (cwd)" })
+map("n", "<localleader>t", "<leader>ss", { remap = true, desc = "Goto Symbol" })
+map("n", "<localleader>T", "<leader>sS", { remap = true, desc = "Goto Symbol (Workspace)" })
+map("n", "<localleader>x", "<leader>fr", { remap = true, desc = "Recent" })
+map("n", "<localleader>X", "<leader>fR", { remap = true, desc = "Recent (cwd)" })
 
 if vim.F.if_nil(vim.g.elite_mode, false) then
   -- Elite-mode: Arrow-keys resize window
@@ -37,3 +41,8 @@ else
   map("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
   map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
 end
+
+-- Comment out code
+unmap("n", { "gra", "gri", "grr", "grn" })
+map("n", "<Leader>v", "gcc", { remap = true, desc = "Comment Line" })
+map("x", "<Leader>v", "gc", { remap = true, desc = "Comment Selection" })

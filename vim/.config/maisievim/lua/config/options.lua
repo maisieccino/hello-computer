@@ -3,7 +3,8 @@ vim.g.maplocalleader = ";"
 
 vim.g.elite_mode = true
 
-vim.g.autoformat = false
+-- Format on save
+vim.g.autoformat = true
 
 local opt = vim.opt
 

@@ -212,3 +212,5 @@ if [ -f ~/src/github.com/monzo ]; then
   source /Users/maisiebell/src/github.com/monzo/analytics/dbt/misc/shell/source.sh
 fi
 export TFENV_ARCH=amd64
+
+alias mvim='NVIM_APPNAME=maisievim nvim'
