@@ -1,0 +1,3 @@
+# vim: filetype=gitconfig expandtab
+[gpg]
+    program = /usr/local/bin/gpg
