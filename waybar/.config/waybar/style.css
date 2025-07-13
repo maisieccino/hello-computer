@@ -1,0 +1,53 @@
+@define-color background rgba(245, 242, 237, 0.7);
+@define-color yellow #ffc700;
+@define-color pink #FD98CE;
+@define-color teal #8eEAEA;
+
+#window {
+  font-family: "Michroma", monospace;
+  font-weight: 800;
+  font-size: 12px;
+  transition-property: all;
+  transition-duration: 0.5s;
+}
+
+window#waybar {
+  background-color: transparent;
+  color: #000000;
+  font-family: "Apercu";
+}
+
+box.modules-left,
+box.modules-center,
+box.modules-right {
+  background-color: @background;
+  border-radius: 100px;
+  transition-property: background-color;
+  transition-duration: 0.5s;
+}
+box.modules-center,
+box.modules-right {
+  padding: 0 15px;
+}
+
+window#waybar.empty box.modules-center {
+  background-color: rgba(100, 100, 100, 0);
+}
+
+.modules-center {
+  background-color: @background;
+}
+
+#workspaces button {
+  border-radius: 100px;
+  border-width: 0;
+  color: black;
+}
+
+#workspaces button:active {
+  border-width: 0;
+}
+
+#workspaces button.active {
+  background: linear-gradient(to bottom right, @yellow, @pink, @teal);
+}
