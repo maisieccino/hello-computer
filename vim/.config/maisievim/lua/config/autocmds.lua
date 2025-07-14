@@ -15,11 +15,13 @@ local function augroup(name)
 end
 
 -- Spell checking in text file types
+-- Enable soft wrapping too.
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup("wrap_spell"),
   pattern = { "text", "plaintex", "typst", "gitcommit", "markdown" },
   callback = function()
     vim.opt_local.spell = true
+    vim.opt_local.wrap = true
   end,
 })
 --

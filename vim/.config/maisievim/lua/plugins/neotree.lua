@@ -51,6 +51,7 @@ return {
             vim.cmd(new_width .. " wincmd |")
           end,
 
+          ["d"] = "noop",
           ["dd"] = "delete",
 
           ["<S-Tab>"] = "prev_source",
