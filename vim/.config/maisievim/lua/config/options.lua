@@ -9,7 +9,7 @@ vim.g.autoformat = true
 local opt = vim.opt
 
 opt.autowrite = false
-opt.expandtab = false
+opt.expandtab = true
 opt.number = true
 opt.relativenumber = true
 
@@ -108,5 +108,6 @@ vim.filetype.add({
     [".*%.js%.map"] = "json",
     [".*%.postman_collection"] = "json",
     ["Jenkinsfile.*"] = "groovy",
+    ["alerts/.*/.*yaml"] = "promql",
   },
 })

@@ -44,10 +44,16 @@ return {
   {
     "echasnovski/mini.trailspace",
     event = { "BufReadPost", "BufNewFile" },
-		-- stylua: ignore
-		keys = {
-			{ '<leader>cw', '<cmd>lua MiniTrailspace.trim()<CR>', desc = 'Erase Whitespace' },
-		},
+    -- stylua: ignore
+    keys = {
+      { '<leader>cw', '<cmd>lua MiniTrailspace.trim()<CR>', desc = 'Erase Whitespace' },
+    },
+    opts = {},
+  },
+  -- Hint and fix deviating indentation
+  {
+    "tenxsoydev/tabs-vs-spaces.nvim",
+    event = { "BufReadPost", "BufNewFile" },
     opts = {},
   },
 }

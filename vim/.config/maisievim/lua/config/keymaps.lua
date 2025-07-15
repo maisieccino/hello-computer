@@ -46,3 +46,7 @@ end
 unmap("n", { "gra", "gri", "grr", "grn" })
 map("n", "<Leader>v", "gcc", { remap = true, desc = "Comment Line" })
 map("x", "<Leader>v", "gc", { remap = true, desc = "Comment Selection" })
+
+map("n", "<CR>", function()
+  return vim.fn.pumvisible() == 1 and "<CR>" or "za"
+end, { expr = true, desc = "Toggle Fold" })

@@ -213,4 +213,5 @@ if [ -f ~/src/github.com/monzo ]; then
 fi
 export TFENV_ARCH=amd64
 
-alias mvim='NVIM_APPNAME=maisievim nvim'
+export NVIM_APPNAME=maisievim
+alias oldvim='NVIM_APPNAME=nvim nvim'
