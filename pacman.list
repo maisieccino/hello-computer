@@ -4,12 +4,14 @@ base
 base-devel
 bat
 clang
+discord
 evtest
 feh
 firefox
 fzf
 gcc
 git
+gnome-keyring
 go
 goimapnotify
 grim
@@ -37,6 +39,7 @@ noto-fonts
 noto-fonts-emoji
 npm
 nvidia-open
+nwg-bar
 nwg-look
 obsidian
 openssh
