@@ -1,3 +1,7 @@
+if vim.fn.exists("$HOME/src/monzo") then
+  return {}
+end
+
 -- Treat anything containing these files as a root directory. This
 -- prevents us ascending too far toward the root of the repository, which
 -- stops us from trying to ingest too much code.
