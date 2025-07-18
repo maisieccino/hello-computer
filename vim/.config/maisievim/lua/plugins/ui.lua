@@ -33,10 +33,14 @@ return {
   {
     "which-key.nvim",
     opts = {
+      icons = {
+        group = " ",
+      },
       spec = {
         {
           { ";", group = "picker" },
-          { ";d", group = "lsp" },
+          { ";d", group = "lsp", icon = "" },
+          { ";q", group = "query", icon = "" },
         },
       },
     },

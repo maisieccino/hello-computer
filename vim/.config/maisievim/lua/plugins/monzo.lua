@@ -1,4 +1,4 @@
-if vim.fn.exists("$HOME/src/monzo") then
+if not vim.fn.exists("$HOME/src/monzo") then
   return {}
 end
 
