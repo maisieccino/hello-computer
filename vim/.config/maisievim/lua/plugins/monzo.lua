@@ -1,4 +1,4 @@
-if not vim.fn.exists("$HOME/src/monzo") then
+if vim.fn.isdirectory(vim.fn.expand("~/src/monzo")) == 0 then
   return {}
 end
 
