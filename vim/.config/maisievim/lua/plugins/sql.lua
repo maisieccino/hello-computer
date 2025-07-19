@@ -68,6 +68,7 @@ return {
     config = function()
       group = vim.api.nvim_create_augroup("estimate_query_on_save", {})
       vim.api.nvim_create_autocmd("BufWritePost", {
+        pattern = "sql",
         group = group,
         callback = function()
           bigquery_get_query_size()
