@@ -1,63 +1,66 @@
-return {
-  {
-    "nvim-neo-tree/neo-tree.nvim",
-    keys = {
-      { "<localleader>e", "<leader>fe", desc = "Explorer Tree (Root dir)", remap = true },
-      { "<localleader>E", "<leader>fE", desc = "Explorer Tree (cwd)", remap = true },
-      {
-        "<localleader>a",
-        function()
-          require("neo-tree.command").execute({ reveal = true, dir = LazyVim.root() })
-        end,
-        desc = "Reveal in Explorer",
-      },
-      {
-        "<localleader>A",
-        function()
-          require("neo-tree.command").execute({ reveal = true, dir = vim.uv.cwd() })
-        end,
-        desc = "Reveal in Explorer (cwd)",
-      },
-    },
-    opts = {
-      event_handlers = {
-        -- Close neo-tree when opening a file.
-        {
-          event = "file_open_requested",
-          handler = function()
-            require("neo-tree.command").execute({ action = "close" })
-          end,
-        },
-      },
-      window = {
-        mappings = {
-          ["<leader>"] = "noop",
+return {}
 
-          ["s"] = "noop",
-          ["sv"] = "open_split",
-          ["sg"] = "open_vsplit",
-          ["st"] = "open_tabnew",
-          ["w"] = function(state)
-            local normal = state.window.width
-            local large = normal * 1.9
-            local small = math.floor(normal / 1.6)
-            local cur_width = state.win_width
-            local new_width = normal
-            if cur_width > normal then
-              new_width = small
-            elseif cur_width == normal then
-              new_width = large
-            end
-            vim.cmd(new_width .. " wincmd |")
-          end,
-
-          ["d"] = "noop",
-          ["dd"] = "delete",
-
-          ["<S-Tab>"] = "prev_source",
-          ["<Tab>"] = "next_source",
-        },
-      },
-    },
-  },
-}
+-- return {
+--   {
+--     "nvim-neo-tree/neo-tree.nvim",
+--     enabled = false,
+--     keys = {
+--       -- { "<localleader>e", "<leader>fe", desc = "Explorer Tree (Root dir)", remap = true },
+--       -- { "<localleader>E", "<leader>fE", desc = "Explorer Tree (cwd)", remap = true },
+--       -- {
+--       --   "<localleader>a",
+--       --   function()
+--       --     require("neo-tree.command").execute({ reveal = true, dir = LazyVim.root() })
+--       --   end,
+--       --   desc = "Reveal in Explorer",
+--       -- },
+--       {
+--         "<localleader>A",
+--         function()
+--           require("neo-tree.command").execute({ reveal = true, dir = vim.uv.cwd() })
+--         end,
+--         desc = "Reveal in Explorer (cwd)",
+--       },
+--     },
+--     opts = {
+--       event_handlers = {
+--         -- Close neo-tree when opening a file.
+--         {
+--           event = "file_open_requested",
+--           handler = function()
+--             require("neo-tree.command").execute({ action = "close" })
+--           end,
+--         },
+--       },
+--       window = {
+--         mappings = {
+--           ["<leader>"] = "noop",
+--
+--           ["s"] = "noop",
+--           ["sv"] = "open_split",
+--           ["sg"] = "open_vsplit",
+--           ["st"] = "open_tabnew",
+--           ["w"] = function(state)
+--             local normal = state.window.width
+--             local large = normal * 1.9
+--             local small = math.floor(normal / 1.6)
+--             local cur_width = state.win_width
+--             local new_width = normal
+--             if cur_width > normal then
+--               new_width = small
+--             elseif cur_width == normal then
+--               new_width = large
+--             end
+--             vim.cmd(new_width .. " wincmd |")
+--           end,
+--
+--           ["d"] = "noop",
+--           ["dd"] = "delete",
+--
+--           ["<S-Tab>"] = "prev_source",
+--           ["<Tab>"] = "next_source",
+--         },
+--       },
+--     },
+--   },
+-- }
