@@ -84,4 +84,17 @@ return {
       },
     },
   },
+  {
+    "nvim-lspconfig",
+    opts = {
+      servers = {
+        sqlfluff = {
+          flags = {
+            -- allows for $VARS in SQL queries.
+            templater = "placeholder",
+          },
+        },
+      },
+    },
+  },
 }

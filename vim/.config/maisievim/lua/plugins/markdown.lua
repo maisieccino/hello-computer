@@ -12,8 +12,10 @@ return {
     opts = {
       render_modes = true,
       heading = {
-        sign = true,
         icons = { "󰲡 ", "󰲣 ", "󰲥 ", "󰲧 ", "󰲩 ", "󰲫 " },
+      },
+      checkbox = {
+        enabled = true,
       },
     },
   },

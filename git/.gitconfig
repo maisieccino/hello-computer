@@ -32,3 +32,9 @@
     path = ~/.gitconfig_mac
 [includeIf "gitdir/i:/home/**"]
     path = ~/.gitconfig_linux
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
