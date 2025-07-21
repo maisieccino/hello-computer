@@ -19,22 +19,32 @@ local bigquery_get_query_size = function()
   vim.system({
     "sh",
     "-c",
-    "bq query --format=prettyjson --use_legacy_sql=false --project_id='monzo-analytics' --dry_run",
+    "bq query --format=prettyjson --dry_run",
   }, {
     stdin = lines,
   }, function(output)
     if output.code ~= 0 then
       print("error from bq: " .. output.stdout)
+      -- vim.notify("error from bq: " .. output.stdout, vim.log.levels.ERROR, {
+      --   bq = true,
+      -- })
       return
     end
     local ok, obj = pcall(vim.json.decode, output.stdout, { luanil = { object = true, array = true } })
     if not ok then
       print("error parsing result")
+      -- vim.notify("error parsing result", vim.log.levels.ERROR, {
+      --   bq = true,
+      -- })
       return
     end
     local bytes = vim.tbl_get(obj, "statistics", "query", "totalBytesProcessed")
     if bytes ~= "" then
       print("Query will process " .. to_human_readable(bytes) .. " when run")
+      -- vim.notify("query will process " .. to_human_readable(bytes), vim.log.levels.INFO, {
+      --   bq = true,
+      --   success = true,
+      -- })
     else
       print("Could not run bq")
     end
@@ -47,6 +57,16 @@ return {
     ft = "sql",
     opts = {
       routes = {
+        -- {
+        --   filter = {
+        --     event = "notify",
+        --     any = {
+        --       { find = "Calculating query" },
+        --       { find = "Query will process" },
+        --       { find = "Could not run bq" },
+        --     },
+        --   },
+        -- },
         {
           filter = {
             event = "msg_show",
@@ -68,10 +88,11 @@ return {
     config = function()
       group = vim.api.nvim_create_augroup("estimate_query_on_save", {})
       vim.api.nvim_create_autocmd("BufWritePost", {
-        pattern = "sql",
         group = group,
         callback = function()
-          bigquery_get_query_size()
+          if vim.bo.filetype == "sql" then
+            bigquery_get_query_size()
+          end
         end,
       })
     end,
