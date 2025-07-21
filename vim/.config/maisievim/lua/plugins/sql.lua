@@ -105,4 +105,15 @@ return {
       },
     },
   },
+  {
+    "mfussenegger/nvim-lint",
+    ft = "sql",
+    opts = {
+      linters = {
+        sqlfluff = {
+          args = { "lint", "-" },
+        },
+      },
+    },
+  },
 }
