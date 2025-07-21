@@ -239,3 +239,5 @@ export TFENV_ARCH=amd64
 export NVIM_APPNAME=maisievim
 alias oldvim='NVIM_APPNAME=nvim nvim'
 export PATH=/Users/maisiebell/.local/bin:$PATH
+
+alias pr="nvim -c 'Octo pr'"
