@@ -11,10 +11,15 @@ local to_human_readable = function(input)
 end
 
 local bigquery_get_query_size = function()
-  if not vim.fn.executable("bq") then
+  if vim.fn.executable("bq") == 0 then
+    vim.notify("bq not installed", vim.log.levels.ERROR, {
+      bq_status = "error",
+    })
     return
   end
-  print("Calculating query...")
+  vim.notify("Calculating...", vim.log.levels.INFO, {
+    bq_status = "in_progress",
+  })
   local lines = vim.api.nvim_buf_get_lines(vim.api.nvim_get_current_buf(), 0, -1, false)
   vim.system({
     "sh",
@@ -24,63 +29,32 @@ local bigquery_get_query_size = function()
     stdin = lines,
   }, function(output)
     if output.code ~= 0 then
-      print("error from bq: " .. output.stdout)
-      -- vim.notify("error from bq: " .. output.stdout, vim.log.levels.ERROR, {
-      --   bq = true,
-      -- })
+      vim.notify("Error from bq: " .. output.stdout, vim.log.levels.ERROR, {
+        bq_status = "error",
+      })
       return
     end
     local ok, obj = pcall(vim.json.decode, output.stdout, { luanil = { object = true, array = true } })
     if not ok then
-      print("error parsing result")
-      -- vim.notify("error parsing result", vim.log.levels.ERROR, {
-      --   bq = true,
-      -- })
+      vim.notify("Error parsing result", vim.log.levels.ERROR, {
+        bq_status = "error",
+      })
       return
     end
     local bytes = vim.tbl_get(obj, "statistics", "query", "totalBytesProcessed")
     if bytes ~= "" then
-      print("Query will process " .. to_human_readable(bytes) .. " when run")
-      -- vim.notify("query will process " .. to_human_readable(bytes), vim.log.levels.INFO, {
-      --   bq = true,
-      --   success = true,
-      -- })
+      vim.notify("Query will process " .. to_human_readable(bytes), vim.log.levels.INFO, {
+        bq_status = "ok",
+      })
     else
-      print("Could not run bq")
+      vim.notify("Could not run bigquery", vim.log.levels.ERROR, {
+        bq_status = "error",
+      })
     end
   end)
 end
 
 return {
-  {
-    "folke/noice.nvim",
-    ft = "sql",
-    opts = {
-      routes = {
-        -- {
-        --   filter = {
-        --     event = "notify",
-        --     any = {
-        --       { find = "Calculating query" },
-        --       { find = "Query will process" },
-        --       { find = "Could not run bq" },
-        --     },
-        --   },
-        -- },
-        {
-          filter = {
-            event = "msg_show",
-            any = {
-              { find = "Calculating query" },
-              { find = "Query will process" },
-              { find = "Could not run bq" },
-            },
-          },
-          view = "mini",
-        },
-      },
-    },
-  },
   {
     "kristijanhusak/vim-dadbod-ui",
     lazy = false,
