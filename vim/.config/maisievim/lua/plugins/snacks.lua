@@ -20,18 +20,18 @@ return {
         desc = "Reveal in explorer",
       },
     },
-    -- @type snacks.Config
     opts = {
-      explorer = {
-        auto_hide = { "input" },
-      },
+      -- @type snacks.Config
       picker = {
-        explorer = {
-          layout = {
-            hidden = { "input" },
+        sources = {
+          explorer = {
+            layout = {
+              hidden = { "input" },
+            },
+            auto_close = true,
+            follow_file = true,
+            hidden = true,
           },
-          follow_file = true,
-          show_hidden = true,
         },
       },
       image = {
