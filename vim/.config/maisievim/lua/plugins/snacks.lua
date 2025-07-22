@@ -23,8 +23,28 @@ return {
     opts = {
       -- @type snacks.Config
       picker = {
+        win = {
+          input = {
+            keys = {
+              ["<c-t>"] = { "tab", mode = { "n", "i" } },
+            },
+          },
+        },
         sources = {
           explorer = {
+            win = {
+              input = {
+                keys = {
+                  ["<C-t>"] = { "tab", mode = { "i", "n" } },
+                },
+              },
+              list = {
+
+                keys = {
+                  ["<C-t>"] = "tab",
+                },
+              },
+            },
             layout = {
               hidden = { "input" },
             },
