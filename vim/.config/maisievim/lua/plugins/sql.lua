@@ -80,12 +80,20 @@ return {
     },
   },
   {
+    "stevearc/conform.nvim",
+    formatters = {
+      sqlfluff = {
+        timeout_ms = 1000,
+      },
+    },
+  },
+  {
     "mfussenegger/nvim-lint",
     ft = "sql",
     opts = {
       linters = {
         sqlfluff = {
-          args = { "lint", "-" },
+          args = { "lint", "--format=json" },
         },
       },
     },
