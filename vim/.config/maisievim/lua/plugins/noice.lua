@@ -16,6 +16,7 @@ return {
     opts = {
       views = {
         bq_info = {
+          timeout = 2000,
           view = "mini",
           format = {
             {
@@ -26,6 +27,7 @@ return {
         },
         bq_ok = {
           view = "mini",
+          timeout = 5000,
           format = {
             {
               "󰸞",
@@ -39,6 +41,7 @@ return {
         },
         bq_error = {
           view = "mini",
+          timeout = 10000,
           format = {
             {
               "",
