@@ -56,6 +56,7 @@ return {
       },
       image = {
         enabled = true,
+        img_dirs = { "img", "images", "assets", "static", "public", "media", "attachments", "assets/images" },
       },
     },
   },

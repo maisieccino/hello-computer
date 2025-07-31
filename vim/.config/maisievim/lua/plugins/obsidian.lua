@@ -3,6 +3,19 @@ return {
   "obsidian-nvim/obsidian.nvim",
   lazy = true,
   ft = "markdown",
+  keys = {
+    { "<localleader>ot", "<cmd>Obsidian today<CR>", desc = "Daily note (today)" },
+    { "<localleader>o+", "<cmd>Obsidian tomorrow<CR>", desc = "Daily note (tomorrow)" },
+    { "<localleader>o-", "<cmd>Obsidian yesterday<CR>", desc = "Daily note (yesterday)" },
+    { "<localleader>on", "<cmd>Obsidian new<CR>", desc = "New" },
+    { "<localleader>or", "<cmd>Obsidian rename<CR>", desc = "Rename" },
+    { "<localleader>oP", "<cmd>Obsidian paste_img<CR>", desc = "Paste image" },
+    { "<localleader>oT", "<cmd>Obsidian tags<CR>", desc = "Tags" },
+    { "<localleader>om", "<cmd>Obsidian template<CR>", desc = "Insert template" },
+    { "<localleader>ob", "<cmd>Obsidian backlinks<CR>", desc = "Backlinks" },
+    { "<localleader>oc", "<cmd>Obsidian toc<CR>", desc = "Insert ToC" },
+    { "<localleader>ox", "<cmd>Obsidian extract_note<CR>", desc = "Extract note", mode = "v" },
+  },
   opts = {
     workspaces = {
       {
