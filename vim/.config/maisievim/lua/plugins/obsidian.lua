@@ -15,6 +15,7 @@ return {
     { "<localleader>ob", "<cmd>Obsidian backlinks<CR>", desc = "Backlinks" },
     { "<localleader>oc", "<cmd>Obsidian toc<CR>", desc = "Insert ToC" },
     { "<localleader>ox", "<cmd>Obsidian extract_note<CR>", desc = "Extract note", mode = "v" },
+    { "<localleader>o ", "<cmd>!syncnotes<CR>", desc = "Push notes to remote" },
   },
   opts = {
     workspaces = {
@@ -29,7 +30,7 @@ return {
       date_format = "%Y-%m-%d",
       template = "Daily Note",
     },
-    new_notes_location = "400 Ideas",
+    new_notes_location = "current_dir",
     note_frontmatter_func = function(note)
       -- Add the title of the note as an alias.
       if note.title then
@@ -52,8 +53,14 @@ return {
       folder = "templates",
       date_format = "%Y-%m-%d",
       time_format = "%H:%M",
-      -- A map for custom variables, the key should be the variable and the value a function
+      -- A map for custom variables, the key should be the variable and the value a function.
+      -- Functions are called with obsidian.TemplateContext objects as their sole parameter.
+      -- See: https://github.com/obsidian-nvim/obsidian.nvim/wiki/Template#substitutions
       substitutions = {},
+
+      -- A map for configuring unique directories and paths for specific templates
+      --- See: https://github.com/obsidian-nvim/obsidian.nvim/wiki/Template#customizations
+      customizations = {},
     },
     attachments = {
       img_folder = "assets/images",
@@ -61,6 +68,25 @@ return {
         return string.format("Pasted image %s", os.date("%Y%m%d%H%M%S"))
       end,
       confirm_img_paste = true,
+    },
+    note_id_func = function(title)
+      if title ~= nil then
+        -- If title is given, transform it into valid file name.
+        return title:gsub(" ", "-"):gsub("[^A-Za-z0-9-]", ""):lower()
+      else
+        -- If title is nil, just add 4 random uppercase letters to the suffix.
+        local suffix = ""
+        for _ = 1, 4 do
+          suffix = suffix .. string.char(math.random(65, 90))
+        end
+        return tostring(os.time()) .. "-" .. suffix
+      end
+    end,
+    wiki_link_func = function()
+      return "prepend*note_id"
+    end,
+    picker = {
+      name = "snacks.pick",
     },
   },
 }
