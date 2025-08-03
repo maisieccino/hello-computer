@@ -40,7 +40,7 @@ return {
       },
       ui = { enable = false },
       daily_notes = {
-        folder = "000 Daily Notes",
+        folder = "600 Daily Notes",
         date_format = "%Y-%m-%d",
         template = "Daily Note",
       },
