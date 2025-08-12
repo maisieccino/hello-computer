@@ -17,6 +17,10 @@ return {
     "obsidian-nvim/obsidian.nvim",
     lazy = true,
     ft = "markdown",
+    -- @type fun(LazyPlugin):boolean
+    cond = function()
+      return string.match(vim.fn.getcwd(), "notes")
+    end,
     keys = {
       { "<localleader>ot", "<cmd>Obsidian today<CR>", desc = "Daily note (today)" },
       { "<localleader>o+", "<cmd>Obsidian tomorrow<CR>", desc = "Daily note (tomorrow)" },

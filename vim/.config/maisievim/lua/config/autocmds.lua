@@ -98,3 +98,55 @@ vim.api.nvim_create_autocmd("FileType", {
     end)
   end,
 })
+
+-- vim.api.nvim_create_autocmd("FileType", {
+--   group = augroup("proto_ls"),
+--   pattern = {
+--     "proto",
+--   },
+--   callback = function(event)
+--     local pipe = vim.uv.new_pipe()
+--     local sockname = os.tmpname()
+--     if vim.uv.os_uname().sysname == "Darwin" and sockname:match("^/tmp") then
+--       -- In OS X /tmp links to /private/tmp
+--       sockname = "/private" .. sockname
+--     end
+--     assert(pipe:bind(sockname))
+--
+--     local stdout = vim.uv.new_pipe()
+--     local stderr = vim.uv.new_pipe()
+--     local function on_read(_, data)
+--       if data then
+--         print(data)
+--       end
+--     end
+--
+--     local function on_error(_, data)
+--       if data then
+--         print(data)
+--       end
+--     end
+--
+--     local proc = vim.uv.spawn("/Users/maisiebell/bin/protols", {
+--       cwd = vim.fn.getcwd(),
+--       args = {
+--         "serve",
+--         "--pipe",
+--         sockname,
+--       },
+--       stdio = { nil, stdout, stderr },
+--     }, function(code, signal)
+--       print("Exited with code " .. code)
+--     end)
+--     vim.uv.read_start(stdout, on_read)
+--     vim.uv.read_start(stderr, on_error)
+--
+--     vim.wait(1000, function() end)
+--
+--     local client = vim.lsp.rpc.connect(sockname)
+--     vim.lsp.start({
+--       name = "protols",
+--       cmd = client,
+--     })
+--   end,
+-- })

@@ -144,17 +144,6 @@ return {
           filetypes = { "starlark", "bzl" },
           root_dir = local_root_dir,
         },
-        protols = {
-          filetypes = { "proto" },
-          cmd = {
-            "protols",
-            "--include-paths="
-              .. vim.env.GOPATH
-              .. "/src,"
-              .. vim.env.GOPATH
-              .. "/src/github.com/monzo/wearedev/vendor",
-          },
-        },
         yamlls = {
           filetypes = { "yaml", "promql" },
         },
