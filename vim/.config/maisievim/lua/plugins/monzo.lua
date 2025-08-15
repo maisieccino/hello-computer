@@ -152,8 +152,8 @@ return {
           -- Never use wearedev as a root path. It'll grind your machine to a halt.
           ignoredRootPaths = { "$HOME/src/github.com/monzo/wearedev/" },
         },
-        bzl = {
-          filetypes = { "starlark", "bzl" },
+        starlark_rust = {
+          filetypes = { "star", "bzl", "BUILD.bazel", "starlark" },
           root_dir = local_root_dir,
         },
         yamlls = {
@@ -192,8 +192,12 @@ return {
     "nvim-treesitter",
     opts = {
       ensure_installed = { "starlark" },
+      auto_install = true,
+      highlight = {
+        enable = true,
+      },
     },
-    config = function()
+    init = function()
       vim.treesitter.language.register("starlark", "starlark")
     end,
   },
