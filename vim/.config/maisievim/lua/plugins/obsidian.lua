@@ -33,7 +33,7 @@ return {
       { "<localleader>ob", "<cmd>Obsidian backlinks<CR>", desc = "Backlinks" },
       { "<localleader>oc", "<cmd>Obsidian toc<CR>", desc = "Insert ToC" },
       { "<localleader>ox", "<cmd>Obsidian extract_note<CR>", desc = "Extract note", mode = "v" },
-      { "<localleader>o ", "<cmd>!syncnotes<CR>", desc = "Push notes to remote" },
+      { "<localleader>o ", "<cmd>!/bin/zsh -c syncnotes<CR>", desc = "Push notes to remote" },
     },
     opts = {
       workspaces = {

@@ -81,9 +81,11 @@ return {
   },
   {
     "stevearc/conform.nvim",
-    formatters = {
-      sqlfluff = {
-        timeout_ms = 1000,
+    opts = {
+      formatters = {
+        sqlfluff = {
+          timeout_ms = 1000,
+        },
       },
     },
   },
