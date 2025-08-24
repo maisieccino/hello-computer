@@ -9,3 +9,4 @@ outer-margin=5,10,0,0
 margin=0,10,10,0
 font=Apercu 12
 format=<span font_desc="Michroma Bold 15">%s</span>\n%b
+width=400
