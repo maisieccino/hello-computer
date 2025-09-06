@@ -18,10 +18,19 @@ end
 -- Enable soft wrapping too.
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup("wrap_spell"),
-  pattern = { "text", "plaintex", "typst", "gitcommit", "markdown" },
+  pattern = { "text", "plaintex", "typst", "gitcommit" },
   callback = function()
     vim.opt_local.spell = true
     vim.opt_local.wrap = true
+  end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  group = augroup("spell"),
+  pattern = { "markdown" },
+  callback = function()
+    vim.opt_local.spell = true
+    vim.o.textwidth = 0
   end,
 })
 --

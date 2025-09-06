@@ -19,4 +19,10 @@ return {
       },
     },
   },
+  {
+    "shortcuts/no-neck-pain.nvim",
+    keys = {
+      { "<localleader>n", "<cmd>NoNeckPain<CR>", desc = "Toggle no neck pain" },
+    },
+  },
 }

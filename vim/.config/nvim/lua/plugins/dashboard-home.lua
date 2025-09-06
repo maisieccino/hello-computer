@@ -13,7 +13,7 @@ return {
     opts.dashboard.sections = {
       {
         section = "terminal",
-        cmd = "chafa ~/.config/maisievim/wallpaper.jpg --probe off --format symbols --scale max --align mid,right; sleep .1",
+        cmd = "chafa ~/.config/nvim/wallpaper.jpg --probe off --format symbols --scale max --align mid,right; sleep .1",
         height = 20,
         padding = 1,
       },
