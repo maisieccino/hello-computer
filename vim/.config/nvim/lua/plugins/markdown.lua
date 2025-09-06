@@ -24,5 +24,10 @@ return {
     keys = {
       { "<localleader>n", "<cmd>NoNeckPain<CR>", desc = "Toggle no neck pain" },
     },
+    opts = {
+      bufferOptionsWo = {
+        wrap = true,
+      },
+    },
   },
 }

@@ -31,6 +31,7 @@ vim.api.nvim_create_autocmd("FileType", {
   callback = function()
     vim.opt_local.spell = true
     vim.o.textwidth = 0
+    vim.o.wrap = true
   end,
 })
 --
