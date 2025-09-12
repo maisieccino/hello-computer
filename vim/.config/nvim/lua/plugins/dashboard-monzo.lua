@@ -16,7 +16,7 @@ return {
       opts.dashboard.sections = {
         {
           section = "terminal",
-          cmd = "cat ~/.config/maisievim/logo",
+          cmd = "cat ~/.config/nvim/logo",
           height = 7,
           padding = 3,
           align = "center",

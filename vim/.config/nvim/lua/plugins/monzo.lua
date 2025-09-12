@@ -22,6 +22,10 @@ local local_root_dir = function(startpath)
   return root_dir
 end
 
+local git_root_dir = function(startpath)
+  return vim.fs.dirname(vim.fs.find(".git", { path = startpath, upward = true })[1])
+end
+
 -- Run goimports on save, fix vendor appearing in path.
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   pattern = "*.go",
@@ -63,6 +67,9 @@ return {
   {
     "mason-org/mason.nvim",
     opts = {
+      ensure_installed = {
+        "semgrep",
+      },
       registries = {
         "github:mason-org/mason-registry",
         "file:" .. vim.fn.stdpath("config") .. "/mason",
@@ -72,6 +79,27 @@ return {
   {
     "sgur/vim-editorconfig",
     enabled = false,
+  },
+  {
+    "nvimtools/none-ls.nvim",
+    opts = function()
+      local null_ls = require("null-ls")
+      local cwd = vim.fn.getcwd()
+      local git_dir = git_root_dir(cwd)
+      return {
+        debug = true,
+        sources = {
+          null_ls.builtins.diagnostics.semgrep.with({
+            extra_args = {
+              "--config=" .. git_dir .. "/static-check-rules",
+              "--severity=WARNING",
+              "--severity=ERROR",
+            },
+            ignore_stderr = true,
+          }),
+        },
+      }
+    end,
   },
   {
     "editorconfig/editorconfig-vim",
