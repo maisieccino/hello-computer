@@ -97,6 +97,7 @@ return {
             },
             ignore_stderr = true,
           }),
+          null_ls.builtins.diagnostics.buf,
         },
       }
     end,

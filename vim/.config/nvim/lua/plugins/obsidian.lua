@@ -5,6 +5,8 @@ return {
       sources = {
         providers = {
           lsp = {
+            -- Disable markdown autocomplete since we use Obsidian's own
+            -- autocomplete instead.
             enabled = function()
               return not vim.tbl_contains({ "markdown" }, vim.bo.filetype)
             end,
@@ -13,6 +15,48 @@ return {
       },
     },
   },
+  -- {
+  --   "folke/snacks.nvim",
+  --   ft = "markdown",
+  --   -- @type fun(LazyPlugin):boolean
+  --   cond = function()
+  --     -- Only apply in Obsidian folder
+  --     return string.match(vim.fn.getcwd(), "notes")
+  --   end,
+  --   -- dependencies = { "obsidian-nvim/obsidian.nvim" },
+  --   opts = {
+  --     image = {
+  --       -- resolve = function(path, src)
+  --       --   if require("obsidian.api").path_is_note(path) then
+  --       --     return require("obsidian.api").resolve_image_path(src)
+  --       --   end
+  --       -- end,
+  --       enabled = true,
+  --       ---@class snacks.image.convert.Config
+  --       convert = {
+  --         magick = {
+  --           default = {
+  --             "{src}[0]",
+  --             "-scale",
+  --             "1920x1080>",
+  --             "-grayscale",
+  --             "average",
+  --             "-fill",
+  --             "#83eaea",
+  --             "-tint",
+  --             "170",
+  --             "-fuzz",
+  --             "15%",
+  --             "-fill",
+  --             "none",
+  --             "-transparent",
+  --             "white",
+  --           },
+  --         },
+  --       },
+  --     },
+  --   },
+  -- },
   {
     "obsidian-nvim/obsidian.nvim",
     lazy = true,

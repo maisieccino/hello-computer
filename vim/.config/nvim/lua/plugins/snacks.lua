@@ -39,7 +39,6 @@ return {
                 },
               },
               list = {
-
                 keys = {
                   ["<C-t>"] = "tab",
                 },
@@ -47,6 +46,7 @@ return {
             },
             layout = {
               hidden = { "input" },
+              preview = false,
             },
             auto_close = true,
             follow_file = true,

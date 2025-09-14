@@ -77,7 +77,9 @@ opt.winwidth = 30
 opt.winheight = 1
 opt.winminheight = 1
 
-vim.g.loaded_python3_provider = 0
+-- vim.g.loaded_python3_provider = 0
+vim.g.python3_host_prog = vim.fn.expand("~/.pyenv/shims/python3")
+
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
 vim.g.loaded_node_provider = 0
