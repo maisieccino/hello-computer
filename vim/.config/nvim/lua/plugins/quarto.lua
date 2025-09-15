@@ -70,9 +70,12 @@ return {
     dependencies = { "3rd/image.nvim" },
     config = function()
       vim.g.molten_image_provider = "image.nvim"
+      vim.g.molten_auto_open_output = true
+      vim.g.molten_enter_output_behaviour = "open_then_enter"
     end,
     keys = {
       { "<localleader>qo", ":noautocmd MoltenEnterOutput<CR>", desc = "Open output window" },
+      { "<localleader>qi", ":noautocmd MoltenInit ir<CR>", desc = "Start molten kernel (ir)" },
     },
   },
   {
