@@ -104,6 +104,9 @@ vim.filetype.add({
     ["todo.txt"] = "todotxt",
     ["yarn.lock"] = "yaml",
   },
+  extension = {
+    ["ipynb"] = "markdown",
+  },
   pattern = {
     ["%.config/git/users/.*"] = "gitconfig",
     ["%.kube/config"] = "yaml",

@@ -23,7 +23,11 @@ local local_root_dir = function(startpath)
 end
 
 local git_root_dir = function(startpath)
-  return vim.fs.dirname(vim.fs.find(".git", { path = startpath, upward = true })[1])
+  local paths = vim.fs.find(".git", { path = startpath, upward = true })
+  if #paths == 0 then
+    return vim.fs.dirname(startpath)
+  end
+  return vim.fs.dirname(paths[1])
 end
 
 -- Run goimports on save, fix vendor appearing in path.

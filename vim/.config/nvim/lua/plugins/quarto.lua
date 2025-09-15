@@ -1,18 +1,29 @@
-if vim.fn.isdirectory(vim.fn.expand("~/src/github.com/monzo")) == 1 then
-  return {}
-end
+-- if vim.fn.isdirectory(vim.fn.expand("~/src/github.com/monzo")) == 1 then
+--   return {}
+-- end
 
 return {
   {
     "quarto-dev/quarto-nvim",
-    ft = "quarto",
+    ft = { "quarto", "markdown" },
     dependencies = {
       "jmbuhr/otter.nvim",
     },
     opts = {
+      lspFeatures = {
+        enabled = true,
+        chunks = "all",
+        languages = { "r", "python", "julia", "bash", "html", "sql" },
+        completion = {
+          enabled = true,
+        },
+      },
       codeRunner = {
         enabled = true,
         default_method = "molten",
+        ft_runners = {
+          python = "molten",
+        },
       },
     },
     keys = function()
@@ -60,7 +71,12 @@ return {
   },
   {
     "3rd/image.nvim",
-    ft = { "quarto" },
+    ft = function()
+      if vim.api.nvim_buf_get_name(0):match(".*ipynb") then
+        return { "quarto", "markdown" }
+      end
+      return { "quarto" }
+    end,
     opts = {
       backend = "kitty",
       integrations = {
@@ -70,16 +86,25 @@ return {
   },
   {
     "benlubas/molten-nvim",
-    ft = { "quarto", "jupyter" },
+    ft = function()
+      if vim.api.nvim_buf_get_name(0):match(".*ipynb") then
+        return { "quarto", "markdown" }
+      end
+      return { "quarto" }
+    end,
     dependencies = { "3rd/image.nvim" },
     config = function()
+      vim.g.molten_virt_lines_off_by_1 = true
+      vim.g.molten_virt_text_output = true
+
       vim.g.molten_image_provider = "image.nvim"
-      vim.g.molten_auto_open_output = true
+      -- vim.g.molten_auto_open_output = true
       vim.g.molten_enter_output_behaviour = "open_then_enter"
     end,
     keys = {
       { "<localleader>qo", ":noautocmd MoltenEnterOutput<CR>", desc = "Open output window" },
       { "<localleader>qi", ":noautocmd MoltenInit ir<CR>", desc = "Start molten kernel (ir)" },
+      { "<localleader>qI", ":noautocmd MoltenInit<CR>", desc = "Start molten kernel" },
     },
   },
   {
@@ -92,6 +117,14 @@ return {
           mason = false,
         },
       },
+    },
+  },
+  {
+    "GCBallesteros/jupytext.nvim",
+    opts = {
+      style = "markdown",
+      output_extension = "md",
+      force_ft = "markdown",
     },
   },
 }
