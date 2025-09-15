@@ -1,3 +1,7 @@
+if vim.fn.isdirectory(vim.fn.expand("~/src/github.com/monzo")) == 1 then
+  return {}
+end
+
 return {
   {
     "quarto-dev/quarto-nvim",

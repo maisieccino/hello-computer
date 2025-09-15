@@ -241,3 +241,5 @@ export PATH=/Users/maisiebell/.local/bin:$PATH
 alias pr="nvim -c 'Octo pr'"
 
 alias syncnotes="git add . && git commit -m \"Sync mac $(date -I)\" && git push"
+
+eval "$(zoxide init zsh)"

@@ -2,60 +2,60 @@
 
 # if brew not installed, install it
 if ! (which brew >/dev/null); then
-	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 else
-	brew update
+  brew update
 fi
 
 formulae=(
-	ag
-	bat
-	ctags
-	doctl
-	ffmpeg
-	fluxctl
-	fzf
-	git-lfs
-	gnupg
-	golang
-	htop
-	hub
-	istioctl
-	jq
-	lazygit
-	neovim
-	nmap
-	pinentry-mac
-	pipenv
-	postgresql@15
-	pyenv
-	ranger
-	reattach-to-user-namespace
-	shellcheck
-	stow
-	swig
-	tidy-html5
-	tmux
-	wget
-	z
-	zmq
-	zsh-syntax-highlighting
+  ag
+  bat
+  ctags
+  doctl
+  ffmpeg
+  fluxctl
+  fzf
+  git-lfs
+  gnupg
+  golang
+  htop
+  hub
+  istioctl
+  jq
+  lazygit
+  neovim
+  nmap
+  pinentry-mac
+  pipenv
+  postgresql@15
+  pyenv
+  ranger
+  reattach-to-user-namespace
+  shellcheck
+  stow
+  swig
+  tidy-html5
+  tmux
+  wget
+  zoxide
+  zmq
+  zsh-syntax-highlighting
 )
 
 casks=(
-	1password-cli
-	docker
-	figma # graphic design, can skip
-	gimp
-	google-chrome
-	insomnia
-	iterm2
-	keybase # public key stuff, can skip
-	ngrok
-	notion # cloud notes, can skip
-	spotify
-	visual-studio-code
-	vnc-viewer
+  1password-cli
+  docker
+  figma # graphic design, can skip
+  gimp
+  google-chrome
+  insomnia
+  iterm2
+  keybase # public key stuff, can skip
+  ngrok
+  notion # cloud notes, can skip
+  spotify
+  visual-studio-code
+  vnc-viewer
 )
 
 # Needed before you can install the kafka keg.
