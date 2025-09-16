@@ -4,22 +4,55 @@ return {
     priority = 10000,
     recommended = true,
     lazy = false,
-    keys = {
-      {
-        "<localleader>e",
-        function()
-          Snacks.explorer()
-        end,
-        desc = "Explorer (Root dir)",
-      },
-      {
-        "<localleader>a",
-        function()
-          Snacks.explorer({ cwd = LazyVim.root() })
-        end,
-        desc = "Reveal in explorer",
-      },
-    },
+    keys = function()
+      local key_map = {
+        {
+          "<localleader>e",
+          function()
+            Snacks.explorer()
+          end,
+          desc = "Explorer (Root dir)",
+        },
+        {
+          "<localleader>a",
+          function()
+            Snacks.explorer({ cwd = LazyVim.root() })
+          end,
+          desc = "Reveal in explorer",
+        },
+      }
+
+      if vim.fn.isdirectory(vim.fn.expand("~/src/github.com/monzo")) == 1 then
+        table.insert(key_map, {
+          "<localleader>s",
+          function()
+            local function list_projects()
+              local projects_raw = vim.fn.system(vim.fn.expand("~/bin/projects.sh"))
+              local projects = {}
+              for project in projects_raw:gmatch("[^\r\n]+") do
+                table.insert(projects, { text = project })
+              end
+              return projects
+            end
+            local projects = list_projects()
+            Snacks.picker.pick({
+              source = "Services",
+              items = projects,
+              format = "text",
+              layout = {
+                preset = "default",
+              },
+              confirm = function(picker, item)
+                picker:close()
+                vim.cmd("e " .. item.text)
+              end,
+            })
+          end,
+          desc = "Find service",
+        })
+      end
+      return key_map
+    end,
     opts = {
       -- @type snacks.Config
       picker = {
