@@ -127,7 +127,7 @@ return {
       attachments = {
         img_folder = "assets/images",
         img_name_func = function()
-          return string.format("Pasted image %s", os.date("%Y%m%d%H%M%S"))
+          return string.format("pasted_image_%s", os.date("%Y%m%d%H%M%S"))
         end,
         confirm_img_paste = true,
       },
