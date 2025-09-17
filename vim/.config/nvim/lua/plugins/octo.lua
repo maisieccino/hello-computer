@@ -12,5 +12,8 @@ return {
       },
       users = "mentionable",
     },
+    keys = {
+      { "<leader>gp", "<cmd>Octo pr<CR>", desc = "Open PR (octo)" },
+    },
   },
 }

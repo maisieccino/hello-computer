@@ -42,10 +42,36 @@ return {
                 },
               }, ctx)
             end,
-            confirm = function(picker, item)
-              picker:close()
-              vim.fn.chdir(item.file)
-              Snacks.explorer({ cwd = item.file })
+            ---@type table<string, snacks.picker.Action.spec> actions used by keymaps
+            actions = {
+              open_in_new_tab = {
+                action = function(picker, item, _)
+                  picker:close()
+                  vim.schedule(function()
+                    vim.cmd("tabnew " .. item.file .. "/README.md")
+                    Snacks.explorer({ cwd = item.file })
+                  end)
+                end,
+              },
+            },
+            win = {
+              input = {
+                keys = {
+                  ["<c-t>"] = {
+                    "open_in_new_tab",
+                    mode = { "n", "i" },
+                  },
+                },
+              },
+            },
+            confirm = function(picker, item, action)
+              if action and action.name or "confirm" then
+                picker:close()
+                vim.schedule(function()
+                  vim.fn.bufadd(item.file)
+                  Snacks.explorer({ cwd = item.file })
+                end)
+              end
             end,
           })
         end,
