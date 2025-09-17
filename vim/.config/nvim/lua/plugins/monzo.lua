@@ -172,8 +172,7 @@ return {
         },
         protols = {
           filetypes = { "proto" },
-          cmd = {
-            "protols",
+          arg = {
             "--include-paths="
               .. vim.env.GOPATH
               .. "/src,"

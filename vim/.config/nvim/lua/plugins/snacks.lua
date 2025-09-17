@@ -22,25 +22,30 @@ return {
       {
         "<localleader>s",
         function()
-          local function list_projects()
-            local projects_raw = vim.fn.system(vim.fn.expand("~/bin/projects.sh"))
-            local projects = {}
-            for project in projects_raw:gmatch("[^\r\n]+") do
-              table.insert(projects, { text = project })
-            end
-            return projects
-          end
-          local projects = list_projects()
           Snacks.picker.pick({
             source = "Services",
-            items = projects,
             format = "text",
             layout = {
               preset = "default",
             },
+            finder = function(config, ctx)
+              local cmd = vim.fn.expand("~/bin/projects.sh")
+              return require("snacks.picker.source.proc").proc({
+                config,
+                {
+                  cmd = cmd,
+                  transform = function(item)
+                    item.file = item.text
+                    item.text = vim.fs.basename(item.text)
+                    return item
+                  end,
+                },
+              }, ctx)
+            end,
             confirm = function(picker, item)
               picker:close()
-              vim.cmd("e " .. item.text)
+              vim.fn.chdir(item.file)
+              Snacks.explorer({ cwd = item.file })
             end,
           })
         end,
