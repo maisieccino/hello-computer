@@ -131,8 +131,11 @@ return {
   },
   {
     "nvim-treesitter/nvim-treesitter-textobjects",
+    -- TODO: Re-enable once patched
+    enabled = false,
+    dependencies = { "nvim-treesitter" },
     build = function()
-      require("nvim-treesitter.install").update({ with_sync = true })()
+      require("nvim-treesitter.install").update({ with_sync = true })
     end,
     config = function()
       local configs = require("nvim-treesitter.configs")

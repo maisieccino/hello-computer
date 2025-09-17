@@ -1,6 +1,6 @@
 return {
   {
-    "echasnovski/mini.surround",
+    "nvim-mini/mini.surround",
     opts = {
       -- Fix surround keymapping
       mappings = {
@@ -42,7 +42,7 @@ return {
   },
 
   {
-    "echasnovski/mini.trailspace",
+    "nvim-mini/mini.trailspace",
     event = { "BufReadPost", "BufNewFile" },
     -- stylua: ignore
     keys = {
