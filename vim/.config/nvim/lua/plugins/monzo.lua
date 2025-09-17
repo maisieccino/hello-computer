@@ -39,7 +39,7 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     -- Remove vendor prefixes
     vim.cmd("silent! %s/github.com\\/monzo\\/wearedev\\/vendor\\///g")
 
-    local params = vim.lsp.util.make_range_params()
+    local params = vim.lsp.util.make_range_params(0, "utf-8")
     params.context = { only = { "source.organizeImports" } }
     local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params)
     for cid, res in pairs(result or {}) do
@@ -193,6 +193,7 @@ return {
         },
         yamlls = {
           filetypes = { "yaml", "promql" },
+          root_dir = local_root_dir,
         },
       },
     },
