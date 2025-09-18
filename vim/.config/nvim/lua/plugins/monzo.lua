@@ -5,8 +5,9 @@ end
 -- Treat anything containing these files as a root directory. This
 -- prevents us ascending too far toward the root of the repository, which
 -- stops us from trying to ingest too much code.
-local local_root_dir = function(startpath)
-  local root_markers = { "README.md", "main.go", "go.mod", "LICENSE", ".git", "package.json" }
+local local_root_dir = function(bufnr, on_dir)
+  local startpath = vim.api.nvim_buf_get_name(bufnr)
+  local root_markers = { "README.md", "main.go", "go.mod", "LICENSE", ".git" }
   local matches = vim.fs.find(root_markers, {
     path = startpath,
     upward = true,
@@ -15,11 +16,12 @@ local local_root_dir = function(startpath)
 
   -- If there are no matches, fall back to finding the Git ancestor.
   if #matches == 0 then
-    return vim.fs.dirname(vim.fs.find(".git", { path = startpath, upward = true })[1])
+    on_dir(vim.fs.dirname(vim.fs.find(".git", { path = startpath, upward = true })[1]))
+    return
   end
 
   local root_dir = vim.fn.fnamemodify(matches[1], ":p:h")
-  return root_dir
+  on_dir(root_dir)
 end
 
 local git_root_dir = function(startpath)
@@ -149,6 +151,7 @@ return {
           expandWorkspaceToModule = false,
           ["local"] = "github.com/monzo/wearedev",
           root_markers = { "README.md", "main.go", "go.mod", "LICENSE", ".git", "package.json" },
+          root_dir = local_root_dir,
 
           init_options = {
             codelenses = {
@@ -185,6 +188,7 @@ return {
           root_markers = { "README.md", "main.go", "go.mod", "LICENSE", ".git", "package.json" },
           -- Never use wearedev as a root path. It'll grind your machine to a halt.
           ignoredRootPaths = { "$HOME/src/github.com/monzo/wearedev/" },
+          root_dir = local_root_dir,
         },
         starlark_rust = {
           filetypes = { "star", "bzl", "BUILD.bazel", "starlark" },
