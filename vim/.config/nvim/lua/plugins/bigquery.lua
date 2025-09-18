@@ -8,20 +8,20 @@ return {
     ft = "sql",
     dependencies = { "nvim-lspconfig" },
   },
-  {
-    "neovim/nvim-lspconfig",
-    dependencies = { "kitagry/bqls.nvim" },
-    init = function()
-      require("lspconfig").bqls.setup({
-        settings = {
-          project_id = "monzo-analytics",
-        },
-        -- This disables the bqls formatter which is very annoying!
-        on_init = function(client)
-          client.server_capabilities.documentFormattingProvider = false
-          client.server_capabilities.documentFormattingRangeProvider = false
-        end,
-      })
-    end,
-  },
+  -- {
+  --   "neovim/nvim-lspconfig",
+  --   dependencies = { "kitagry/bqls.nvim" },
+  --   init = function()
+  --     require("lspconfig").bqls.setup({
+  --       settings = {
+  --         project_id = "monzo-analytics",
+  --       },
+  --       -- This disables the bqls formatter which is very annoying!
+  --       on_init = function(client)
+  --         client.server_capabilities.documentFormattingProvider = false
+  --         client.server_capabilities.documentFormattingRangeProvider = false
+  --       end,
+  --     })
+  --   end,
+  -- },
 }

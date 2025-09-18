@@ -94,7 +94,7 @@ return {
       return { "quarto", "python" }
     end,
     dependencies = { "3rd/image.nvim" },
-    config = function()
+    config = function(_, opts)
       vim.g.molten_virt_lines_off_by_1 = true
       vim.g.molten_virt_text_output = true
       vim.g.molten_image_provider = "image.nvim"
@@ -107,18 +107,6 @@ return {
       { "<localleader>qP", ":noautocmd MoltenInit python3<CR>", desc = "Start molten kernel (python3)" },
       { "<localleader>qI", ":noautocmd MoltenInit<CR>", desc = "Start molten kernel" },
       { "<localleader>qe", ":noautocmd MoltenEvaluateOperator<CR>", desc = "Molten: Evaluate" },
-    },
-  },
-  {
-    "nvim-lspconfig",
-    ft = "quarto",
-    opts = {
-      servers = {
-        r_language_server = {
-          enabled = true,
-          mason = false,
-        },
-      },
     },
   },
   {

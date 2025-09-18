@@ -1,17 +1,4 @@
 return {
-  {
-    "neovim/nvim-lspconfig",
-    opts = {
-      capabilities = {
-        textDocument = {
-          foldingRange = {
-            dynamicRegistration = false,
-            lineFoldingOnly = true,
-          },
-        },
-      },
-    },
-  },
   -- Pretty window for navigating LSP locations
   {
     "dnlhc/glance.nvim",
@@ -64,7 +51,6 @@ return {
     dependencies = {
       "kevinhwang91/promise-async",
       "nvim-treesitter/nvim-treesitter",
-      "neovim/nvim-lspconfig",
     },
     opts = function()
       -- lsp->treesitter->indent
