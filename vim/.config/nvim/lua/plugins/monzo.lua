@@ -76,7 +76,7 @@ return {
       },
       registries = {
         "github:mason-org/mason-registry",
-        "file:" .. vim.fn.stdpath("config") .. "/mason",
+        -- "file:" .. vim.fn.stdpath("config") .. "/mason",
       },
     },
   },
@@ -148,7 +148,7 @@ return {
 
           expandWorkspaceToModule = false,
           ["local"] = "github.com/monzo/wearedev",
-          root_dir = local_root_dir,
+          root_markers = { "README.md", "main.go", "go.mod", "LICENSE", ".git", "package.json" },
 
           init_options = {
             codelenses = {
@@ -179,20 +179,20 @@ return {
               .. vim.env.GOPATH
               .. "/src/github.com/monzo/wearedev/vendor",
           },
-          root_dir = local_root_dir,
+          root_markers = { "README.md", "main.go", "go.mod", "LICENSE", ".git", "package.json" },
         },
         vtsls = {
-          root_dir = local_root_dir,
+          root_markers = { "README.md", "main.go", "go.mod", "LICENSE", ".git", "package.json" },
           -- Never use wearedev as a root path. It'll grind your machine to a halt.
           ignoredRootPaths = { "$HOME/src/github.com/monzo/wearedev/" },
         },
         starlark_rust = {
           filetypes = { "star", "bzl", "BUILD.bazel", "starlark" },
-          root_dir = local_root_dir,
+          root_markers = { "README.md", "main.go", "go.mod", "LICENSE", ".git", "package.json" },
         },
         yamlls = {
           filetypes = { "yaml", "promql" },
-          root_dir = local_root_dir,
+          root_markers = { "README.md", "main.go", "go.mod", "LICENSE", ".git", "package.json" },
         },
       },
     },
