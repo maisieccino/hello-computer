@@ -19,10 +19,26 @@ return {
   {
     "blink.cmp",
     optional = true,
+    dependencies = {
+      "Kaiser-Yang/blink-cmp-git",
+    },
     opts = {
       keymap = {
         ["<C-j>"] = { "select_next", "fallback" },
         ["<C-k>"] = { "select_prev", "fallback" },
+      },
+      sources = {
+        default = { "lsp", "git", "path", "snippets", "buffer" },
+        providers = {
+          git = {
+            module = "blink-cmp-git",
+            name = "Git",
+            enabled = function()
+              return vim.tbl_contains({ "octo", "gitcommit" }, vim.bo.filetype)
+            end,
+            opts = {},
+          },
+        },
       },
     },
   },
