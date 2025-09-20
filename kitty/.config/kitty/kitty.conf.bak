@@ -1,11 +1,27 @@
+hide_window_decorations yes
 background_opacity 0.85
+background_blur 20
 
-font_family Iosevka Nerd Font Mono
+# font_family Jetbrains Mono NerdFont Nerd Font
+font_family FantasqueSansM Nerd Font Mono
 font_size 12.0
 window_padding_width 5
 
+# startup_session startup.conf
+
+map alt+left send_text all \x1b\x62
+map alt+right send_text all \x1b\x66
+
+# Open new windows in same tab, in the same working directory.
+map ctrl+shift+enter new_window_with_cwd
+map cmd+enter new_window_with_cwd
+
+# Email
+map ctrl+shift+e launch --env EDITOR=nvim aerc
+map ctrl+shift+o launch --cwd=~/github.com/maisieccino/notes nvim Home.md
 
 # BEGIN_KITTY_THEME
-# Catppuccin-Frappe
+# Catppuccin Kitty Mocha
 include current-theme.conf
 # END_KITTY_THEME
+

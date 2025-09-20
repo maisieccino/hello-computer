@@ -1,5 +1,8 @@
 return {
   {
+    "nvim-lspconfig",
+  },
+  {
     "nvim-mini/mini.surround",
     opts = {
       -- Fix surround keymapping
