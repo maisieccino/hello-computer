@@ -240,4 +240,12 @@ return {
       vim.treesitter.language.register("starlark", "starlark")
     end,
   },
+  {
+    "pwntester/octo.nvim",
+    opts = {
+      notifications = {
+        current_repo_only = true,
+      },
+    },
+  },
 }

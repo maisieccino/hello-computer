@@ -15,6 +15,9 @@ return {
       suppress_missing_scope = {
         projects_v2 = true,
       },
+      -- High timeout needed for loading reviewers list.
+      -- TODO: Possible to optimise this?
+      timeout = 20000,
       users = "assignable",
     },
     keys = {
