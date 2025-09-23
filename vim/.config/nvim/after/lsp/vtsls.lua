@@ -1,7 +1,20 @@
 local util = require("util")
 
 if not util.is_work() then
-  return {}
+  local loc = LazyVim.get_pkg_path("astro-language-server", "/node_modules/@astrojs/ts-plugin")
+  return {
+    settings = {
+      vtsls = {
+        tsserver = {
+          globalPlugins = {
+            name = "@astrojs/ts-plugin",
+            location = loc,
+            enableForWorkspaceTypeScriptVersions = true,
+          },
+        },
+      },
+    },
+  }
 end
 
 return {
