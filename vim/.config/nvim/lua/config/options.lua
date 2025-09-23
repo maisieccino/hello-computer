@@ -77,17 +77,6 @@ opt.winwidth = 30
 opt.winheight = 1
 opt.winminheight = 1
 
-vim.lsp.config("*", {
-  capabilities = {
-    textDocument = {
-      foldingRange = {
-        dynamicRegistration = false,
-        lineFoldingOnly = true,
-      },
-    },
-  },
-})
-
 -- vim.g.loaded_python3_provider = 0
 vim.g.python3_host_prog = vim.fn.expand("~/.pyenv/shims/python3")
 

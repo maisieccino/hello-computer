@@ -1,4 +1,6 @@
-if vim.fn.isdirectory(vim.fn.expand("~/src/github.com/monzo")) == 0 then
+local util = require("util")
+
+if not util.is_work() then
   return {}
 end
 
