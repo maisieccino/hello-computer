@@ -14,6 +14,11 @@ local base_cfg = {
     debounce_text_changes = 200,
   },
   init_options = {
+    annotations = {
+      bounds = false,
+      escape = false,
+      inline = false,
+    },
     codelenses = {
       generate = true,
       gc_details = true,
