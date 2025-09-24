@@ -5,7 +5,7 @@ local M = {}
 -- stops us from trying to ingest too much code.
 M.local_root_dir = function(bufnr, on_dir)
   local startpath = vim.api.nvim_buf_get_name(bufnr)
-  local root_markers = { "README.md", "main.go", "go.mod", "LICENSE", ".git" }
+  local root_markers = { "README.md", "main.go", "go.mod", "LICENSE", ".git", "package.json" }
   local matches = vim.fs.find(root_markers, {
     path = startpath,
     upward = true,

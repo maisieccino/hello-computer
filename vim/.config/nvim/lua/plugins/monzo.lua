@@ -125,10 +125,27 @@ return {
       adapters = {
         ["neotest-jest"] = {
           jestCommand = "yarn test --",
-          jestConfigFile = "jest.config.js",
+          jestConfigFile = function(file)
+            return git_root_dir(file) .. "/jest.config.js"
+          end,
+          jest_test_discovery = true,
           env = { CI = true },
-          cwd = function()
+          cwd = function(file)
+            if file:find("/packages/") then
+              -- Matches "some/path/" in "some/path/src/"
+              local match = file:match("(.*/[^/]+/)src")
+
+              if match then
+                return match
+              end
+            end
             return vim.fn.getcwd()
+          end,
+          isTestFile = function(file_path)
+            if not file_path then
+              return false
+            end
+            return require("neotest-jest.jest-util").defaultIsTestFile(file_path)
           end,
         },
       },
@@ -145,6 +162,7 @@ return {
     },
     init = function()
       vim.treesitter.language.register("starlark", "starlark")
+      vim.treesitter.language.register("tsx", "typescriptreact")
     end,
   },
   {
