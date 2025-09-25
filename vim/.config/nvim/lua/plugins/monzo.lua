@@ -110,7 +110,8 @@ return {
   },
   {
     "neotest",
-    dependencies = { "nvim-neotest/neotest-jest" },
+    dependencies = { "nvim-neotest/neotest-jest", "nvim-treesitter" },
+    commit = "52fca6717ef972113ddd6ca223e30ad0abb2800c",
     opts = {
       discovery = {
         enabled = false,

@@ -81,4 +81,13 @@ M.bigquery_get_query_size = function()
     end
   end)
 end
+
+M.git_root_dir = function(startpath)
+  local paths = vim.fs.find(".git", { path = startpath, upward = true })
+  if #paths == 0 then
+    return vim.fs.dirname(startpath)
+  end
+  return vim.fs.dirname(paths[1])
+end
+
 return M
