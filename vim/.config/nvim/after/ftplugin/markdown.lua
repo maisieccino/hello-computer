@@ -4,11 +4,17 @@
 local imb = function(e) -- init molten buffer
   vim.schedule(function()
     local kernels = vim.fn.MoltenAvailableKernels()
+    local running_kernels = vim.fn.MoltenRunningKernels()
     local try_kernel_name = function()
       local metadata = vim.json.decode(io.open(e.file, "r"):read("a"))["metadata"]
       return metadata.kernelspec.name
     end
     local ok, kernel_name = pcall(try_kernel_name)
+
+    -- If a matching kernel is already running, don't start a new one!
+    if ok and vim.tbl_contains(running_kernels, kernel_name) then
+      return
+    end
     if not ok or not vim.tbl_contains(kernels, kernel_name) then
       kernel_name = nil
       local venv = os.getenv("VIRTUAL_ENV") or os.getenv("CONDA_PREFIX")
@@ -20,6 +26,7 @@ local imb = function(e) -- init molten buffer
       vim.cmd(("MoltenInit %s"):format(kernel_name))
     end
     vim.cmd("MoltenImportOutput")
+    require("quarto").activate()
   end)
 end
 vim.api.nvim_create_autocmd("BufAdd", {
