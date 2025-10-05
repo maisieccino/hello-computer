@@ -118,14 +118,12 @@ return {
     },
   },
   {
-    "nvim-treesitter/nvim-treesitter-textobjects",
+    "nvim-treesitter/nvim-treesitter",
     -- TODO: Re-enable once patched
-    enabled = false,
-    dependencies = { "nvim-treesitter" },
-    build = function()
-      require("nvim-treesitter.install").update({ with_sync = true })
-    end,
-    config = function()
+    enabled = true,
+    dependencies = { "nvim-treesitter-textobjects" },
+    build = ":TSUpdate",
+    setup = function()
       local configs = require("nvim-treesitter.configs")
       configs.setup({
         ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "javascript", "html" },

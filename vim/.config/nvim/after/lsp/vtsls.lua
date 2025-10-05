@@ -7,9 +7,11 @@ if not util.is_work() then
       vtsls = {
         tsserver = {
           globalPlugins = {
-            name = "@astrojs/ts-plugin",
-            location = loc,
-            enableForWorkspaceTypeScriptVersions = true,
+            {
+              name = "@astrojs/ts-plugin",
+              location = loc,
+              enableForWorkspaceTypeScriptVersions = true,
+            },
           },
         },
       },

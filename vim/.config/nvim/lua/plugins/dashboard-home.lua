@@ -25,7 +25,7 @@ return {
         section = "terminal",
         ttl = 5 * 60,
         title = "GitHub Notifications",
-        cmd = "gh notify -s -a -n5",
+        cmd = "gh notify -s -n6",
       },
     }
   end,

@@ -105,6 +105,7 @@ vim.filetype.add({
     ["yarn.lock"] = "yaml",
   },
   extension = {
+    mdx = "mdx",
     ["ipynb"] = "markdown",
   },
   pattern = {
