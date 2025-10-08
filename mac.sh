@@ -10,52 +10,38 @@ fi
 formulae=(
   ag
   bat
-  ctags
   doctl
   ffmpeg
-  fluxctl
   fzf
   git-lfs
   gnupg
   golang
   htop
   hub
-  istioctl
   jq
   lazygit
   neovim
   nmap
   pinentry-mac
-  pipenv
   postgresql@15
   pyenv
   ranger
   reattach-to-user-namespace
   shellcheck
   stow
-  swig
   tidy-html5
   tmux
   wget
   zoxide
-  zmq
   zsh-syntax-highlighting
 )
 
 casks=(
   1password-cli
-  docker
+  # docker Deprecated, use `container` in macOS Tahoe
   figma # graphic design, can skip
-  gimp
-  google-chrome
-  insomnia
   iterm2
   keybase # public key stuff, can skip
-  ngrok
-  notion # cloud notes, can skip
-  spotify
-  visual-studio-code
-  vnc-viewer
 )
 
 # Needed before you can install the kafka keg.
