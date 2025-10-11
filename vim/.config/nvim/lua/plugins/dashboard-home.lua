@@ -23,6 +23,14 @@ return {
       {
         pane = 2,
         section = "terminal",
+        ttl = 5,
+        title = "Water consumption",
+        cmd = "type chart &>/dev/null && chart",
+        padding = 1,
+      },
+      {
+        pane = 2,
+        section = "terminal",
         ttl = 5 * 60,
         title = "GitHub Notifications",
         cmd = "gh notify -s -n6",

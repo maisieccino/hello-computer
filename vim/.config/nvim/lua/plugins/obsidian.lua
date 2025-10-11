@@ -15,23 +15,26 @@ return {
       },
     },
   },
-  -- {
-  --   "folke/snacks.nvim",
-  --   ft = "markdown",
-  --   -- @type fun(LazyPlugin):boolean
-  --   cond = function()
-  --     -- Only apply in Obsidian folder
-  --     return string.match(vim.fn.getcwd(), "notes")
-  --   end,
-  --   -- dependencies = { "obsidian-nvim/obsidian.nvim" },
-  --   opts = {
-  --     image = {
-  --       -- resolve = function(path, src)
-  --       --   if require("obsidian.api").path_is_note(path) then
-  --       --     return require("obsidian.api").resolve_image_path(src)
-  --       --   end
-  --       -- end,
-  --       enabled = true,
+  {
+    "folke/snacks.nvim",
+    ft = "markdown",
+    -- @type fun(LazyPlugin):boolean
+    cond = function()
+      -- Only apply in Obsidian folder
+      return string.match(vim.fn.getcwd(), "notes")
+    end,
+    dependencies = { "obsidian-nvim/obsidian.nvim" },
+    opts = {
+      image = {
+        resolve = function(path, src)
+          if require("obsidian.api").path_is_note(path) then
+            return require("obsidian.api").resolve_image_path(src)
+          end
+        end,
+        enabled = true,
+      },
+    },
+  },
   --       ---@class snacks.image.convert.Config
   --       convert = {
   --         magick = {
@@ -125,7 +128,7 @@ return {
         customizations = {},
       },
       attachments = {
-        img_folder = "assets/images",
+        img_folder = "Assets/images",
         img_name_func = function()
           return string.format("pasted_image_%s", os.date("%Y%m%d%H%M%S"))
         end,
