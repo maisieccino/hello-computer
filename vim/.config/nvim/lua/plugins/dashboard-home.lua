@@ -25,7 +25,7 @@ return {
         section = "terminal",
         ttl = 5,
         title = "Water consumption",
-        cmd = "type chart &>/dev/null && chart",
+        cmd = "cd ~/github.com/maisieccino/notes && type chart &>/dev/null && chart",
         padding = 1,
       },
       {

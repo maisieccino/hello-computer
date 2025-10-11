@@ -18,11 +18,6 @@ return {
   {
     "folke/snacks.nvim",
     ft = "markdown",
-    -- @type fun(LazyPlugin):boolean
-    cond = function()
-      -- Only apply in Obsidian folder
-      return string.match(vim.fn.getcwd(), "notes")
-    end,
     dependencies = { "obsidian-nvim/obsidian.nvim" },
     opts = {
       image = {
