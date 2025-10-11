@@ -1,3 +1,4 @@
+local util = require("util")
 return {
   {
     "blink.cmp",
@@ -21,9 +22,21 @@ return {
     dependencies = { "obsidian-nvim/obsidian.nvim" },
     opts = {
       image = {
+        ---@param path any
+        ---@param src any
+        ---@return string|nil
         resolve = function(path, src)
           if require("obsidian.api").path_is_note(path) then
-            return require("obsidian.api").resolve_image_path(src)
+            local dirname = util.git_root_dir(path)
+            local matches = vim.fs.find(src, {
+              path = dirname .. "/Assets",
+              limit = 1,
+            })
+            if #matches == 0 then
+              return ""
+            else
+              return matches[1]
+            end
           end
         end,
         enabled = true,
@@ -57,7 +70,6 @@ return {
   -- },
   {
     "obsidian-nvim/obsidian.nvim",
-    lazy = true,
     ft = "markdown",
     -- @type fun(LazyPlugin):boolean
     cond = function()
