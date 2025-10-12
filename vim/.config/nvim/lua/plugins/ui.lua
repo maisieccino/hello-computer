@@ -39,7 +39,8 @@ return {
       spec = {
         {
           { ";", group = "picker" },
-          { ";d", group = "lsp", icon = "" },
+          { ";c", group = "code", icon = "" },
+          { ";d", group = "lsp", icon = "" },
           { ";q", group = "query", icon = "" },
           { ";o", group = "obsidian", icon = "󰹕", mode = { "n", "v" } },
         },
