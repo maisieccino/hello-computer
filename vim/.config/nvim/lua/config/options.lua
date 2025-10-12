@@ -93,6 +93,7 @@ vim.g.no_map_maps = 1
 vim.filetype.add({
   filename = {
     Brewfile = "ruby",
+    [".Brewfile"] = "ruby",
     justfile = "just",
     Justfile = "just",
     [".buckconfig"] = "toml",

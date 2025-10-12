@@ -1,9 +1,13 @@
-# Path to your oh-my-zsh installation.
-export ZSH="${HOME}/.oh-my-zsh"
-# Disable automatic directory changing without calling cd.
-unsetopt AUTO_CD
+###
+### OPTS
+###
+unsetopt AUTO_CD # Disable automatic directory changing without calling cd.
+setopt SHARE_HISTORY
 
 export PATH="${PATH}:${HOME}/bin"
+export PATH="${PATH}:${HOME}/.local/bin"
+
+export XDG_CONFIG_HOME="${HOME}/.config"
 
 if (uname -a | grep -i darwin >/dev/null); then
   # For M1 Macs
@@ -11,27 +15,6 @@ if (uname -a | grep -i darwin >/dev/null); then
 else
   export PATH="/opt/brew/bin:/opt/brew/sbin:$PATH"
 fi
-#
-# # Use brew-installed cURL (with OpenSSL support).
-# if (uname -a | grep -i darwin >/dev/null); then
-#     export LDFLAGS="-L/opt/homebrew/curl-openssl/lib"
-#     export CPPFLAGS="-I/usr/local/opt/curl-openssl/include"
-#     export PKG_CONFIG_PATH="/usr/local/opt/curl-openssl/lib/pkgconfig"
-#
-#     # And symlink for helm2
-#     alias helm2=/usr/local/opt/helm@2/bin/helm
-# fi
-#
-ZSH_THEME="cypher"
-# PROMPT='$ '
-if (stat "${HOME}/.remote" >/dev/null 2>/dev/null); then
-	PROMPT="${HOST} λ "
-fi
-if (uname -a | grep -i darwin >/dev/null); then
-  PROMPT='$ '
-fi
-
-COMPLETION_WAITING_DOTS="true"
 
 # PyEnv
 if (stat "${HOME}/.pyenv/bin" >/dev/null 2>/dev/null); then
@@ -44,55 +27,39 @@ if (which pyenv >/dev/null 2>/dev/null); then
   eval "$(pyenv init -)"
 fi
 
-plugins=(
-# aws - aws-cli package sorts this for us.
-docker
-helm
-git
-golang
-kubectl
-macos
-pip
-vault
-)
-
 if (uname -a | grep -i darwin>/dev/null); then
   [[ -d $(brew --prefix)/share/zsh/site-functions/ ]] && fpath+=($(brew --prefix)/share/zsh/site-functions/)
 fi
-source $ZSH/oh-my-zsh.sh
-
 export EDITOR=nvim
 
 # NVM
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-autoload -U add-zsh-hook
+[ -s "$NVM_DIR/nvm.sh" ] && start_nvm() {
+   \. "$NVM_DIR/nvm.sh"  # This loads nvm
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+  load-nvmrc() {
+    local nvmrc_path
+    nvmrc_path="$(nvm_find_nvmrc)"
 
-load-nvmrc() {
-  local nvmrc_path
-  nvmrc_path="$(nvm_find_nvmrc)"
+    if [ -n "$nvmrc_path" ]; then
+      local nvmrc_node_version
+      nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
 
-  if [ -n "$nvmrc_path" ]; then
-    local nvmrc_node_version
-    nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
-
-    if [ "$nvmrc_node_version" = "N/A" ]; then
-      nvm install
-    elif [ "$nvmrc_node_version" != "$(nvm version)" ]; then
-      nvm use
+      if [ "$nvmrc_node_version" = "N/A" ]; then
+        nvm install
+      elif [ "$nvmrc_node_version" != "$(nvm version)" ]; then
+        nvm use
+      fi
+    elif [ -n "$(PWD=$OLDPWD nvm_find_nvmrc)" ] && [ "$(nvm version)" != "$(nvm version default)" ]; then
+      echo "Reverting to nvm default version"
+      nvm use default
     fi
-  elif [ -n "$(PWD=$OLDPWD nvm_find_nvmrc)" ] && [ "$(nvm version)" != "$(nvm version default)" ]; then
-    echo "Reverting to nvm default version"
-    nvm use default
-  fi
+  }
+  add-zsh-hook chpwd load-nvmrc
+  load-nvmrc
 }
 
-add-zsh-hook chpwd load-nvmrc
-load-nvmrc
-
-# GitHub CLI
-alias git=hub
+autoload -U add-zsh-hook
 
 # GnuPG
 if [ -f ~/.gnupg/.gpg-agent-info ] && [ -n "$(pgrep gpg-agent)" ]; then
@@ -117,103 +84,33 @@ export GOPATH=$HOME/go
 export GOPRIVATE="*.apple.com"
 export PATH=$GOPATH/bin:$PATH
 
-####################
-# CUSTOM FUNCTIONS #
-####################
-
-# mkcd recursively creates and cds into a directory
-function mkcd() {
-    mkdir -p $1
-    cd $1
-}
-
-
-# Elevates the last run command using sudo
-function elevate_last_command() {
-    # Check if running with ZSH history verification
-    if [ -z ${HIST_VERIFY+x} ]; then
-        setopt no_histverify
-        sudo `fc -ln -1`
-        setopt histverify
-    else
-        sudo `fc -ln -1`
-    fi
-}
-
-# fuck I forgot to sudo
-alias fuck=elevate_last_command
-
-function latest_tag {
-    echo "latest tag: $(git tag -l | sort -r --version-sort | head -n1)"
-}
-
-function docker_size {
-    docker image inspect "${1}" | jq '.[0].Size' | numfmt --to=iec-i --suffix=B
-}
-
-# Set the current context's namespace.
-function kube_ns() {
-    kubectl config set-context --current --namespace "${1}"
-}
-export FLUX_FORWARD_NAMESPACE="flux"
-
 # Secrets.
 [ -f ~/.secrets ] && source ~/.secrets
 
-# Generates a checksum for a given directory. Useful for checking for Helm chart
-# regressions.
-function checksum_dir {
-    find "${1}" -type f | xargs cat | sha256sum | cut -d' ' -f1
-}
+# Custom functions
+source $HOME/.config/zsh/functions.zsh
 
 # syntax highlighting
 if (uname -a | grep -i darwin >/dev/null); then
     test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
     source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+    source "$(brew --prefix)/share/zsh-history-substring-search/zsh-history-substring-search.zsh"
+    bindkey '^[[A' history-substring-search-up
+    bindkey '^[[B' history-substring-search-down
 else
     source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
+# history substring search
+if (uname -a | grep -i darwin >/dev/null); then
+  source "$(brew --prefix)/share/zsh-history-substring-search/zsh-history-substring-search.zsh"
+  bindkey '^[[A' history-substring-search-up
+  bindkey '^[[B' history-substring-search-down
+  # Options: https://github.com/zsh-users/zsh-history-substring-search#configuration
+  HISTORY_SUBSTRING_SEARCH_PREFIXED='yes' # Use the prefix to search.
+fi
+
 fpath=(/usr/local/share/zsh-completions $fpath)
-
-function authorizeme () {
-  prod_group_id=sg-c8e2fdad
-  preprod_group_id=sg-a93173cc
-  description="Matt B Remote $(date +%F)"
-  my_ip=$(curl -s 'https://api.ipify.org?format=json' \
-    | python -c "import sys, json; print(json.load(sys.stdin)['ip'])")/32
-
-  aws ec2 authorize-security-group-ingress \
-    --group-id $preprod_group_id \
-    --ip-permissions IpProtocol=tcp,FromPort=22,ToPort=22,IpRanges="[{CidrIp=$my_ip,Description=$description}]"
-      aws ec2 authorize-security-group-ingress \
-        --group-id $prod_group_id \
-        --ip-permissions IpProtocol=tcp,FromPort=22,ToPort=22,IpRanges="[{CidrIp=$my_ip,Description=$description}]"
-}
-
-function get-ecr-token() {
-  aws ecr get-authorization-token \
-    | jq -r '.authorizationData[0].authorizationToken' \
-    | base64 -d \
-    | cut -d':' -f2
-}
-
-function update-registry-secret() {
-  kubectl delete secret $1 --ignore-not-found
-  kubectl create secret docker-registry $1 \
-    --docker-server=$2 \
-    --docker-username=$3 \
-    --docker-password=$(cat /dev/stdin) \
-    --docker-email=$4
-}
-
-function ecr-registry-secret() {
-  export secret_name="${1}"
-  export docker_server="https://${AWS_ACCOUNT}.dkr.ecr.eu-west-1.amazonaws.com"
-  export docker_email="${ECR_EMAIL}"
-
-  get-ecr-token | update-registry-secret "${secret_name}" "${docker_server}" "AWS" "${docker_email}"
-}
 
 # rbenv
 if which rbenv >/dev/null; then
@@ -225,8 +122,6 @@ if (which mise >/dev/null); then
   eval "$(mise activate zsh)"
 fi
 
-export PATH=/Users/maisiebell/.local/bin:$PATH
-
 if [ -d ~/src/github.com/monzo ]; then
   source /opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
   source /opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
@@ -236,21 +131,14 @@ if [ -d ~/src/github.com/monzo ]; then
 fi
 export TFENV_ARCH=amd64
 
-export PATH=/Users/maisiebell/.local/bin:$PATH
-
-alias pr="nvim -c 'Octo pr'"
-
-alias syncnotes="git add . && git commit -m \"Sync mac $(date -I)\" && git push"
-
 eval "$(zoxide init zsh)"
 
-# macbook. what is the charger wattage, and what is the current charging power?
-wattage () {
-	info=$(ioreg -w 0 -f -r -c AppleSmartBattery)
-	vol=$(echo $info | grep '"Voltage" = ' | grep -oE '[0-9]+')
-	amp=$(echo $info | grep '"Amperage" = ' | grep -oE '[0-9]+')
-	amp=$(bc <<< "if ($amp >= 2^63) $amp - 2^64 else $amp")
-	wat="$(( (vol / 1000.0) * (amp / 1000.0) ))"
-	/usr/sbin/system_profiler SPPowerDataType | grep Wattage
-	printf "      Charging with: %.0f W\n" $wat
-}
+# Carapace shell completion
+if (which carapace >/dev/null) then
+  autoload -Uz compinit
+  compinit
+  zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
+  source <(carapace _carapace)
+fi
+
+eval "$(starship init zsh)"

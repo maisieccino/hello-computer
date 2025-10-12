@@ -1,0 +1,12 @@
+"$schema" = "https://starship.rs/config-schema.json"
+format = '''$git_branch
+$status$directory\$ '''
+
+[git_branch]
+format = "[$symbol$branch(:$remote_branch)]($style) "
+
+[status]
+success_symbol = ""
+format = "[$int]($style) "
+map_symbol = false
+disabled = false
