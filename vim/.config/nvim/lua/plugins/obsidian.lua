@@ -26,6 +26,9 @@ return {
         ---@param src any
         ---@return string|nil
         resolve = function(path, src)
+          if string.match(src, "^https://") then
+            return
+          end
           if require("obsidian.api").path_is_note(path) then
             local dirname = util.git_root_dir(path)
             local matches = vim.fs.find(src, {
