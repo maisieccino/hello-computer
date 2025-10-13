@@ -1,6 +1,7 @@
 "$schema" = "https://starship.rs/config-schema.json"
 format = '''$git_branch
 $status$directory\$ '''
+right_format = '''${custom.tenancy}'''
 
 [git_branch]
 format = "[$symbol$branch(:$remote_branch)]($style) "
@@ -10,3 +11,9 @@ success_symbol = ""
 format = "[$int]($style) "
 map_symbol = false
 disabled = false
+
+[custom.tenancy]
+command = "~/bin/tenancy_prompt.sh"
+when = '''which tenancy'''
+format = '[$output](bold green)'
+ignore_timeout = true

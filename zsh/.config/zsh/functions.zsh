@@ -12,6 +12,8 @@ alias gst="git status"
 alias gp="git push"
 alias gl="git pull"
 alias glg="git log"
+alias gd="git diff"
+alias gco="git checkout"
 
 ####################
 # CUSTOM FUNCTIONS #

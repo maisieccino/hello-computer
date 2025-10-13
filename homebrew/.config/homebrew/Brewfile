@@ -1,3 +1,7 @@
+def is_work?
+  return File.exist?("/Users/maisiebell/src/github.com/monzo")
+end
+
 brew "bat"
 brew "carapace" # Shell completion
 brew "chafa" # Generate ASCII images
@@ -18,12 +22,11 @@ brew "jq"
 brew "lazygit"
 brew "neovim", args: ["HEAD"] # v0.12.0
 brew "openapi"
-brew "openssl@1.1"
 brew "pinentry-mac"
 brew "pkgconf"
 brew "pngpaste"
-brew "postgis" # Geospatial data in postgresql
-brew "postgresql@17", restart_service: :changed, link: true
+brew "postgis" unless is_work? # Geospatial data in postgresql
+brew "postgresql@17", restart_service: :changed, link: true unless is_work?
 brew "pyenv"
 brew "r"
 brew "ranger"
@@ -45,21 +48,23 @@ brew "z"
 brew "zoxide"
 brew "zsh-history-substring-search"
 brew "zsh-syntax-highlighting"
-
-cask "1password"
-cask "1password-cli"
-cask "blender"
-cask "container" #  Container runtime
-cask "figma"
 cask "font-fantasque-sans-mono-nerd-font"
 cask "font-gohufont-nerd-font"
 cask "font-iosevka-nerd-font"
-cask "google-chrome"
-cask "keybase"
-cask "kitty"
-cask "mactex-no-gui"
-cask "quarto"
-cask "signal"
-cask "slicer"
-cask "vnc-viewer"
-cask "zoom"
+
+unless is_work? do
+  cask "1password"
+  cask "1password-cli"
+  cask "blender"
+  cask "container"
+  cask "figma"
+  cask "google-chrome"
+  cask "keybase"
+  cask "kitty"
+  cask "mactex-no-gui"
+  cask "quarto"
+  cask "signal"
+  cask "slicer"
+  cask "vnc-viewer"
+  cask "zoom"
+end

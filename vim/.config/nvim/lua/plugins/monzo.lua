@@ -159,10 +159,48 @@ return {
     end,
   },
   {
-    "pwntester/octo.nvim",
+    "octo.nvim",
     opts = {
       notifications = {
         current_repo_only = true,
+      },
+    },
+  },
+  {
+    "which-key.nvim",
+    keys = {
+      {
+        "<localleader>ms",
+        function()
+          require("snacks").terminal("£ -es101", {
+            auto_close = true,
+            win = {
+              border = "rounded",
+              height = 0.7,
+              width = 0.5,
+            },
+          })
+        end,
+        desc = "Staging",
+      },
+      {
+        "<localleader>mp",
+        function()
+          require("snacks").terminal("£ -eprod", {
+            auto_close = true,
+            win = {
+              border = "rounded",
+              height = 0.7,
+              width = 0.5,
+            },
+          })
+        end,
+        desc = "Prod",
+      },
+    },
+    opts = {
+      spec = {
+        { ";m", group = "monzo", icon = "" },
       },
     },
   },

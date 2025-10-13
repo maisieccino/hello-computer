@@ -1,8 +1,8 @@
 ---@type LazySpec[]
 return {
   {
-    "pwntester/octo.nvim",
-    dir = "~/github.com/octo.nvim",
+    "maisieccino/octo.nvim",
+    branch = "snacks-user-search",
     dependencies = {
       "nvim-telescope/telescope.nvim",
     },
