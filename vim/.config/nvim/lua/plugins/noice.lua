@@ -54,6 +54,7 @@ return {
           },
         },
       },
+      ---@type NoiceRouteConfig[]
       routes = {
         {
           filter = {

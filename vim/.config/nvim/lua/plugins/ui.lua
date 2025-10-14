@@ -10,15 +10,23 @@ return {
   },
   {
     "bufferline.nvim",
-    opts = {
-      options = {
-        mode = "tabs",
-        show_close_icon = false,
-        show_buffer_close_icons = false,
-        always_show_bufferline = true,
-        separator_style = "slope",
-      },
-    },
+    opts = function()
+      local bufferline = require("bufferline")
+      return {
+        options = {
+          style_preset = bufferline.style_preset.no_italic,
+          mode = "tabs",
+          show_close_icon = false,
+          show_buffer_close_icons = false,
+          always_show_bufferline = true,
+          indicator = {
+            style = "icon",
+          },
+          separator_style = "thick",
+          color_icons = true,
+        },
+      }
+    end,
   },
   {
     "snacks.nvim",
