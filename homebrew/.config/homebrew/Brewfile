@@ -52,7 +52,7 @@ cask "font-fantasque-sans-mono-nerd-font"
 cask "font-gohufont-nerd-font"
 cask "font-iosevka-nerd-font"
 
-unless is_work? do
+unless is_work?
   cask "1password"
   cask "1password-cli"
   cask "blender"
