@@ -30,8 +30,12 @@ return {
             return
           end
           if require("obsidian.api").path_is_note(path) then
+            if vim.fn.filereadable(src) == 1 then
+              return src
+            end
             local dirname = util.git_root_dir(path)
-            local matches = vim.fs.find(src, {
+            local filename = vim.fn.fnamemodify(src, ":t")
+            local matches = vim.fs.find(filename, {
               path = dirname .. "/Assets",
               limit = 1,
             })
