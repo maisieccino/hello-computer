@@ -9,6 +9,7 @@ brew "ctags"
 brew "doctl" # DigitalOcean CLI
 brew "fd" # Better find tools
 brew "ffmpeg"
+brew "fnm" unless is_work? # Better nvm
 brew "fzf" # Fuzzy finder
 brew "gh"
 brew "git-lfs"

@@ -34,17 +34,24 @@ if (uname -a | grep -i darwin>/dev/null); then
 fi
 export EDITOR=nvim
 
-# NVM
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --no-use # This loads nvm, without auto-using the default version
-check_nvm() {
-  if [ -f ".nvmrc" ]; then
-    nvm use
-  fi
-}
-autoload -U add-zsh-hook
-add-zsh-hook chpwd check_nvm
-check_nvm
+if (command -v fnm &>/dev/null)
+then
+  # FNM is a faster version of NVM.
+  alias nvm="fnm"
+  eval "$(fnm --version-file-strategy=recursive --log-level=quiet env --use-on-cd)"
+else
+  # NVM
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+  check_nvm() {
+    if [ -f ".nvmrc" ]; then
+      nvm use
+    fi
+  }
+  autoload -U add-zsh-hook
+  add-zsh-hook chpwd check_nvm
+  check_nvm
+fi
 
 # GnuPG
 if [ -f ~/.gnupg/.gpg-agent-info ] && [ -n "$(pgrep gpg-agent)" ]; then
