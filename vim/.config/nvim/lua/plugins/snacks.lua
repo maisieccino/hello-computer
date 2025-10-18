@@ -112,6 +112,7 @@ return {
           },
         },
       },
+      ---@type snacks.image.Config
       image = {
         enabled = true,
         img_dirs = { "img", "images", "assets", "Assets", "static", "public", "media", "attachments", "assets/images" },
