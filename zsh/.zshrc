@@ -3,6 +3,7 @@
 ###
 unsetopt AUTO_CD # Disable automatic directory changing without calling cd.
 setopt SHARE_HISTORY
+HISTFILE=~/.zsh_history
 
 export PATH="${PATH}:${HOME}/bin"
 export PATH="${PATH}:${HOME}/.local/bin"
@@ -73,25 +74,29 @@ export PATH=$GOPATH/bin:$PATH
 # Custom functions
 source $HOME/.config/zsh/functions.zsh
 
+
 # syntax highlighting
 if (uname -a | grep -i darwin >/dev/null); then
     test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
     source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-    source "$(brew --prefix)/share/zsh-history-substring-search/zsh-history-substring-search.zsh"
-    bindkey '^[[A' history-substring-search-up
-    bindkey '^[[B' history-substring-search-down
 else
     source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
 # history substring search
+# Options: https://github.com/zsh-users/zsh-history-substring-search#configuration
+HISTORY_SUBSTRING_SEARCH_PREFIXED='yes' # Use the prefix to search.
 if (uname -a | grep -i darwin >/dev/null); then
   source "$(brew --prefix)/share/zsh-history-substring-search/zsh-history-substring-search.zsh"
   bindkey '^[[A' history-substring-search-up
   bindkey '^[[B' history-substring-search-down
-  # Options: https://github.com/zsh-users/zsh-history-substring-search#configuration
-  HISTORY_SUBSTRING_SEARCH_PREFIXED='yes' # Use the prefix to search.
+else
+  source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+  bindkey "^[[A" history-substring-search-up
+  bindkey "^[[B" history-substring-search-down
 fi
+bindkey "^[[H" beginning-of-line
+bindkey "^[[F" end-of-line
 
 fpath=(/usr/local/share/zsh-completions $fpath)
 
@@ -120,6 +125,7 @@ eval "$(zoxide init zsh)"
 if (which carapace >/dev/null) then
   autoload -Uz compinit
   compinit
+  export CARAPACE_BRIDGES='cobra,kitten,zsh'
   zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
   source <(carapace _carapace)
 fi
