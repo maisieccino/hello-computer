@@ -29,7 +29,8 @@ return {
           if string.match(src, "^https://") then
             return
           end
-          if require("obsidian.api").path_is_note(path) then
+          local status, obsidian = pcall(require, "obsidian.api")
+          if status and obsidian.path_is_note(path) then
             if vim.fn.filereadable(src) == 1 then
               return src
             end
@@ -94,7 +95,7 @@ return {
       { "<localleader>ob", "<cmd>Obsidian backlinks<CR>", desc = "Backlinks" },
       { "<localleader>oc", "<cmd>Obsidian toc<CR>", desc = "Insert ToC" },
       { "<localleader>ox", "<cmd>Obsidian extract_note<CR>", desc = "Extract note", mode = "v" },
-      { "<localleader>o ", "<cmd>!/bin/zsh -c syncnotes<CR>", desc = "Push notes to remote" },
+      { "<localleader>o ", "<cmd>!./bin/syncnotes.zsh<CR>", desc = "Push notes to remote" },
     },
     opts = {
       workspaces = {
