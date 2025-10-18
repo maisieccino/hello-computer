@@ -4,6 +4,7 @@
 unsetopt AUTO_CD # Disable automatic directory changing without calling cd.
 setopt SHARE_HISTORY
 HISTFILE=~/.zsh_history
+bindkey -e
 
 export PATH="${PATH}:${HOME}/bin"
 export PATH="${PATH}:${HOME}/.local/bin"
@@ -97,6 +98,8 @@ else
 fi
 bindkey "^[[H" beginning-of-line
 bindkey "^[[F" end-of-line
+bindkey "^[b" backward-word
+bindkey "^[f" forward-word
 
 fpath=(/usr/local/share/zsh-completions $fpath)
 

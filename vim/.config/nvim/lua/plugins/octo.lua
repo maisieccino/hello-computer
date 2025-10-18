@@ -1,11 +1,10 @@
 ---@type LazySpec[]
 return {
   {
-    "maisieccino/octo.nvim",
-    branch = "snacks-user-search",
-    dependencies = {
-      "nvim-telescope/telescope.nvim",
-    },
+    "pwntester/octo.nvim",
+    -- dependencies = {
+    --   "nvim-telescope/telescope.nvim",
+    -- },
     opts = {
       -- Fixes issues with diffs being wrong(?)
       use_local_fs = true,
