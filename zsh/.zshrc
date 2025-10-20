@@ -107,6 +107,9 @@ bindkey "^[[H" beginning-of-line
 bindkey "^[[F" end-of-line
 bindkey "^[b" backward-word
 bindkey "^[f" forward-word
+autoload edit-command-line
+zle -N edit-command-line
+bindkey "^X^E" edit-command-line
 
 fpath=(/usr/local/share/zsh-completions $fpath)
 

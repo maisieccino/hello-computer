@@ -116,6 +116,11 @@ return {
       image = {
         enabled = true,
         img_dirs = { "img", "images", "assets", "Assets", "static", "public", "media", "attachments", "assets/images" },
+        math = {
+          latex = {
+            packages = { "amsmath", "amssymb", "amsfonts", "amscd", "mathtools", "pgfplots" },
+          },
+        },
       },
     },
   },

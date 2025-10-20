@@ -2,6 +2,7 @@
 --   return {}
 -- end
 
+---@type LazySpec
 return {
   {
     "quarto-dev/quarto-nvim",
@@ -91,15 +92,16 @@ return {
       if vim.api.nvim_buf_get_name(0):match(".*ipynb") then
         return { "quarto", "markdown", "python" }
       end
-      return { "quarto", "python" }
+      return { "quarto", "markdown", "python" }
     end,
-    dependencies = { "3rd/image.nvim" },
     config = function(_, opts)
       vim.g.molten_virt_lines_off_by_1 = true
       vim.g.molten_virt_text_output = true
-      vim.g.molten_image_provider = "image.nvim"
-      vim.g.molten_auto_open_output = false
+      vim.g.molten_image_provider = "snacks.nvim"
+      -- vim.g.molten_auto_open_output = true
       vim.g.molten_wrap_output = true
+      vim.g.molten_image_location = "float"
+      vim.g.molten_output_win_hide_on_leave = true
     end,
     keys = {
       { "<localleader>q ", ":noautocmd MoltenEnterOutput<CR>", desc = "Open output window" },
@@ -107,6 +109,13 @@ return {
       { "<localleader>qP", ":noautocmd MoltenInit python3<CR>", desc = "Start molten kernel (python3)" },
       { "<localleader>qI", ":noautocmd MoltenInit<CR>", desc = "Start molten kernel" },
       { "<localleader>qe", ":noautocmd MoltenEvaluateOperator<CR>", desc = "Molten: Evaluate" },
+      {
+        "<localleader>qv",
+        ":<C-u>MoltenEvaluateVisual<CR>gv",
+        desc = "execute visual selection",
+        silent = true,
+        mode = "v",
+      },
     },
   },
   {
@@ -118,45 +127,34 @@ return {
     },
   },
   {
-    "nvim-treesitter/nvim-treesitter",
-    -- TODO: Re-enable once patched
+    "nvim-treesitter/nvim-treesitter-textobjects",
     enabled = true,
-    dependencies = { "nvim-treesitter-textobjects" },
+    branch = "main",
     build = ":TSUpdate",
-    setup = function()
-      local configs = require("nvim-treesitter.configs")
-      configs.setup({
-        ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "javascript", "html" },
-        modules = {},
-        ignore_install = {},
-        auto_install = true,
-        sync_install = false,
-        highlight = { enable = true },
-        indent = { enable = true },
-        textobjects = {
-          move = {
-            enable = true,
-            set_jumps = false, -- you can change this if you want.
-            goto_next_start = {
-              --- ... other keymaps
-              ["]s"] = { query = "@code_cell.inner", desc = "next code block" },
-            },
-            goto_previous_start = {
-              --- ... other keymaps
-              ["[s"] = { query = "@code_cell.inner", desc = "previous code block" },
-            },
+    opts = {
+      move = {
+        enable = true,
+        set_jumps = false, -- you can change this if you want.
+        keys = {
+          goto_next_start = {
+            --- ... other keymaps
+            ["]s"] = "@code_cell.inner",
           },
-          select = {
-            enable = true,
-            lookahead = true, -- you can change this if you want
-            keymaps = {
-              --- ... other keymaps
-              ["is"] = { query = "@code_cell.inner", desc = "in block" },
-              ["as"] = { query = "@code_cell.outer", desc = "around block" },
-            },
+          goto_previous_start = {
+            --- ... other keymaps
+            ["[s"] = "@code_cell.inner",
           },
         },
-      })
-    end,
+      },
+      select = {
+        enable = true,
+        lookahead = true, -- you can change this if you want
+        keymaps = {
+          --- ... other keymaps
+          ["is"] = { query = "@code_cell.inner", desc = "in block" },
+          ["as"] = { query = "@code_cell.outer", desc = "around block" },
+        },
+      },
+    },
   },
 }
