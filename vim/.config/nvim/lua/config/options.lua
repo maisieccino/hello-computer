@@ -78,7 +78,11 @@ opt.winheight = 1
 opt.winminheight = 1
 
 -- vim.g.loaded_python3_provider = 0
-vim.g.python3_host_prog = vim.fn.expand("~/.pyenv/shims/python3")
+if vim.fn.isdirectory(vim.fn.expand("~/.local/share/virtualenvs/nvim")) then
+  vim.g.python3_host_prog = vim.fn.expand("~/.local/share/virtualenvs/nvim/bin/python3")
+else
+  vim.g.python3_host_prog = vim.fn.expand("~/.pyenv/shims/python3")
+end
 
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0

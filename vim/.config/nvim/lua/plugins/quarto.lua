@@ -1,7 +1,3 @@
--- if vim.fn.isdirectory(vim.fn.expand("~/src/github.com/monzo")) == 1 then
---   return {}
--- end
-
 ---@type LazySpec
 return {
   {
@@ -121,9 +117,13 @@ return {
   {
     "GCBallesteros/jupytext.nvim",
     opts = {
-      style = "markdown",
-      output_extension = "md",
-      force_ft = "markdown",
+      custom_language_formatting = {
+        python = {
+          style = "markdown",
+          extension = "md",
+          force_ft = "markdown",
+        },
+      },
     },
   },
   {
