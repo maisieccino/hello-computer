@@ -6,6 +6,7 @@ end
 
 return {
   "snacks.nvim",
+  ---@param opts snacks.Config
   opts = function(_, opts)
     table.insert(
       opts.dashboard.preset.keys,
@@ -15,14 +16,18 @@ return {
     opts.dashboard.sections = {
       {
         section = "terminal",
-        cmd = "chafa ~/.config/nvim/wallpaper.jpg --probe off --format symbols --scale max --align mid,right; sleep .1",
-        height = 20,
+        cmd = "chafa ~/.config/nvim/wallpaper.jpg --probe off --format symbols --size 30x17 --align vcenter,right; sleep .1",
+        height = 30,
+        align = "right",
+        width = 60,
         padding = 1,
       },
       { pane = 2, section = "keys", padding = 1 },
       {
         pane = 2,
         section = "terminal",
+        width = 60,
+        height = 11,
         ttl = 5,
         title = "Water consumption",
         cmd = "cd ~/github.com/maisieccino/notes && type chart &>/dev/null && chart",
@@ -34,6 +39,7 @@ return {
         ttl = 5 * 60,
         title = "GitHub Notifications",
         cmd = "gh notify -s -n6",
+        width = 30,
       },
     }
   end,

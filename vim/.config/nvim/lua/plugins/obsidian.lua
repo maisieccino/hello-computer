@@ -108,7 +108,7 @@ return {
       ui = { enable = false },
       daily_notes = {
         folder = "600 Daily Notes",
-        date_format = "%Y-%m-%d",
+        date_format = "%Y/%m/%Y-%m-%d",
         template = "Daily Note",
       },
       new_notes_location = "current_dir",
