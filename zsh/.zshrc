@@ -82,7 +82,9 @@ export PATH=$GOPATH/bin:$PATH
 [ -f ~/.secrets ] && source ~/.secrets
 
 # Custom functions
-source $HOME/.config/zsh/functions.zsh
+for file in $HOME/.config/zsh/*.zsh; do
+  source "${file}"
+done
 
 
 # syntax highlighting

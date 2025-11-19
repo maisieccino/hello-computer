@@ -13,9 +13,10 @@ brew "fnm" unless is_work? # Better nvm
 brew "fzf" # Fuzzy finder
 brew "gh"
 brew "git-lfs"
+brew "glow"
 brew "gnupg"
 brew "go"
-brew "golang-migrate"
+brew "golang-migrate" unless is_work?
 brew "htop"
 brew "hub"
 brew "imagemagick"
@@ -50,7 +51,6 @@ brew "zoxide"
 brew "zsh-history-substring-search"
 brew "zsh-syntax-highlighting"
 cask "font-fantasque-sans-mono-nerd-font"
-cask "font-gohufont-nerd-font"
 cask "font-iosevka-nerd-font"
 
 unless is_work?
@@ -58,6 +58,7 @@ unless is_work?
   cask "1password-cli"
   cask "blender"
   cask "container"
+  cask "calibre"
   cask "figma"
   cask "google-chrome"
   cask "keybase"
@@ -68,4 +69,8 @@ unless is_work?
   cask "slicer"
   cask "vnc-viewer"
   cask "zoom"
+  cask "font-stack-sans-text"
+  cask "font-stack-sans-notch"
+  cask "font-stack-sans-headline"
+  cask "font-gohufont-nerd-font"
 end
