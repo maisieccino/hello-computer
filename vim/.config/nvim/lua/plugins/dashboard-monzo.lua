@@ -15,6 +15,7 @@ return {
     end,
     opts = function(_, opts)
       table.insert(opts.dashboard.preset.keys, 2, { icon = " ", key = "P", desc = "Open PR", action = ":Octo pr" })
+      ---@type snacks.dashboard.Section[]
       opts.dashboard.sections = {
         {
           section = "terminal",
@@ -40,7 +41,7 @@ return {
           },
           action = ":Octo search is:pr user-review-requested:@me is:open",
           key = "R",
-          width = 100,
+          width = 80,
         },
         {
           pane = 2,
@@ -54,7 +55,7 @@ return {
           },
           action = ":Octo search is:pr author:@me is:open org:monzo",
           key = "m",
-          width = 100,
+          width = 80,
         },
         {
           pane = 2,
@@ -62,7 +63,7 @@ return {
           ttl = 5 * 60,
           title = "Tenancy status",
           cmd = "tenancy status",
-          width = 100,
+          width = 80,
         },
       }
     end,

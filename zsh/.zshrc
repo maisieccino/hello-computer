@@ -149,3 +149,31 @@ if (which carapace >/dev/null) then
 fi
 
 eval "$(starship init zsh)"
+
+# Print welcome ascii
+
+LINE1="                                               ";
+LINE2=" ,dPYb,              ,dPYb, ,dPYb,             ";
+LINE3=" IP' Yb              IP' Yb IP' Yb             ";
+LINE4=" I8  8I              I8  8I I8  8I             ";
+LINE5=" I8  8'              I8  8' I8  8'             ";
+LINE6=" I8 dPgg,    ,ggg,   I8 dP  I8 dP    ,ggggg,   ";
+LINE7=" I8dP\" \"8I  i8\" \"8i  I8dP   I8dP    dP\"  \"Y8ggg";
+LINE8=" I8P    I8  I8, ,8I  I8P    I8P    i8'    ,8I  ";
+LINE9=",d8     I8,  YbadP' ,d8b,_ ,d8b,_ ,d8,   ,d8'  ";
+LINE10="88P      Y8888P\"Y8888P'\"Y888P'\"Y88P\"Y8888P\"    ";
+LINE11="                                               ";
+
+print -P -r "
+$LINE1%f
+%F{#8ce8f1}$LINE2%f
+%F{#81e3f7}$LINE3%f
+%F{#7bddfc}$LINE4%f
+%F{#79d6ff}$LINE5%f
+%F{#7dcfff}$LINE6%f
+%F{#86c6ff}$LINE7%f
+%F{#93beff}$LINE8%f
+%F{#a2b4fe}$LINE9%f
+%F{#b2aaf7}$LINE10%f
+%F{#c19fec}$LINE11%f
+  "

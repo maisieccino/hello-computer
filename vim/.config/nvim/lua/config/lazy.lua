@@ -1,3 +1,4 @@
+local util = require("util")
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -15,9 +16,21 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
+  ---@type LazySpec
   spec = {
     -- add LazyVim and import its plugins
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
+    {
+      "pin",
+      dir = "~/src/github.com/monzo/pin",
+      cond = function()
+        return util.is_work()
+      end,
+      import = "pin.plugins",
+      opts = {
+        foo = "bar",
+      },
+    },
     -- import/override with your plugins
     { import = "plugins" },
   },

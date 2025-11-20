@@ -41,6 +41,7 @@ vim.diagnostic.config({
   float = { border = "rounded" },
 })
 
+---@type LazySpec[]
 return {
   {
     "mason-org/mason.nvim",
@@ -50,37 +51,12 @@ return {
       },
       registries = {
         "github:mason-org/mason-registry",
-        -- "file:" .. vim.fn.stdpath("config") .. "/mason",
       },
     },
   },
   {
     "sgur/vim-editorconfig",
     enabled = false,
-  },
-  {
-    "nvimtools/none-ls.nvim",
-    opts = function()
-      local null_ls = require("null-ls")
-      local cwd = vim.fn.getcwd()
-      local git_dir = git_root_dir(cwd)
-      return {
-        debug = true,
-        sources = {
-          null_ls.builtins.diagnostics.semgrep.with({
-            extra_args = {
-              "--config=" .. git_dir .. "/static-check-rules",
-              "--severity=WARNING",
-              "--severity=ERROR",
-            },
-            timeout = 10000,
-            ignore_stderr = true,
-            method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
-          }),
-          null_ls.builtins.diagnostics.buf,
-        },
-      }
-    end,
   },
   {
     "editorconfig/editorconfig-vim",
@@ -163,44 +139,6 @@ return {
     opts = {
       notifications = {
         current_repo_only = true,
-      },
-    },
-  },
-  {
-    "which-key.nvim",
-    keys = {
-      {
-        "<localleader>ms",
-        function()
-          require("snacks").terminal("£ -es101", {
-            auto_close = true,
-            win = {
-              border = "rounded",
-              height = 0.7,
-              width = 0.5,
-            },
-          })
-        end,
-        desc = "Staging",
-      },
-      {
-        "<localleader>mp",
-        function()
-          require("snacks").terminal("£ -eprod", {
-            auto_close = true,
-            win = {
-              border = "rounded",
-              height = 0.7,
-              width = 0.5,
-            },
-          })
-        end,
-        desc = "Prod",
-      },
-    },
-    opts = {
-      spec = {
-        { ";m", group = "monzo", icon = "" },
       },
     },
   },

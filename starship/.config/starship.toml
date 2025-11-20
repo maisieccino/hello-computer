@@ -17,3 +17,4 @@ command = "~/bin/tenancy_prompt.sh"
 when = '''which tenancy'''
 format = '[$output](bold green)'
 ignore_timeout = true
+disabled = true
