@@ -16,13 +16,12 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-  ---@type LazySpec
+  ---@type LazySpecImport[]
   spec = {
     -- add LazyVim and import its plugins
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
     {
-      "pin",
-      dir = "~/src/github.com/monzo/pin",
+      name = "pin",
       cond = function()
         return util.is_work()
       end,

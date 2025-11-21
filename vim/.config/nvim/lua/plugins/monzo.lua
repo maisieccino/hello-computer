@@ -4,14 +4,6 @@ if not util.is_work() then
   return {}
 end
 
-local git_root_dir = function(startpath)
-  local paths = vim.fs.find(".git", { path = startpath, upward = true })
-  if #paths == 0 then
-    return vim.fs.dirname(startpath)
-  end
-  return vim.fs.dirname(paths[1])
-end
-
 -- Run goimports on save, fix vendor appearing in path.
 -- TODO: May not be needed! https://go-review.googlesource.com/c/tools/+/708475
 -- vim.api.nvim_create_autocmd({ "BufWritePre" }, {
@@ -43,6 +35,11 @@ vim.diagnostic.config({
 
 ---@type LazySpec[]
 return {
+  {
+    "pin",
+    lazy = false,
+    dir = "~/src/github.com/monzo/pin",
+  },
   {
     "mason-org/mason.nvim",
     opts = {
@@ -95,7 +92,7 @@ return {
         ["neotest-jest"] = {
           jestCommand = "yarn test",
           jestConfigFile = function(file)
-            return git_root_dir(file) .. "/jest.config.js"
+            return util.git_root_dir(file) .. "/jest.config.js"
           end,
           jest_test_discovery = true,
           env = { CI = true },

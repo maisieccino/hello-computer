@@ -1,3 +1,4 @@
+local util = require("util")
 vim.g.mapleader = " "
 vim.g.maplocalleader = ";"
 
@@ -26,6 +27,11 @@ opt.timeoutlen = 500 -- Faster timeout on mapped sequence to complete.
 opt.ttimeoutlen = 10 -- Faster timeout on key code sequence to complete.
 
 opt.tabclose:append({ "uselast" })
+
+-- TODO: Remove once moved to a real plugin
+if util.is_work() then
+  opt.rtp:append(vim.fn.expand("~/src/github.com/monzo/pin"))
+end
 
 opt.sessionoptions:remove({ "blank", "buffers", "terminal" })
 opt.sessionoptions:append({ "globals", "skiprtp" })
