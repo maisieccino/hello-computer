@@ -7,6 +7,7 @@ border-radius=10
 padding=10
 outer-margin=5,10,0,0
 margin=0,10,10,0
-font=Apercu 12
-format=<span font_desc="Michroma Bold 15">%s</span>\n%b
+font=FantasqueSansM Nerd Font Mono 13
+#format=<span font_desc="Michroma Bold 15">%s</span>\n%b
+format=<i><b>%s</b></i>\n%b
 width=400

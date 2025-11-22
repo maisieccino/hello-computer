@@ -136,12 +136,12 @@
   },
   "pulseaudio": {
     // "scroll-step": 1, // %, can be a float
-    "format": "{volume}% <span font=\"Font Awesome 6 Free Solid\">{icon} </span> {format_source}",
+    "format": "{volume}% <span font=\"Font Awesome 6 Free Solid 10\">{icon} </span> {format_source}",
     "format-bluetooth": "{volume}% {icon} {format_source}",
     "format-bluetooth-muted": " {icon} {format_source}",
-    "format-muted": " {format_source}",
-    "format-source": "{volume}% ",
-    "format-source-muted": "",
+    "format-muted": "<span font=\"Font Awesome 6 Free Solid 10\"></span> {format_source}",
+    "format-source": "{volume}% <span font=\"Font Awesome 6 Free Solid 10\"></span>",
+    "format-source-muted": "<span font=\"Font Awesome 6 Free Solid 10\"></span>",
     "format-icons": {
       "headphone": "",
       "hands-free": "",
@@ -170,16 +170,9 @@
     // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
   },
   "custom/power": {
-    "format": "⏻ ",
+    "format": "<span font=\"Font Awesome 6 Free Solid 10\">⏻</span> ",
     "tooltip": false,
-    "menu": "on-click",
-    "menu-file": "$HOME/.config/waybar/power_menu.xml", // Menu file in resources folder
-    "menu-actions": {
-      "shutdown": "shutdown",
-      "reboot": "reboot",
-      "suspend": "systemctl suspend",
-      "hibernate": "systemctl hibernate",
-    }
+    "on-click": "~/bin/powermenu.sh"
   },
   "mpris": {
     "format": "{status_icon} {dynamic}",

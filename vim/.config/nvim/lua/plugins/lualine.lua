@@ -6,12 +6,13 @@ local colors = {
   red = "#ff5189",
   violet = "#d183e8",
   grey = "#303030",
+  normal = "#24273b",
 }
 
 local bubbles_theme = {
   normal = {
     a = { fg = colors.black, bg = colors.violet },
-    b = { fg = colors.white, bg = colors.grey },
+    b = { fg = colors.black, bg = colors.blue },
     c = { fg = colors.white },
   },
 
@@ -20,8 +21,8 @@ local bubbles_theme = {
   replace = { a = { fg = colors.black, bg = colors.red } },
 
   inactive = {
-    a = { fg = colors.white, bg = colors.black },
-    b = { fg = colors.white, bg = colors.black },
+    a = { fg = colors.white, bg = colors.normal },
+    b = { fg = colors.white, bg = colors.normal },
     c = { fg = colors.white },
   },
 }
@@ -39,7 +40,7 @@ return {
     },
     sections = {
       lualine_a = {},
-      lualine_b = { { "branch", separator = { left = "" }, right_padding = 2, left_padding = 2 } },
+      lualine_b = { { "branch", separator = { left = "", right = "" }, right_padding = 2, left_padding = 2 } },
 
       lualine_c = {
         LazyVim.lualine.root_dir(),
@@ -57,7 +58,14 @@ return {
       },
 
       lualine_y = {
-        { "location", padding = { left = 0, right = 1 } },
+        {
+          "location",
+          padding = { left = 0, right = 1 },
+          separator = {
+            left = "",
+            right = "",
+          },
+        },
       },
       lualine_z = {},
     },
