@@ -39,7 +39,7 @@ return {
         ttl = 5 * 60,
         title = "GitHub Notifications",
         cmd = "gh notify -s -n6",
-        width = 30,
+        width = 80,
       },
     }
   end,
