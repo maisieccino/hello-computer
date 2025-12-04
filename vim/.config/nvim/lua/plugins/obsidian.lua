@@ -1,4 +1,17 @@
 local util = require("util")
+
+local function sync_notes()
+  vim.schedule(function()
+    vim.notify("Syncing with git...")
+    local cmd = vim.system({ "zsh", vim.fn.expand("./bin/syncnotes.zsh") }):wait(5000)
+    if cmd.code == 0 then
+      vim.notify("Sync complete.")
+    else
+      vim.notify("Sync failed.", "error")
+    end
+  end)
+end
+
 return {
   {
     "blink.cmp",
@@ -96,7 +109,7 @@ return {
       { "<localleader>ob", "<cmd>Obsidian backlinks<CR>", desc = "Backlinks" },
       { "<localleader>oc", "<cmd>Obsidian toc<CR>", desc = "Insert ToC" },
       { "<localleader>ox", "<cmd>Obsidian extract_note<CR>", desc = "Extract note", mode = "v" },
-      { "<localleader>o ", "<cmd>!./bin/syncnotes.zsh<CR>", desc = "Push notes to remote" },
+      { "<localleader>o ", sync_notes, desc = "Push notes to remote" },
     },
     opts = {
       workspaces = {

@@ -3,6 +3,7 @@ return {
     "LazyVim/LazyVim",
     opts = {
       colorscheme = "catppuccin-macchiato",
+      -- colorscheme = "oxocarbon",
     },
   },
   {
@@ -10,7 +11,7 @@ return {
     lazy = true,
   },
   {
-    "jim-at-jibba/ariake.nvim",
+    "nyoom-engineering/oxocarbon.nvim",
   },
   {
     "akinsho/bufferline.nvim",
