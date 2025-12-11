@@ -38,7 +38,8 @@ return {
   {
     "pin",
     lazy = false,
-    dir = "~/src/github.com/monzo/pin",
+    dir = "/Users/maisiebell/src/github.com/monzo/pin",
+    main = "pin",
   },
   {
     "mason-org/mason.nvim",

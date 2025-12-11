@@ -19,6 +19,7 @@ return {
       { "<leader>gp", "<cmd>Octo pr<CR>", desc = "Open PR (octo)" },
       { "@", mode = "i", ft = "octo", false },
       { "#", mode = "i", ft = "octo", false },
+      { ":", mode = "i", ft = "octo", false },
     },
   },
 }
