@@ -1,0 +1,61 @@
+- name: Calibre and cargo installed
+  become: true
+  apt:
+    pkg:
+      - calibre
+      - cargo
+      - imagemagick
+- name: Calibre web installed
+  become: true
+  community.general.pipx:
+    name: calibreweb
+    global: true
+
+- name: Calibre web dependencies
+  vars:
+    packages:
+      - calibreweb[goodreads]
+      - calibreweb[metadata]
+  community.general.pipx:
+    name: calibreweb
+    source: "{{ item }}"
+  with_items: "{{ packages }}"
+
+- name: Calibre user present
+  become: true
+  user:
+    name: calibre
+
+- name: Calibre systemd unit definition
+  become: true
+  ansible.builtin.copy:
+    dest: /etc/systemd/system/calibre.service
+    src: src/calibre.service
+
+- name: Check if the file exists
+  become: true
+  become_user: calibre
+  ansible.builtin.stat:
+    path: ~/books
+  register: books_dir_stat
+
+- name: Calibre DB present
+  become: true
+  become_user: calibre
+  ansible.builtin.shell: |
+    mkdir ~/books
+    mkdir ~/books/.calnotes
+    calibredb restore_database --really-do-it --with-library ~/books
+  when: not books_dir_stat.stat.exists
+
+- name: Calibre Web Started
+  become: true
+  ansible.builtin.systemd_service:
+    name: calibre
+    state: started
+    enabled: true
+
+- name: Serve to Tailnet
+  become: true
+  ansible.builtin.shell: |
+    tailscale serve --yes --bg 8083

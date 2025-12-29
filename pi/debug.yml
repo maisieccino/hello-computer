@@ -1,0 +1,8 @@
+- name: Debug
+  hosts: ungrouped
+  tasks:
+    - name: Ping hosts
+      ansible.builtin.ping: {}
+    - name: Print message
+      ansible.builtin.debug:
+        msg: Hi there

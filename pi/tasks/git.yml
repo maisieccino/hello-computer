@@ -1,0 +1,4 @@
+- name: Hello-computer
+  git:
+    repo: "https://github.com/maisieccino/hello-computer"
+    dest: ~/src/github.com/maisieccino/hello-computer

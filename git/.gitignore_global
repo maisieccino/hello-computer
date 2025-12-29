@@ -9,3 +9,4 @@ okteto
 .idea
 .python-version
 telepresence.log
+__debug_bin*

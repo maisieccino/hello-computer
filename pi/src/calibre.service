@@ -1,0 +1,10 @@
+[Unit]
+Description=Calibre web
+
+[Service]
+Type=simple
+User=calibre
+ExecStart=/usr/local/bin/cps
+
+[Install]
+WantedBy=multi-user.target

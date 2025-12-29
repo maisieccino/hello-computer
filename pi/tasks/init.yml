@@ -1,0 +1,21 @@
+- name: Apt update
+  become: true
+  apt: update_cache=yes cache_valid_time=3600
+
+- name: Upgrade
+  become: true
+  apt:
+    upgrade: dist
+
+- name: Ensure installed
+  become: true
+  apt:
+    pkg:
+      - git
+      - neovim
+      - python3
+      - pipx
+
+- name: Pipx ensurepath
+  become: true
+  shell: pipx ensurepath --global

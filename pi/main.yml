@@ -1,0 +1,19 @@
+- name: Tailscale
+  hosts: all
+  tags: [init]
+  vars:
+    tailscale_up_skip: yes
+  roles:
+    - role: artis3n.tailscale.machine
+- name: Main
+  hosts: all
+  tasks:
+    - name: Init
+      ansible.builtin.include_tasks:
+        file: tasks/init.yml
+    - name: Git
+      ansible.builtin.include_tasks:
+        file: tasks/git.yml
+    - name: Calibre Web
+      ansible.builtin.include_tasks:
+        file: tasks/calibre.yml
