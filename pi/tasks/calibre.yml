@@ -58,4 +58,4 @@
 - name: Serve to Tailnet
   become: true
   ansible.builtin.shell: |
-    tailscale serve --yes --bg 8083
+    tailscale serve --service=svc:calibre --https=443 --yes 8083
