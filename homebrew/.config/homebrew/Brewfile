@@ -52,6 +52,7 @@ brew "zsh-history-substring-search"
 brew "zsh-syntax-highlighting"
 cask "font-fantasque-sans-mono-nerd-font"
 cask "font-iosevka-nerd-font"
+cask "kitty"
 
 unless is_work?
   cask "1password"
@@ -62,7 +63,6 @@ unless is_work?
   cask "figma"
   cask "google-chrome"
   cask "keybase"
-  cask "kitty"
   cask "mactex-no-gui"
   cask "quarto"
   cask "signal"
