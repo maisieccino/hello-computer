@@ -15,7 +15,7 @@ local unmap = function(modes, lhs)
 end
 
 map("n", "<localleader>f", "<leader>ff", { remap = true, desc = "Find files (Root Dir)" })
-map("n", "<localleader>F", "<leader>FF", { remap = true, desc = "Find files (cwd)" })
+map("n", "<localleader>F", "<leader>fF", { remap = true, desc = "Find files (cwd)" })
 map("n", "<localleader>g", "<leader>sg", { remap = true, desc = "Grep (Root dir)" })
 map("n", "<localleader>G", "<leader>sG", { remap = true, desc = "Grep (cwd)" })
 map("n", "<localleader>t", "<leader>ss", { remap = true, desc = "Goto Symbol" })

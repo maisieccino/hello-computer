@@ -4,6 +4,7 @@ return {
     priority = 10000,
     recommended = true,
     lazy = false,
+    ---@type LazyKeysSpec[]
     keys = {
       {
         "<localleader>e",
@@ -12,6 +13,10 @@ return {
         end,
         desc = "Explorer (Root dir)",
       },
+      { "<leader>gi", false },
+      { "<leader>gI", false },
+      { "<leader>gp", false },
+      { "<leader>gP", false },
       {
         "<localleader>a",
         function()
@@ -22,6 +27,7 @@ return {
     },
     ---@type snacks.Config
     opts = {
+      gh = {},
       picker = {
         win = {
           input = {
@@ -50,6 +56,15 @@ return {
             auto_close = true,
             follow_file = true,
             hidden = true,
+          },
+          gh_pr = {},
+          -- https://github.com/folke/snacks.nvim/issues/2446#issuecomment-3498850414
+          gh_diff = {
+            auto_close = false,
+            layout = {
+              preset = "right",
+              hidden = { "preview" },
+            },
           },
         },
       },
