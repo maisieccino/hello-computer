@@ -9,8 +9,9 @@ return {
     opts = { ensure_installed = { "git_config", "gitcommit", "git_rebase", "gitignore", "gitattributes" } },
   },
   {
-    "pwntester/octo.nvim",
-    dir = "~/github.com/octo.nvim",
+    name = "octo.nvim",
+    url = "https://github.com/maisieccino/octo.nvim",
+    branch = "snacks-better-user-picker",
     cmd = "Octo",
     event = { { event = "BufReadCmd", pattern = "octo://*" } },
     opts = {
@@ -18,11 +19,8 @@ return {
       -- use_local_fs = true,
       use_local_fs = false,
       enable_builtin = true,
+      default_to_projects_v2 = true,
       picker = "snacks",
-      -- Disable error popups
-      suppress_missing_scope = {
-        projects_v2 = true,
-      },
       -- High timeout needed for loading reviewers list.
       -- TODO: Possible to optimise this?
       timeout = 20000,
@@ -58,7 +56,7 @@ return {
   },
   -- Octo Picker
   {
-    "pwntester/octo.nvim",
+    "octo.nvim",
     opts = function(_, opts)
       vim.treesitter.language.register("markdown", "octo")
       -- Keep some empty windows in sessions
