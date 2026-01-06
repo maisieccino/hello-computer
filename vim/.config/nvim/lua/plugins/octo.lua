@@ -10,6 +10,7 @@ return {
   },
   {
     "pwntester/octo.nvim",
+    dir = "~/github.com/octo.nvim",
     cmd = "Octo",
     event = { { event = "BufReadCmd", pattern = "octo://*" } },
     opts = {
@@ -59,6 +60,7 @@ return {
   {
     "pwntester/octo.nvim",
     opts = function(_, opts)
+      vim.treesitter.language.register("markdown", "octo")
       -- Keep some empty windows in sessions
       vim.api.nvim_create_autocmd("ExitPre", {
         group = vim.api.nvim_create_augroup("octo_exit_pre", { clear = true }),

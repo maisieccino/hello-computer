@@ -11,6 +11,10 @@ bindkey -e
 export PATH="${PATH}:${HOME}/bin"
 export PATH="${PATH}:${HOME}/.local/bin"
 
+if [ -d /Applications/Tailscale.app ]; then
+  alias tailscale=/Applications/Tailscale.app/Contents/MacOS/Tailscale
+fi
+
 export XDG_CONFIG_HOME="${HOME}/.config"
 
 if (uname -a | grep -i darwin >/dev/null); then

@@ -34,6 +34,7 @@ return {
     "folke/snacks.nvim",
     ft = "markdown",
     dependencies = { "obsidian-nvim/obsidian.nvim" },
+    ---@type snacks.Config
     opts = {
       image = {
         ---@param path any
@@ -41,7 +42,7 @@ return {
         ---@return string|nil
         resolve = function(path, src)
           if string.match(src, "^https://") then
-            return
+            return nil
           end
           local status, obsidian = pcall(require, "obsidian.api")
           if status and obsidian.path_is_note(path) then
