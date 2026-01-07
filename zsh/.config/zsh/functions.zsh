@@ -14,6 +14,7 @@ alias gl="git pull"
 alias glg="git log"
 alias gd="git diff"
 alias gco="git checkout"
+alias prn='gh pr view --json number -q .number'
 
 ####################
 # CUSTOM FUNCTIONS #
