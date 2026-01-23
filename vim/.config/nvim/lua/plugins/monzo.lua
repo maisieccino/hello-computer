@@ -33,51 +33,47 @@ vim.diagnostic.config({
   float = { border = "rounded" },
 })
 
+local function neotest_local_root()
+  local current = vim.fn.expand("%")
+
+  local matches = vim.fs.find({ "main.go", "README.md" }, {
+    path = current,
+    upward = true,
+    limit = 1,
+  })
+  if #matches == 0 then
+    return current
+  end
+  return vim.fn.fnamemodify(matches[1], ":p:h")
+end
+
 ---@type LazySpec[]
 return {
   {
     "pin",
-    lazy = false,
     dir = "/Users/maisiebell/src/github.com/monzo/pin",
     main = "pin",
-  },
-  {
-    "mason-org/mason.nvim",
-    opts = {
-      ensure_installed = {
-        "semgrep",
-      },
-      registries = {
-        "github:mason-org/mason-registry",
-      },
+    cmd = {
+      "ShipperDeploy",
+      "GoToProto",
     },
-  },
-  {
-    "sgur/vim-editorconfig",
-    enabled = false,
-  },
-  {
-    "editorconfig/editorconfig-vim",
-    lazy = false,
-    init = function()
-      vim.g.editorconfig_verbose = 1
-      vim.g.editorconfig_blacklist = {
-        filetype = {
-          "git.*",
-          "fugitive",
-          "help",
-          "lsp-.*",
-          "any-jump",
-          "gina-.*",
-        },
-        pattern = { "\\.un~$" },
-      }
-    end,
+    keys = {
+      { "gP", "<cmd>GoToProto<CR>", desc = "Go to Protobuf definition" },
+    },
   },
   {
     "neotest",
     dependencies = { "nvim-neotest/neotest-jest", "nvim-treesitter" },
     commit = "52fca6717ef972113ddd6ca223e30ad0abb2800c",
+    keys = {
+      {
+        "<leader>tT",
+        function()
+          require("neotest").run.run(neotest_local_root())
+        end,
+        desc = "Run All Test Files in package (Neotest)",
+      },
+    },
     opts = {
       discovery = {
         enabled = false,

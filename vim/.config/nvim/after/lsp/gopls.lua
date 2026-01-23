@@ -1,5 +1,6 @@
 local util = require("util")
 
+---@type vim.lsp.Config
 local base_cfg = {
   analyses = {
     fieldalignment = true,

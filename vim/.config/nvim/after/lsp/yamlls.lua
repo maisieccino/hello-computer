@@ -20,6 +20,7 @@ return vim.tbl_deep_extend("force", base_settings, {
       schemas = {
         [ruleslib_schema_path] = "rules/**/*.yml",
         [keyspace_schema_path] = "service.*/config/schema.yml",
+        ["https://json.schemastore.org/semgrep.json"] = "static-check-rules/**/*.{yml,yaml}",
       },
     },
   },

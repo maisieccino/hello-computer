@@ -13,7 +13,15 @@ vim.api.nvim_create_autocmd({ "BufReadPre", "BufNewFile" }, {
 })
 
 -- Custom LSP Actions
+---@param client vim.lsp.Client
+---@param bufnr integer
 local on_attach = function(client, bufnr)
+  -- Skip for Octo buffers
+  if vim.api.nvim_buf_get_name(bufnr):match("^octo") then
+    vim.print("detaching as octo buffer")
+    vim.lsp.buf_detach_client(bufnr, client.id)
+  end
+
   ---@param mode "n"|"i"|"v"
   ---@param l string
   ---@param r fun(any?)|string
