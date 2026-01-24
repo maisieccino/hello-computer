@@ -1,3 +1,4 @@
+/* Source: https://raw.githubusercontent.com/cebem1nt/dotfiles/refs/heads/main/.config/swaync/config.json */
 @define-color background alpha(#24273a, .6);
 @define-color text #cad3f5;
 @define-color text-alt #6e738d;
@@ -179,6 +180,10 @@
 .widget-dnd switch slider {
   background: @text;
   border-radius: 8px;
+}
+
+.widget-notifications stack {
+  margin: 20px 0;
 }
 
 .widget-volume,

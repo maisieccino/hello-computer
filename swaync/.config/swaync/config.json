@@ -1,11 +1,11 @@
-// Source: https://raw.githubusercontent.com/cebem1nt/dotfiles/refs/heads/main/.config/swaync/config.json
 {
     "$schema": "/etc/xdg/swaync/configschema.json",
     "positionX": "right",
     "positionY": "top",
     "cssPriority": "user",
     "control-center-width": 450,
-    "fit-to-screen": true,
+  "control-center-height": -1,
+    "fit-to-screen": false,
 
     "notification-window-width": 400,
     "notification-icon-size": 40,
@@ -29,13 +29,15 @@
       "mpris",
       "dnd",
       "notifications",
-      "buttons-grid"
+      "buttons-grid",
+      "backlight",
+      "volume"
     ],
 
     "widget-config": {
         "backlight": {
-            "device": "amdgpu_bl1",
             "label": "󰃠",
+            "device": "ddcci6",
             "slider": true,
             "min": 10
         },
@@ -59,12 +61,6 @@
         "buttons-grid": {
             "actions": [
                 {
-                    "label": "󰌪",
-                    "type": "toggle",
-                    "command": "bash -c $HOME/.config/swaync/scripts/quiet.sh",
-                    "update-command": "bash -c $HOME/.config/swaync/scripts/update_quiet.sh"
-                },
-                {
                     "label": "",
                     "type": "toggle",
                     "command": "bash -c $HOME/.config/swaync/scripts/inhibit.sh",
@@ -77,20 +73,12 @@
                     "update-command": "bash -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && $HOME/.config/swaync/scripts/update_mic.sh'"
                 },
                 {
-                    "label": "",
-                    "command": "hyprctl dispatch exec alacritty -- -e htop ; swaync-client -cp"
-                },
-                {
-                    "label": "",
-                    "command": "hyprctl dispatch exec alacritty -- -e nvtop ; swaync-client -cp"
-                },
-                {
                     "label": "",
                     "command": "hyprctl dispatch exec nwg-look ; swaync-client -cp"
                 },
                 {
                     "label": "",
-                    "command": "swaync-client -cp ; bash -c $HOME/.config/rofi/bin/logout"
+                    "command": "swaync-client -cp; ~/bin/powermenu.sh"
                 }
             ]
         }
