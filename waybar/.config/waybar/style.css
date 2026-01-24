@@ -53,3 +53,7 @@ window#waybar.empty box.modules-center {
 #workspaces button.active {
   background: linear-gradient(to bottom right, @yellow, @pink, @teal);
 }
+
+#custom-swaync {
+  margin: -1 5px 0;
+}

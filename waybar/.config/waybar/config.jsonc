@@ -22,6 +22,7 @@
     "keyboard-state",
     "clock",
     "tray",
+    "custom/swaync",
     "custom/power",
   ],
   // Modules configuration
@@ -136,7 +137,8 @@
   },
   "pulseaudio": {
     // "scroll-step": 1, // %, can be a float
-    "format": "{volume}% <span font=\"Font Awesome 6 Free Solid 10\">{icon} </span> {format_source}",
+    // "format": "{volume}% <span font=\"Font Awesome 6 Free Solid 10\">{icon} </span> {format_source}",
+    "format": "{volume}% <span font=\"Font Awesome 6 Free Solid 10\">{icon} </span>",
     "format-bluetooth": "{volume}% {icon} {format_source}",
     "format-bluetooth-muted": " {icon} {format_source}",
     "format-muted": "<span font=\"Font Awesome 6 Free Solid 10\"></span> {format_source}",
@@ -174,10 +176,22 @@
     "tooltip": false,
     "on-click": "~/bin/powermenu.sh"
   },
+  "custom/swaync": {
+    "exec": "~/bin/notify-bar.sh",
+    "on-click": "swaync-client -op",
+    "interval": 2,
+    "return-type": "json",
+    "format": "<span font=\"Font Awesome 6 Free Solid 10\">{icon}</span> {text}",
+    "format-icons": {
+      "unread": "",
+      "read": ""
+    }
+  },
   "mpris": {
-    "format": "{status_icon} {dynamic}",
+    "format": "{status_icon} {dynamic} •",
     "status-icons": {
-      "paused": ""
+      "paused": "",
+      "playing": ""
     },
     "dynamic-order": [
       "artist",

@@ -4,8 +4,9 @@
     "positionY": "top",
     "cssPriority": "user",
     "control-center-width": 450,
-  "control-center-height": -1,
+    "control-center-height": -1,
     "fit-to-screen": false,
+    "text-empty": "empty",
 
     "notification-window-width": 400,
     "notification-icon-size": 40,

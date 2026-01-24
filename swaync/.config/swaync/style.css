@@ -167,7 +167,8 @@
 }
 
 .widget-dnd>label {
-  font-size: 1rem;
+  font-size: 0.75rem;
+  font-family: "Brachial SemiBold";
 }
 
 .widget-dnd switch {
@@ -319,6 +320,10 @@
 /* Change color for plaseholder when no notifications */
 .control-center-list-placeholder {
   color: @text;
+}
+
+.control-center-list-placeholder label {
+  font-family: "Brachial SemiBold - Wide";
 }
 
 /* Avoid 'annoying' backgroud */

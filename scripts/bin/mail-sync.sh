@@ -15,4 +15,4 @@ mbsync -a
 notmuch new
 
 echo "Notifying for new mail"
-notmuch search --format=json +inbox date:30m.. | jq -r '.[]| .authors + "\n" + .subject' | xargs --no-run-if-empty -d'\n' -n2 notify-send -u low -a Mail
+notmuch search --format=json +tag:inbox date:30m.. | jq -r '.[]| .authors + "\n" + .subject' | xargs --no-run-if-empty -d'\n' -n2 notify-send -u low -a Mail -i mail
