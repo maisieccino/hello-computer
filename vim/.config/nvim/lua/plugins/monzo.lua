@@ -51,7 +51,7 @@ end
 return {
   {
     "pin",
-    dir = "/Users/maisiebell/src/github.com/monzo/pin",
+    dir = "/Users/maisiebell/src/github.com/monzo/wearedev-pin/tools/editors/nvim/pin.nvim",
     main = "pin",
     cmd = {
       "ShipperDeploy",

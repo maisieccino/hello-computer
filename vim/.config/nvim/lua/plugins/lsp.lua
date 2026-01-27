@@ -4,8 +4,11 @@ return {
     opts = {
       ensure_installed = {
         "astro-language-server",
+        "bqls",
+        "gopls",
         "marksman",
         "protols",
+        "shellcheck",
         "sqlfluff",
         "shfmt",
         "yaml-language-server",
