@@ -11,6 +11,7 @@ return {
         "shellcheck",
         "sqlfluff",
         "shfmt",
+        "vtsls",
         "yaml-language-server",
       },
       ui = {

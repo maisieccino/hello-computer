@@ -26,9 +26,31 @@ local base_cfg = {
       test = true,
       tidy = true,
     },
+    importsSource = "gopls",
   },
   filetypes = { "go", "gomod", "gowork", "gotmpl" },
   staticcheck = true,
+  on_attach = function(client, _)
+    if not client.server_capabilities.semanticTokensProvider then
+      local semantic = client.config.capabilities.textDocument.semanticTokens
+      client.server_capabilities.semanticTokensProvider = {
+        full = true,
+        legend = {
+          tokenTypes = semantic.tokenTypes,
+          tokenModifiers = semantic.tokenModifiers,
+        },
+        range = true,
+      }
+    end
+
+    vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+      pattern = "*.go",
+      callback = function()
+        -- Remove vendor prefixes
+        vim.cmd("silent! %s/github.com\\/monzo\\/wearedev\\/vendor\\///g|norm!``")
+      end,
+    })
+  end,
 }
 
 if util.is_work() then

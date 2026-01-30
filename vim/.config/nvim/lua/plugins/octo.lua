@@ -24,7 +24,7 @@ return {
       -- High timeout needed for loading reviewers list.
       -- TODO: Possible to optimise this?
       timeout = 20000,
-      users = "search",
+      users = "assignable",
     },
     ---@type LazyKeysSpec[]
     keys = {

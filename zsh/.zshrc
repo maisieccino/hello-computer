@@ -135,7 +135,7 @@ fi
 if [ -d ~/src/github.com/monzo ]; then
   source /opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
   source /opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
-  export CLOUDSDK_PYTHON=/Users/maisiebell/.pyenv/versions/3.9.10/bin/python
+  export CLOUDSDK_PYTHON=/opt/homebrew/opt/python@3.13/libexec/bin/python
   export OAUTHLIB_RELAX_TOKEN_SCOPE=1
   source /Users/maisiebell/src/github.com/monzo/analytics/dbt/misc/shell/source.sh
 fi
@@ -181,3 +181,4 @@ $LINE1%f
 %F{#b2aaf7}$LINE10%f
 %F{#c19fec}$LINE11%f
   "
+export PATH=/Users/maisiebell/.local/bin:$PATH
