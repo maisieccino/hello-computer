@@ -113,6 +113,7 @@ return {
       { "<localleader>o ", sync_notes, desc = "Push notes to remote" },
     },
     opts = {
+      legacy_commands = false,
       workspaces = {
         {
           name = "personal",
@@ -126,24 +127,26 @@ return {
         template = "Daily Note",
       },
       new_notes_location = "current_dir",
-      note_frontmatter_func = function(note)
-        -- Add the title of the note as an alias.
-        if note.title then
-          note:add_alias(note.title)
-        end
-
-        local out = { id = note.id, aliases = note.aliases, tags = note.tags }
-
-        -- `note.metadata` contains any manually added fields in the frontmatter.
-        -- So here we just make sure those fields are kept in the frontmatter.
-        if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
-          for k, v in pairs(note.metadata) do
-            out[k] = v
+      frontmatter = {
+        func = function(note)
+          -- Add the title of the note as an alias.
+          if note.title then
+            note:add_alias(note.title)
           end
-        end
 
-        return out
-      end,
+          local out = { id = note.id, aliases = note.aliases, tags = note.tags }
+
+          -- `note.metadata` contains any manually added fields in the frontmatter.
+          -- So here we just make sure those fields are kept in the frontmatter.
+          if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
+            for k, v in pairs(note.metadata) do
+              out[k] = v
+            end
+          end
+
+          return out
+        end,
+      },
       templates = {
         folder = "templates",
         date_format = "%Y-%m-%d",
@@ -158,7 +161,7 @@ return {
         customizations = {},
       },
       attachments = {
-        img_folder = "Assets/images",
+        folder = "Assets/images",
         img_name_func = function()
           return string.format("pasted_image_%s", os.date("%Y%m%d%H%M%S"))
         end,
