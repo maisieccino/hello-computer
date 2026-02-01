@@ -3,12 +3,13 @@ local util = require("util")
 local function sync_notes()
   vim.schedule(function()
     vim.notify("Syncing with git...")
-    local cmd = vim.system({ "zsh", vim.fn.expand("./bin/syncnotes.zsh") }):wait(5000)
-    if cmd.code == 0 then
-      vim.notify("Sync complete.")
-    else
-      vim.notify("Sync failed.", "error")
-    end
+    local cmd = vim.system({ "zsh", vim.fn.expand("./bin/syncnotes.zsh") }, {}, function(out)
+      if out.code == 0 then
+        vim.notify("Sync complete.")
+      else
+        vim.notify("Sync failed.", "error")
+      end
+    end)
   end)
 end
 
