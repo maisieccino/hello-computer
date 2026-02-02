@@ -126,3 +126,11 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost" }, {
   pattern = { "*.md" },
   callback = get_imgs,
 })
+
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = { "*.md" },
+  callback = function(opts)
+    require("otter").activate({ "markdown", "yaml" })
+  end,
+  group = vim.api.nvim_create_augroup("md_otter", {}),
+})

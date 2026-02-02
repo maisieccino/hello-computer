@@ -7,6 +7,7 @@ brew "carapace" # Shell completion
 brew "chafa" # Generate ASCII images
 brew "ctags"
 brew "doctl" # DigitalOcean CLI
+brew "exiftool" unless is_work? # Strip exif data from images
 brew "fd" # Better find tools
 brew "ffmpeg"
 brew "fnm" unless is_work? # Better nvm
@@ -29,6 +30,7 @@ brew "pkgconf"
 brew "pngpaste"
 brew "postgis" unless is_work? # Geospatial data in postgresql
 brew "postgresql@17", restart_service: :changed, link: true unless is_work?
+brew "pre-commit" unless is_work?
 brew "pyenv"
 brew "r"
 brew "ranger"

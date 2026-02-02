@@ -23,8 +23,20 @@ return {
             -- Disable markdown autocomplete since we use Obsidian's own
             -- autocomplete instead.
             enabled = function()
-              return (not vim.tbl_contains({ "markdown" }, vim.bo.filetype))
-                or (vim.api.nvim_buf_get_name(0):match("ipynb"))
+              if not vim.tbl_contains({ "markdown" }, vim.bo.filetype) then
+                return true
+              end
+
+              local buf_name = vim.api.nvim_buf_get_name(0)
+              if buf_name:match("ipynb") then
+                return false
+              end
+
+              local ok, obsidian = pcall(require, "obsidian.api")
+              if not ok then
+                return true
+              end
+              return not obsidian.path_is_note(buf_name)
             end,
           },
         },
