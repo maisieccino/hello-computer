@@ -42,14 +42,6 @@ local base_cfg = {
         range = true,
       }
     end
-
-    vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-      pattern = "*.go",
-      callback = function()
-        -- Remove vendor prefixes
-        vim.cmd("silent! %s/github.com\\/monzo\\/wearedev\\/vendor\\///g|norm!``")
-      end,
-    })
   end,
 }
 
@@ -58,13 +50,17 @@ if util.is_work() then
     cmd = { "env", "GO111MODULE=off", "gopls", "-remote=auto" },
 
     expandWorkspaceToModule = false,
-    ["local"] = "github.com/monzo/wearedev",
+    formatting = {
+      ["local"] = "github.com/monzo/wearedev",
+    },
     root_markers = { "README.md", "main.go", "go.mod", "LICENSE", ".git", "package.json" },
     root_dir = util.local_root_dir,
 
-    directory_filters = {
-      "-vendor",
-      "-manifests",
+    build = {
+      directory_filters = {
+        "-vendor",
+        "-manifests",
+      },
     },
 
     -- Never use wearedev as a root path. It'll grind your machine to a halt.

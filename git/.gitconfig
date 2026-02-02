@@ -23,7 +23,7 @@
 [init]
     defaultBranch = main
 # mac-specific settings
-[includeIf "gitdir/i:~/work/**"]
+[includeIf "gitdir/i:~/src/**"]
     path = ~/.work.gitconfig
 [merge]
     tool = nvimdiff

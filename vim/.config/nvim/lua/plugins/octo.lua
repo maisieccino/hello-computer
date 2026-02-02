@@ -11,7 +11,7 @@ return {
   {
     name = "octo.nvim",
     url = "https://github.com/maisieccino/octo.nvim",
-    branch = "snacks-better-user-picker",
+    branch = "snacks-inline-images",
     cmd = "Octo",
     event = { { event = "BufReadCmd", pattern = "octo://*" } },
     opts = {
