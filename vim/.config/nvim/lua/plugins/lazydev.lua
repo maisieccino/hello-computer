@@ -9,6 +9,7 @@ return {
         { path = "snacks.nvim" },
         { path = "lazy.nvim" },
         { path = "noice.nvim" },
+        { path = "blink.cmp" },
       },
     },
   },
