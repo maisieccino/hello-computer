@@ -94,6 +94,12 @@ return {
                   return ctx.kind_hl
                 end,
               },
+              label = {
+                ---@param ctx blink.cmp.DrawItemContext
+                text = function(ctx)
+                  return " " .. ctx.label
+                end,
+              },
             },
           },
         },

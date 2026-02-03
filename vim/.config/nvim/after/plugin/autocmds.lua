@@ -79,6 +79,9 @@ local function get_imgs()
 ((minus_metadata) @frontmatter)
 ]]
   )
+  if #ts.get_parser():trees() == 0 then
+    return
+  end
   for _ in query:iter_captures(ts.get_parser():trees()[1]:root(), bufnr) do
     -- Parse yaml
     local fm_query = ts.query.parse(
