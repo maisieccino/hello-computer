@@ -1,5 +1,6 @@
 local util = require("util")
 
+---@type LazySpec
 return {
   {
     "kristijanhusak/vim-dadbod-ui",

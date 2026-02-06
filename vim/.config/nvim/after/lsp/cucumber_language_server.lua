@@ -1,0 +1,17 @@
+return {}
+------@type vim.lsp.Config
+---return {
+---  cmd = { "cucumber-language-server", "--stdio" },
+---  root_markers = { "README.md", "main.go", "go.mod", "LICENSE", ".git", "package.json" },
+---  filetypes = { "cucumber" },
+---  settings = {
+---    cucumber = {
+---      features = {
+---        "**/*.feature",
+---      },
+---      glue = {
+---        "**/*_test.go",
+---      },
+---    },
+---  },
+---}

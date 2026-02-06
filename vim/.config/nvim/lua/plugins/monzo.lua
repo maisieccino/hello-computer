@@ -34,17 +34,18 @@ vim.diagnostic.config({
 })
 
 local function neotest_local_root()
-  local current = vim.fn.expand("%")
-
-  local matches = vim.fs.find({ "main.go", "README.md" }, {
-    path = current,
-    upward = true,
-    limit = 1,
-  })
-  if #matches == 0 then
-    return current
-  end
-  return vim.fn.fnamemodify(matches[1], ":p:h")
+  return vim.fn.expand("%:p:h")
+  -- local current = vim.fn.expand("%:h")
+  --
+  -- local matches = vim.fs.find({ "main.go", "README.md" }, {
+  --   path = current,
+  --   upward = true,
+  --   limit = 1,
+  -- })
+  -- if #matches == 0 then
+  --   return current
+  -- end
+  -- return vim.fn.fnamemodify(matches[1], ":p:h")
 end
 
 ---@type LazySpec[]
@@ -63,21 +64,27 @@ return {
   },
   {
     "neotest",
-    dependencies = { "nvim-neotest/neotest-jest", "nvim-treesitter" },
+    dependencies = { "nvim-neotest/neotest-jest", "fredrikaverpil/neotest-golang", "nvim-treesitter" },
     commit = "52fca6717ef972113ddd6ca223e30ad0abb2800c",
     keys = {
       {
         "<leader>tT",
         function()
-          require("neotest").run.run(neotest_local_root())
+          require("neotest").run.run(vim.fn.expand("%:.:h"))
         end,
         desc = "Run All Test Files in package (Neotest)",
       },
     },
+    ---@type neotest.Config
+    ---@diagnostic disable-next-line: missing-fields
     opts = {
       discovery = {
-        enabled = false,
+        enabled = true,
         concurrent = 1,
+        filter_dir = function(name, relpath, root)
+          local project_dir = util.git_root_dir(vim.api.nvim_buf_get_name(0))
+          return not string.match(relpath, project_dir)
+        end,
       },
       running = {
         concurrent = 1,
@@ -112,6 +119,14 @@ return {
           end,
         },
       },
+      require("neotest-golang")(
+        ---@type NeotestGolangOptions
+        {
+          filter_dir_patterns = {
+            "vendor",
+          },
+        }
+      ),
     },
   },
   {

@@ -1,13 +1,12 @@
+local null_ls = require("null-ls")
+
+local h = require("null-ls.helpers")
 ---@type LazySpec
 return {
   {
     "nvimtools/none-ls.nvim",
-    opts = function()
-      local null_ls = require("null-ls")
-      local cwd = vim.fn.getcwd()
-
-      local h = require("null-ls.helpers")
-      local shellcheck = {
+    opts = function(_, opts)
+      table.insert(opts.sources, {
         name = "shellcheck",
         meta = {
           url = "https://www.shellcheck.net/",
@@ -35,14 +34,7 @@ return {
             return parser({ output = params.output.comments })
           end,
         }),
-      }
-
-      return {
-        debug = true,
-        sources = {
-          shellcheck,
-        },
-      }
+      })
     end,
   },
 }
