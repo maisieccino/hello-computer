@@ -1,11 +1,13 @@
-local null_ls = require("null-ls")
+local util = require("util")
 
 local h = require("null-ls.helpers")
+
 ---@type LazySpec
 return {
   {
     "nvimtools/none-ls.nvim",
     opts = function(_, opts)
+      local null_ls = require("null-ls")
       table.insert(opts.sources, {
         name = "shellcheck",
         meta = {
@@ -35,6 +37,21 @@ return {
           end,
         }),
       })
+
+      if not util.is_work() then
+        table.insert(opts.sources, null_ls.builtins.diagnostics.semgrep)
+        table.insert(opts.sources, null_ls.builtins.diagnostics.golangci_lint)
+      end
     end,
+  },
+  {
+    "mason.nvim",
+    opts = {
+      ensure_installed = {
+        "golangci-lint",
+        "semgrep",
+        "shellcheck",
+      },
+    },
   },
 }

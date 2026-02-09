@@ -8,7 +8,6 @@ return {
         "gopls",
         "marksman",
         "protols",
-        "shellcheck",
         "sqlfluff",
         "shfmt",
         "vtsls",

@@ -33,21 +33,6 @@ vim.diagnostic.config({
   float = { border = "rounded" },
 })
 
-local function neotest_local_root()
-  return vim.fn.expand("%:p:h")
-  -- local current = vim.fn.expand("%:h")
-  --
-  -- local matches = vim.fs.find({ "main.go", "README.md" }, {
-  --   path = current,
-  --   upward = true,
-  --   limit = 1,
-  -- })
-  -- if #matches == 0 then
-  --   return current
-  -- end
-  -- return vim.fn.fnamemodify(matches[1], ":p:h")
-end
-
 ---@type LazySpec[]
 return {
   {
@@ -87,10 +72,11 @@ return {
         end,
       },
       running = {
-        concurrent = 1,
+        concurrent = true,
       },
+      ---@diagnostic disable-next-line: missing-fields
       summary = {
-        animated = 1,
+        animated = true,
       },
       adapters = {
         ["neotest-jest"] = {
