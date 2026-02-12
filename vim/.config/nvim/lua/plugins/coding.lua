@@ -16,7 +16,7 @@ return {
   {
     "outline.nvim",
     keys = {
-      { "<leader>o", "<cmd>Outline<CR>", desc = "Toggle outline" },
+      { "<leader>O", "<cmd>Outline<CR>", desc = "Toggle outline" },
     },
   },
   {
