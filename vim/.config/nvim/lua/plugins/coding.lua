@@ -51,7 +51,7 @@ return {
         menu = {
           draw = {
             -- columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind" } },
-            columns = { { "kind_icon", "label" } },
+            columns = { { "kind_icon" }, { "label" } },
             padding = { 0, 1 }, -- padding only on right side
             components = {
               kind_icon = {

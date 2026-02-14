@@ -63,6 +63,7 @@ ly
 make
 mako
 man-db
+mermaid-cli
 mesa-utils
 mpv
 neovim
@@ -85,6 +86,7 @@ pdfjs
 podman
 poppler-glib
 postgresql
+pre-commit
 protonmail-bridge-core
 pulseaudio
 pulseaudio-alsa
