@@ -36,18 +36,6 @@ vim.diagnostic.config({
 ---@type LazySpec[]
 return {
   {
-    "pin",
-    dir = "/Users/maisiebell/src/github.com/monzo/wearedev-pin/tools/editors/nvim/pin.nvim",
-    main = "pin",
-    cmd = {
-      "ShipperDeploy",
-      "GoToProto",
-    },
-    keys = {
-      { "gP", "<cmd>GoToProto<CR>", desc = "Go to Protobuf definition" },
-    },
-  },
-  {
     "neotest",
     dependencies = { "nvim-neotest/neotest-jest", "fredrikaverpil/neotest-golang", "nvim-treesitter" },
     commit = "52fca6717ef972113ddd6ca223e30ad0abb2800c",

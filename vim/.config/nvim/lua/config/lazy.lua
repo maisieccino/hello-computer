@@ -16,7 +16,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-  ---@type LazySpecImport[]
   spec = {
     -- add LazyVim and import its plugins
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
@@ -27,7 +26,9 @@ require("lazy").setup({
       end,
       import = "pin.plugins",
       opts = {
-        foo = "bar",
+        starlark = {
+          enabled = true,
+        },
       },
     },
     -- import/override with your plugins
@@ -133,4 +134,4 @@ require("lazy").setup({
       },
     },
   },
-})
+} --[[@as LazyConfig]])
