@@ -57,6 +57,12 @@ cask "font-fantasque-sans-mono-nerd-font"
 cask "font-iosevka-nerd-font"
 cask "kitty"
 
+if is_work?
+  tap "mdogan/zulu"
+  brew "zulu-jdk21"
+  brew "pillow" # For images in ranger!
+end
+
 unless is_work?
   cask "1password"
   cask "1password-cli"

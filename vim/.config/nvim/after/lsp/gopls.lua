@@ -30,7 +30,14 @@ local base_cfg = {
   },
   filetypes = { "go", "gomod", "gowork", "gotmpl" },
   staticcheck = true,
-  on_attach = function(client, _)
+  on_attach = function(client, bufnr)
+    -- Ignore Octo.nvim buffers (it makes Gopls sad!)
+    local filename = vim.api.nvim_buf_get_name(bufnr)
+    if filename:match("^octo://") then
+      client:stop()
+      return
+    end
+
     if not client.server_capabilities.semanticTokensProvider then
       local semantic = client.config.capabilities.textDocument.semanticTokens
       client.server_capabilities.semanticTokensProvider = {

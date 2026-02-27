@@ -182,3 +182,7 @@ $LINE1%f
 %F{#c19fec}$LINE11%f
   "
 export PATH=/Users/maisiebell/.local/bin:$PATH
+
+if (uname -a | grep -i darwin >/dev/null); then
+  export JAVA_HOME=$(/usr/libexec/java_home -v 21)
+fi

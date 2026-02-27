@@ -9,10 +9,10 @@ if not util.is_work() then
   return base_settings
 end
 
-local filename = vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf())
-local git_dir = util.git_root_dir(filename)
-local ruleslib_schema_path = git_dir .. "/libraries/fincrime/ruleslib/schemas/combined.json"
-local keyspace_schema_path = git_dir .. "/libraries/cassandra/schema/schema.bundled.generated.json"
+local ruleslib_schema_path =
+  vim.fn.expand("$GOPATH/src/github.com/monzo/wearedev/libraries/fincrime/ruleslib/schemas/combined.json")
+local keyspace_schema_path =
+  vim.fn.expand("$GOPATH/src/github.com/monzo/wearedev/libraries/cassandra/schema/schema.bundled.generated.json")
 
 return vim.tbl_deep_extend("force", base_settings, {
   settings = {
@@ -24,4 +24,4 @@ return vim.tbl_deep_extend("force", base_settings, {
       },
     },
   },
-})
+} --[[@as vim.lsp.Config]])
