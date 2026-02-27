@@ -83,6 +83,7 @@ pandoc-cli
 pass
 pavucontrol
 pdfjs
+perl-image-exiftool
 podman
 poppler-glib
 postgresql

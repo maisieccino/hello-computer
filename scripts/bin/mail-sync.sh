@@ -3,7 +3,7 @@
 MBSYNC=$(pgrep mbsync)
 NOTMUCH=$(pgrep notmuch)
 
-if [ -n "$MBSYNC" -o -n "$NOTMUCH" ]; then
+if [ -n "$MBSYNC" ] || [ -n "$NOTMUCH" ]; then
 	echo "Already running one instance of mbsync or notmuch. Exiting..."
 	exit 0
 fi
@@ -15,4 +15,7 @@ mbsync -a
 notmuch new
 
 echo "Notifying for new mail"
-notmuch search --format=json +tag:inbox date:30m.. | jq -r '.[]| .authors + "\n" + .subject' | xargs --no-run-if-empty -d'\n' -n2 notify-send -u low -a Mail -i mail
+notmuch search --format=json +tag:unread date:30m.. |
+	jq -r '.[]| .thread + "\n" + .authors + "\n" + .subject' |
+	xargs --no-run-if-empty -d'\n' -n3 \
+		sh -c 'notify-send -h "string:synchronous:$0" -u low -a Mail -i mail "$1" "$2"'
