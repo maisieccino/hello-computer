@@ -184,5 +184,7 @@ $LINE1%f
 export PATH=/Users/maisiebell/.local/bin:$PATH
 
 if (uname -a | grep -i darwin >/dev/null); then
-  export JAVA_HOME=$(/usr/libexec/java_home -v 21)
+    export JAVA_HOME=$(/usr/libexec/java_home -v 21 2>/dev/null)
 fi
+
+export PATH="$PATH:/Applications/Obsidian.app/Contents/MacOS"

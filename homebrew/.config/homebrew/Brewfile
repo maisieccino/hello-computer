@@ -73,6 +73,7 @@ unless is_work?
   cask "google-chrome"
   cask "keybase"
   cask "mactex-no-gui"
+  cask "obsidian"
   cask "quarto"
   cask "signal"
   cask "slicer"

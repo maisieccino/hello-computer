@@ -1,0 +1,9 @@
+new_tab
+layout fat
+enabled_layouts fat,grid,horizontal,splits,stack,tall,vertical
+cd $HOME/github.com/maisieccino/notes
+
+launch zsh -ic nvim
+focus
+
+focus_tab 0
