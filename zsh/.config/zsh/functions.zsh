@@ -12,7 +12,8 @@ alias gst="git status"
 alias gp="git push"
 alias gl="git pull"
 alias glg="git log"
-alias gd="git diff"
+# https://sw.kovidgoyal.net/kitty/kittens/diff/
+alias gd="git difftool --no-symlinks --dir-diff"
 alias gco="git checkout"
 alias prn='gh pr view --json number -q .number'
 
