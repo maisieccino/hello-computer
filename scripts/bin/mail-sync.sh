@@ -15,11 +15,7 @@ mbsync -a
 notmuch new
 
 echo "Notifying for new mail"
-<<<<<<< HEAD
-notmuch search --format=json +tag:unread date:30m.. | jq -r '.[]| .authors + "\n" + .subject' | xargs --no-run-if-empty -d'\n' -n2 notify-send -u low -a Mail -i mail
-=======
 notmuch search --format=json +tag:unread date:30m.. |
 	jq -r '.[]| .thread + "\n" + .authors + "\n" + .subject' |
 	xargs --no-run-if-empty -d'\n' -n3 \
 		sh -c 'notify-send -h "string:synchronous:$0" -u low -a Mail -i mail "$1" "$2"'
->>>>>>> 3029ff570ce3f4adc274be7316c26a4ae26171d7
