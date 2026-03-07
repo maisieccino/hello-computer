@@ -1,19 +1,3 @@
-bip() {
-  local inst=$(brew search "$@" | fzf -m --preview='brew info {}')
-
-  if [[ $inst ]]; then
-    for prog in $(echo $inst);
-    do; brew install $prog; done;
-  fi
-}
-
-bs() {
-    local inst=$(brew search "$@" | fzf --preview='brew info {}')
-    if [[ $inst ]]; then
-      echo $inst | pbcopy
-    fi
-}
-
 books() {
   calibredb list --for-machine -f 'all' | jq -r '.[]|[.id,.cover,.title]|@tsv' | fzf \
     --with-nth='{3..}' --accept-nth=1 -d'\t' \
