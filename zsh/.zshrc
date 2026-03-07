@@ -151,6 +151,7 @@ if (which carapace >/dev/null) then
   zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
   source <(carapace _carapace)
 fi
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
 eval "$(starship init zsh)"
 
