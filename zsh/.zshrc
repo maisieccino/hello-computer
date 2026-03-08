@@ -1,29 +1,73 @@
-###
-### OPTS
-###
-unsetopt AUTO_CD # Disable automatic directory changing without calling cd.
+# zmodload zsh/zprof
+### ZINIT
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
+[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+source "${ZINIT_HOME}/zinit.zsh"
+
+zinit light zsh-users/zsh-syntax-highlighting
+zinit light zsh-users/zsh-completions
+zinit light Aloxaf/fzf-tab
+
+zi ice lucid; zi snippet OMZL::git.zsh
+zi ice lucid; zi snippet OMZP::git
+zi ice lucid; zi snippet OMZP::archlinux
+zi ice lucid; zi snippet OMZP::brew
+
+### Completion
+autoload -Uz compinit
+if (uname -a | grep -i darwin>/dev/null); then
+  # POSIX version
+  if [ "$(date +'%j')" != "$(stat -f '%Sm' -t '%j' ~/.zcompdump 3>/dev/null)" ]; then
+      compinit
+  else
+      compinit -C
+  fi
+else
+  # UNIX version
+  if [ "$(date +'%j')" != "$(stat --format '%Y' ~/.zcompdump | strftime '%j'  3>/dev/null)" ]; then
+      compinit
+  else
+      compinit -C
+  fi
+fi
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' menu no
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'CLICOLOR_force=1 tree -L1 $realpath'
+zstyle ':fzf-tab:complete:ls:*' fzf-preview '~/bin/fzf-preview.sh $realpath'
+zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
+zstyle ':fzf-tab:*' fzf-flags --border=horizontal
+
+fpath=(/usr/local/share/zsh-completions $fpath)
+
+### History
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
-SAVEHIST=10000
-setopt incappendhistorytime
+SAVEHIST=$HISTSIZE
+HISTDUP=erase
+setopt appendhistory
+setopt sharehistory
+setopt hist_ignore_space
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
 bindkey -e
 
+export XDG_CONFIG_HOME="${HOME}/.config"
+export EDITOR=nvim
+
+### Path
 export PATH="${PATH}:${HOME}/bin"
 export PATH="${PATH}:${HOME}/.local/bin"
-
 if [ -d /Applications/Tailscale.app ]; then
   alias tailscale=/Applications/Tailscale.app/Contents/MacOS/Tailscale
 fi
-
-export XDG_CONFIG_HOME="${HOME}/.config"
-
-if (uname -a | grep -i darwin >/dev/null); then
-  # For M1 Macs
+if [[ -f "/opt/homebrew/bin/brew" ]]; then
   export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
-else
-  export PATH="/opt/brew/bin:/opt/brew/sbin:$PATH"
+  eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
-
 # PyEnv
 if (stat "${HOME}/.pyenv/bin" >/dev/null 2>/dev/null); then
   export PATH="${HOME}/.pyenv/bin:${PATH}"
@@ -34,11 +78,11 @@ fi
 if (which pyenv >/dev/null 2>/dev/null); then
   eval "$(pyenv init -)"
 fi
+export PATH="$PATH:/Applications/Obsidian.app/Contents/MacOS"
 
 if (uname -a | grep -i darwin>/dev/null); then
   [[ -d $(brew --prefix)/share/zsh/site-functions/ ]] && fpath+=($(brew --prefix)/share/zsh/site-functions/)
 fi
-export EDITOR=nvim
 
 if (command -v fnm &>/dev/null)
 then
@@ -79,7 +123,6 @@ fi
 
 # Go
 export GOPATH=$HOME/go
-export GOPRIVATE="*.apple.com"
 export PATH=$GOPATH/bin:$PATH
 
 # Secrets.
@@ -89,15 +132,6 @@ export PATH=$GOPATH/bin:$PATH
 for file in $HOME/.config/zsh/*.zsh; do
   source "${file}"
 done
-
-
-# syntax highlighting
-if (uname -a | grep -i darwin >/dev/null); then
-    test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-    source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-else
-    source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-fi
 
 # history substring search
 # Options: https://github.com/zsh-users/zsh-history-substring-search#configuration
@@ -120,8 +154,6 @@ zle -N edit-command-line
 bindkey "^X^E" edit-command-line
 bindkey "^[[3~" delete-char
 
-fpath=(/usr/local/share/zsh-completions $fpath)
-
 # rbenv
 if which rbenv >/dev/null; then
   eval "$(rbenv init -)"
@@ -142,15 +174,6 @@ fi
 export TFENV_ARCH=amd64
 
 eval "$(zoxide init zsh)"
-
-# Carapace shell completion
-if (which carapace >/dev/null) then
-  autoload -Uz compinit
-  compinit
-  export CARAPACE_BRIDGES='cobra,kitten,zsh'
-  zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
-  source <(carapace _carapace)
-fi
 
 eval "$(starship init zsh)"
 
@@ -181,10 +204,9 @@ $LINE1%f
 %F{#b2aaf7}$LINE10%f
 %F{#c19fec}$LINE11%f
   "
-export PATH=/Users/maisiebell/.local/bin:$PATH
 
 if (uname -a | grep -i darwin >/dev/null); then
     export JAVA_HOME=$(/usr/libexec/java_home -v 21 2>/dev/null)
 fi
 
-export PATH="$PATH:/Applications/Obsidian.app/Contents/MacOS"
+# zprof

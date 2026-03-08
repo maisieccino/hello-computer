@@ -13,6 +13,8 @@
     pkg:
       - git
       - neovim
+      - podman
+      - podman-compose
       - python3
       - pipx
 
