@@ -17,3 +17,11 @@
     - name: Calibre Web
       ansible.builtin.include_tasks:
         file: tasks/calibre.yml
+- name: linkwarden
+  hosts: all
+  vars_files:
+    - vault.yml
+  tasks:
+    - name: Linkwarden
+      ansible.builtin.include_tasks:
+        file: tasks/linkwarden.yml

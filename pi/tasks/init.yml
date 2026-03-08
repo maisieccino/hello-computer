@@ -18,6 +18,14 @@
       - python3
       - pipx
 
+- name: Ensure docker.io registry
+  ansible.builtin.copy:
+    dest: /etc/containers/registries.conf.d/docker.io.conf
+    content: |
+      unqualified-search-registries = ["docker.io"]
+      [[registry]]
+      location = "docker.io"
+  become: true
 - name: Pipx ensurepath
   become: true
   shell: pipx ensurepath --global

@@ -1,0 +1,27 @@
+- name: Setup linkwarden directory
+  ansible.builtin.file:
+    path: ~/linkwarden
+    state: directory
+- name: Copy env file
+  ansible.builtin.template:
+    src: src/linkwarden.env.j2
+    dest: ~/linkwarden/.env
+    mode: 0600
+- name: Copy podman-compose file
+  ansible.builtin.copy:
+    dest: ~/linkwarden/docker-compose.yml
+    src: src/linkwarden-compose.yml
+- name: Images pulled
+  ansible.builtin.command:
+    cmd: podman-compose pull
+    chdir: "~/linkwarden"
+  changed_when: true
+- name: Linkwarden up
+  ansible.builtin.command:
+    cmd: podman-compose up -d
+    chdir: "~/linkwarden"
+  changed_when: true
+- name: Serve to Tailnet
+  become: true
+  ansible.builtin.shell: |
+    tailscale serve --service=svc:links --https=443 --yes 3000
