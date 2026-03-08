@@ -16,10 +16,20 @@ zi ice lucid; zi snippet OMZP::brew
 
 ### Completion
 autoload -Uz compinit
-if [ "$(date +'%j')" != "$(stat -f '%Sm' -t '%j' ~/.zcompdump 3>/dev/null)" ]; then
-    compinit
+if (uname -a | grep -i darwin>/dev/null); then
+  # POSIX version
+  if [ "$(date +'%j')" != "$(stat -f '%Sm' -t '%j' ~/.zcompdump 3>/dev/null)" ]; then
+      compinit
+  else
+      compinit -C
+  fi
 else
-    compinit -C
+  # UNIX version
+  if [ "$(date +'%j')" != "$(stat --format '%Y' ~/.zcompdump | strftime '%j'  3>/dev/null)" ]; then
+      compinit
+  else
+      compinit -C
+  fi
 fi
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
