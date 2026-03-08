@@ -38,3 +38,19 @@ EOF
 
   local res = $(echo ${list} | fzf)
 }
+
+# Proton pass
+pp() {
+  echo "Fetching items..." >&2
+
+  passes=$(
+    pass-cli item list --output=json --filter-state=active --sort-by=created-desc |
+    jq -r '.items[] | [.id, .content.title] | @tsv'
+  )
+
+  res=$(fzf --prompt="Passwords" -d'\t' \
+    --with-nth='{2}' --accept-nth='{1}' \
+    --preview='pass-cli item view --item-id {1}' <<< "$passes")
+
+  pass-cli item view --item-id "${res}"
+}

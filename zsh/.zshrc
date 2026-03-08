@@ -209,4 +209,7 @@ if (uname -a | grep -i darwin >/dev/null); then
     export JAVA_HOME=$(/usr/libexec/java_home -v 21 2>/dev/null)
 fi
 
+# use fs key provider for the proton pass cli
+export PROTON_PASS_KEY_PROVIDER=fs
+
 # zprof
