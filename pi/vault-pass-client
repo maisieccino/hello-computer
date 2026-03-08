@@ -1,0 +1,11 @@
+#!/bin/bash
+
+item_id="${2}"
+
+if [ -z "$item_id" ]; then
+  exit 1
+fi
+
+pass-cli item view \
+  --item-title "${2}" \
+  --field password

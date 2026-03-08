@@ -84,4 +84,6 @@ unless is_work?
   cask "font-stack-sans-notch"
   cask "font-stack-sans-headline"
   cask "font-gohufont-nerd-font"
+  tap "protonpass/tap"
+  brew "pass-cli"
 end
