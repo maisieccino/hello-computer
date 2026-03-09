@@ -54,3 +54,47 @@ pp() {
 
   pass-cli item view --item-id "${res}"
 }
+
+save-link() {
+  set +x
+  local url=${1}
+  if [ -z "${url}" ]; then
+    echo "You need to add a url!" >&2
+    return 1
+  fi
+
+  body=$(cat <<EOF
+{
+  "type": "link",
+  "url": "${url}"
+}
+EOF
+)
+
+  curl -H "Authorization: Bearer ${KARAKEEP_SECRET}" \
+    -H "Content-Type: application/json" \
+    -d "${body}" \
+    -XPOST "${KARAKEEP_URL}/api/v1/bookmarks"
+}
+
+links() {
+  local results=$(curl -H "Authorization: Bearer ${KARAKEEP_SECRET}" \
+    -XGET "${KARAKEEP_URL}/api/v1/bookmarks" \
+    | jq -r '.bookmarks[] | [.content.title,.id,.content.url, (.assets[] | select(.assetType=="screenshot")|.id) ] | @tsv')
+
+
+  local preview_cmd="curl -sH \"Authorization: Bearer ${KARAKEEP_SECRET}\" \"${KARAKEEP_URL}/api/v1/assets/{4}\" | kitten icat --clear --transfer-mode=memory"
+
+  local open_cmd="xdg-open"
+  if (uname -a | grep -i darwin>/dev/null); then
+    open_cmd="open"
+  fi
+
+  fzf -d'\t' --with-nth="{1}: {3}" \
+    --accept-nth="{3}" \
+    --preview-window=up \
+    --preview="zsh -c '${preview_cmd}'" <<< "${results}" \
+    --footer="ENTER: open, CTRL-O: open in Karakeep" \
+    --bind "ctrl-o:execute(${open_cmd} ${KARAKEEP_URL}/dashboard/preview/{2})" |\
+      xargs open
+}
