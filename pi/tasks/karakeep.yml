@@ -1,25 +1,24 @@
-- name: Setup linkwarden directory
+- name: Setup Karakeep directory
   ansible.builtin.file:
-    path: ~/linkwarden
+    path: ~/karakeep
     state: directory
+    mode: 0700
+
 - name: Copy env file
   ansible.builtin.template:
-    src: src/linkwarden.env.j2
-    dest: ~/linkwarden/.env
+    src: src/karakeep.env.j2
+    dest: ~/karakeep/.env
     mode: 0600
+
 - name: Copy podman-compose file
   ansible.builtin.copy:
-    dest: ~/linkwarden/docker-compose.yml
-    src: src/linkwarden-compose.yml
-- name: Images pulled
-  ansible.builtin.command:
-    cmd: podman-compose pull
-    chdir: "~/linkwarden"
-  changed_when: true
-- name: Linkwarden up
+    dest: ~/karakeep/docker-compose.yml
+    src: src/karakeep-compose.yml
+
+- name: Karakeep up
   ansible.builtin.command:
     cmd: podman-compose up -d
-    chdir: "~/linkwarden"
+    chdir: "~/karakeep"
   changed_when: true
 - name: Serve to Tailnet
   become: true

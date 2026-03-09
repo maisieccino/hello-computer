@@ -22,6 +22,6 @@
   vars_files:
     - vault.yml
   tasks:
-    - name: Linkwarden
+    - name: karakeep
       ansible.builtin.include_tasks:
-        file: tasks/linkwarden.yml
+        file: tasks/karakeep.yml
