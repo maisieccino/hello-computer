@@ -78,23 +78,40 @@ EOF
 }
 
 links() {
+  if [ -z "${KARAKEEP_SECRET}"]; then
+    echo "KARAKEEP_SECRET is missing!" >&2
+    return 1
+  fi
+  if [ -z "${KARAKEEP_URL}"]; then
+    echo "KARAKEEP_URL is missing!" >&2
+    return 1
+  fi
+
   local results=$(curl -H "Authorization: Bearer ${KARAKEEP_SECRET}" \
     -XGET "${KARAKEEP_URL}/api/v1/bookmarks" \
     | jq -r '.bookmarks[] | [.content.title,.id,.content.url, (.assets[] | select(.assetType=="screenshot")|.id) ] | @tsv')
 
 
-  local preview_cmd="curl -sH \"Authorization: Bearer ${KARAKEEP_SECRET}\" \"${KARAKEEP_URL}/api/v1/assets/{4}\" | kitten icat --clear --transfer-mode=memory"
+  local build_preview_cmd() {
+    local curl_cmd="curl -sH \"Authorization: Bearer ${KARAKEEP_SECRET}\" \"${KARAKEEP_URL}/api/v1/assets/{4}\""
+    local icat_cmd="kitten icat --clear --transfer-mode=memory --place=\"\${FZF_PREVIEW_COLUMNS}x\${FZF_PREVIEW_LINES}@0x0\""
+    echo "${curl_cmd} | ${icat_cmd}"
+  }
+  local preview_cmd="$(build_preview_cmd)"
 
   local open_cmd="xdg-open"
   if (uname -a | grep -i darwin>/dev/null); then
     open_cmd="open"
   fi
 
-  fzf -d'\t' --with-nth="{1}: {3}" \
+  result=$(fzf -d'\t' --with-nth="{1}: {3}" \
     --accept-nth="{3}" \
-    --preview-window=up \
     --preview="zsh -c '${preview_cmd}'" <<< "${results}" \
     --footer="ENTER: open, CTRL-O: open in Karakeep" \
-    --bind "ctrl-o:execute(${open_cmd} ${KARAKEEP_URL}/dashboard/preview/{2})" |\
-      xargs open
+    --bind "ctrl-o:execute(${open_cmd} ${KARAKEEP_URL}/dashboard/preview/{2})")
+
+  if [ $? -ne 0 ]; then
+    return
+  fi
+  $open_cmd "${result}"
 }
