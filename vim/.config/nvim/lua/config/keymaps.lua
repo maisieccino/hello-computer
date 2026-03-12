@@ -23,6 +23,10 @@ map("n", "<localleader>T", "<leader>sS", { remap = true, desc = "Goto Symbol (Wo
 map("n", "<localleader>x", "<leader>fr", { remap = true, desc = "Recent" })
 map("n", "<localleader>X", "<leader>fR", { remap = true, desc = "Recent (cwd)" })
 
+-- Disable inc/dec numbers...
+map({ "n", "x" }, "<C-a>", "<Nop>")
+map({ "n", "x" }, "<C-x>", "<Nop>")
+
 if vim.F.if_nil(vim.g.elite_mode, false) then
   -- Elite-mode: Arrow-keys resize window
   map("n", "<Up>", "<cmd>resize +1<cr>", { desc = "Increase Window Height" })

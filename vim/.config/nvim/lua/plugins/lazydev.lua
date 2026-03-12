@@ -7,6 +7,7 @@ return {
       library = {
         { path = "LazyVim" },
         { path = "snacks.nvim" },
+        { path = "nvim-treesitter" },
         { path = "lazy.nvim" },
         { path = "noice.nvim" },
         { path = "blink.cmp" },
