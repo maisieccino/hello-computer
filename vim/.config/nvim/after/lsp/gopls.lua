@@ -1,5 +1,13 @@
 local util = require("util")
 
+local augroup = vim.api.nvim_create_augroup("lsp.gopls", {})
+
+local rewrite_imports = function()
+  local view = vim.fn.winsaveview()
+  vim.cmd("silent! %s@github.com/monzo/wearedev/vendor/@@g")
+  vim.fn.winrestview(view)
+end
+
 ---@type vim.lsp.Config
 local base_cfg = {
   analyses = {
@@ -13,6 +21,7 @@ local base_cfg = {
     -- gopls is a particularly slow language server, especially in wearedev.
     -- Debounce text changes so that we don't send loads of updates.
     debounce_text_changes = 200,
+    exit_timeout = 500,
   },
   init_options = {
     annotations = {
@@ -40,6 +49,9 @@ local base_cfg = {
 
     if not client.server_capabilities.semanticTokensProvider then
       local semantic = client.config.capabilities.textDocument.semanticTokens
+      if semantic == nil then
+        return
+      end
       client.server_capabilities.semanticTokensProvider = {
         full = true,
         legend = {
@@ -49,14 +61,29 @@ local base_cfg = {
         range = true,
       }
     end
-
-    -- vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-    --   pattern = "*.go",
-    --   callback = function()
-    --     -- Remove vendor prefixes
-    --     vim.cmd("silent! %s/github.com\\/monzo\\/wearedev\\/vendor\\///g|norm!``")
-    --   end,
-    -- })
+    local blink_installed, _ = pcall(require, "blink.cmp")
+    if blink_installed then
+      vim.api.nvim_create_autocmd({ "User" }, {
+        pattern = "BlinkCmpAccept",
+        callback = function(ev)
+          ---@type blink.cmp.CompletionItem
+          local item = ev.data.item
+          if
+            not item.client_id == client.id or not item.kind == require("blink.cmp.types").CompletionItemKind.Module
+          then
+            return
+          end
+          rewrite_imports()
+        end,
+        group = augroup,
+      })
+    else
+      vim.api.nvim_create_autocmd({ "CompleteDone" }, {
+        buffer = bufnr,
+        callback = rewrite_imports,
+        group = augroup,
+      })
+    end
   end,
 }
 
