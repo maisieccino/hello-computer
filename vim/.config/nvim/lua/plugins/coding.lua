@@ -14,12 +14,6 @@ return {
     },
   },
   {
-    "outline.nvim",
-    keys = {
-      { "<leader>co", "<cmd>Outline<CR>", desc = "Toggle outline" },
-    },
-  },
-  {
     "blink.cmp",
     optional = true,
     dependencies = {

@@ -1,3 +1,7 @@
-```bash
-poetry run ansible-playbook -i inventory.yml --skip-tags init main.yml
+# Pi
+
+Ansible tasks for setting up my Raspberry Pi
+
+```
+$ make
 ```

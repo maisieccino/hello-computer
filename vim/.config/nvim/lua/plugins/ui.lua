@@ -1,14 +1,6 @@
 require("snacks")
 return {
   {
-    "lualine.nvim",
-    opts = {
-      sections = {
-        lualine_a = {},
-      },
-    },
-  },
-  {
     "bufferline.nvim",
     opts = function()
       local bufferline = require("bufferline")

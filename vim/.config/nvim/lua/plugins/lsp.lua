@@ -29,8 +29,4 @@ return {
     "mason-lspconfig.nvim",
     enabled = false,
   },
-  {
-    "nvim-treesitter/nvim-treesitter",
-    opts = { ensure_installed = { "gotmpl", "gowork" } },
-  },
 }
