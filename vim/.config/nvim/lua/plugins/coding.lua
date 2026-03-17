@@ -1,6 +1,7 @@
+---@type LazySpec
 return {
   {
-    "nvim-lspconfig",
+    "neovim/nvim-lspconfig",
   },
   {
     "nvim-mini/mini.surround",

@@ -83,7 +83,7 @@ return {
   {
     "nvim-treesitter",
     opts = {
-      ensure_installed = { "starlark" },
+      ensure_installed = { "promql", "starlark" },
       auto_install = true,
       highlight = {
         enable = true,

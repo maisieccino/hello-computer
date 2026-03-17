@@ -76,6 +76,11 @@ return {
             packages = { "amsmath", "amssymb", "amsfonts", "amscd", "mathtools", "pgfplots" },
           },
         },
+        doc = {
+          enabled = true,
+          float = true,
+          inline = false,
+        },
       },
     },
   },

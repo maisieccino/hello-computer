@@ -33,10 +33,6 @@ local on_attach = function(client, bufnr)
     vim.keymap.set(mode, l, r, opts)
   end
 
-  map("n", "K", function()
-    vim.lsp.buf.hover({ border = "rounded" })
-  end, { desc = "LSP Hover" })
-
   map("n", "<localleader>cr", vim.lsp.buf.rename, { desc = "Rename" })
 
   map("n", "<space>wa", vim.lsp.buf.add_workspace_folder, { desc = "Add workspace folder" })
