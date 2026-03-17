@@ -1,4 +1,6 @@
 ;; extends
+
+; Adds promql code injection to yaml definitions.
 ((block_mapping_pair
    key: (flow_node
       (plain_scalar (string_scalar) @key)

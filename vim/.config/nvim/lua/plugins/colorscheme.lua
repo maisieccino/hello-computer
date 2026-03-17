@@ -1,12 +1,13 @@
+local util = require("util")
 ---@type LazySpec
 return {
   {
     "LazyVim/LazyVim",
-    opts = {
-      -- colorscheme = "catppuccin-macchiato",
-      -- colorscheme = "oxocarbon",
-      colorscheme = "kanagawa-dragon",
-    },
+    opts = function(opts)
+      return vim.tbl_deep_extend("force", {
+        colorscheme = util.is_work() and "catppuccin-macchiato" or "kanagawa-dragon",
+      }, opts)
+    end,
   },
   {
     "rebelot/kanagawa.nvim",
