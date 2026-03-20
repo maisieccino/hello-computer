@@ -8,6 +8,7 @@ brew "chafa" # Generate ASCII images
 brew "ctags"
 brew "doctl" # DigitalOcean CLI
 brew "exiftool" unless is_work? # Strip exif data from images
+brew "eza"
 brew "fd" # Better find tools
 brew "ffmpeg"
 brew "fnm" unless is_work? # Better nvm

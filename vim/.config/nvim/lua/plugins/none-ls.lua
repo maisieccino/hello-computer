@@ -6,6 +6,9 @@ local h = require("null-ls.helpers")
 return {
   {
     "nvimtools/none-ls.nvim",
+    dependencies = {
+      "nvimtools/none-ls-extras.nvim",
+    },
     opts = function(_, opts)
       local null_ls = require("null-ls")
       table.insert(opts.sources, {
@@ -41,6 +44,7 @@ return {
       if not util.is_work() then
         table.insert(opts.sources, null_ls.builtins.diagnostics.semgrep)
         table.insert(opts.sources, null_ls.builtins.diagnostics.golangci_lint)
+        table.insert(opts.sources, require("none-ls.formatting.golangci_lint"))
       end
     end,
   },

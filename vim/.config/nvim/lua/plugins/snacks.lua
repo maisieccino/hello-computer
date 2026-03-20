@@ -80,6 +80,7 @@ return {
           enabled = true,
           float = true,
           inline = false,
+          max_height = 20,
         },
       },
     },

@@ -5,7 +5,7 @@ return {
     "LazyVim/LazyVim",
     opts = function(opts)
       return vim.tbl_deep_extend("force", {
-        colorscheme = util.is_work() and "catppuccin-macchiato" or "kanagawa-dragon",
+        colorscheme = util.is_work() and "oxocarbon" or "kanagawa-dragon",
       }, opts)
     end,
   },
