@@ -5,7 +5,7 @@
 - name: Upgrade
   become: true
   apt:
-    upgrade: dist
+    upgrade: full
 
 - name: Ensure installed
   become: true

@@ -3,3 +3,6 @@ ungrouped:
     pi:
       ansible_host: maisiepi.local
       ansible_ssh_private_key_file: ~/.ssh/pi
+    optiflex:
+      ansible_host: optiflex
+      ansible_ssh_private_key_file: ~/.ssh/optiflex

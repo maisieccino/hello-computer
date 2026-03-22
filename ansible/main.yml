@@ -14,11 +14,20 @@
     - name: Git
       ansible.builtin.include_tasks:
         file: tasks/git.yml
+- name: Home server packages
+  hosts: optiflex
+  tasks:
+    - name: Init
+      ansible.builtin.include_tasks:
+        file: tasks/optiflex.yml
+- name: Calibre-Web
+  hosts: pi
+  tasks:
     - name: Calibre Web
       ansible.builtin.include_tasks:
         file: tasks/calibre.yml
 - name: linkwarden
-  hosts: all
+  hosts: pi
   vars_files:
     - vault.yml
   tasks:

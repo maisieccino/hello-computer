@@ -1,0 +1,5 @@
+- name: Install programs
+  become: true
+  apt:
+    pkg:
+      - btop
