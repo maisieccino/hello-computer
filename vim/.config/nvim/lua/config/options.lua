@@ -119,6 +119,11 @@ vim.filetype.add({
   extension = {
     mdx = "mdx",
     ["ipynb"] = "markdown",
+    network = "systemd",
+    container = "systemd",
+    pod = "systemd",
+    volume = "systemd",
+    kube = "systemd",
   },
   pattern = {
     ["%.config/git/users/.*"] = "gitconfig",

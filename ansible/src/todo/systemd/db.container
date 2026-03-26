@@ -1,0 +1,27 @@
+[Unit]
+Description=Task Manager (Vikunja) DB Container
+Requires=todo-pod.service
+After=todo-pod.service
+StartLimitIntervalSec=300
+StartLimitBurst=5
+
+[Container]
+AutoUpdate=registry
+ContainerName=postgres
+Image=docker.io/library/postgres:18
+Volume=/home/app/todo/db:/var/lib/postgresql:z,U
+Environment=POSTGRES_USER=vikunja
+Environment=POSTGRES_DB=vikunja
+Secret=todo_db_passwd,type=env,target=POSTGRES_PASSWORD
+HealthCmd=pg_isready -h localhost -U vikunja
+HealthInterval=10s
+HealthStartPeriod=30s
+UserNS=keep-id:uid=999,gid=999
+Pod=todo.pod
+
+[Service]
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=default.target

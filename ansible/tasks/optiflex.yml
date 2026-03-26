@@ -2,4 +2,19 @@
   become: true
   apt:
     pkg:
+      - acl
       - btop
+
+- name: Disable podman auto update
+  become: true
+  ansible.builtin.systemd:
+    name: podman-auto-update.timer
+    state: stopped
+    enabled: false
+
+- name: Ensure app directory
+  become: true
+  ansible.builtin.file:
+    path: /home/app/
+    state: directory
+    mode: 0755

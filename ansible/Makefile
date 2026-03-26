@@ -6,13 +6,21 @@ apply:
 		--vault-id 'ansible_vault_pi@vault-pass-client' \
 		-i inventory.yml --skip-tags init main.yml
 
+apply-optiflex:
+	poetry run ansible-playbook \
+		--vault-id 'ansible_vault_pi@vault-pass-client' \
+		-l optiflex \
+		-i inventory.yml --skip-tags init main.yml
+
 check:
 	poetry run ansible-playbook -C \
 		--vault-id 'ansible_vault_pi@vault-pass-client' \
 		-i inventory.yml --skip-tags init main.yml
 
 edit-vault.yml:
-	poetry run ansible-vault edit --vault-id 'ansible_vault_pi@vault-pass-client'
+	poetry run ansible-vault \
+		edit --vault-id 'ansible_vault_pi@vault-pass-client' \
+		vault.yml
 
 vault.yml:
 	pass-cli item view \

@@ -34,3 +34,12 @@
     - name: karakeep
       ansible.builtin.include_tasks:
         file: tasks/karakeep.yml
+
+- name: todo
+  hosts: optiflex
+  vars_files:
+    - vault.yml
+  tasks:
+    - name: todo (Vikunja)
+      ansible.builtin.include_tasks:
+        file: tasks/todo.yml

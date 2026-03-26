@@ -1,0 +1,30 @@
+[Unit]
+Description=Task Manager (Vikunja) App Container
+Requires=db.service
+After=db.service
+StartLimitIntervalSec=300
+StartLimitBurst=5
+
+[Container]
+AutoUpdate=registry
+ContainerName=todo
+Image=docker.io/vikunja/vikunja:2.2
+# Run as "root" (todo user on host)
+User=0:0
+Volume=/home/app/todo/files:/app/vikunja/files
+Volume=/home/app/todo/config.yml:/etc/vikunja/config.yml
+Environment=VIKUNJA_SERVICE_PUBLICURL=https://todo.corvus-buri.ts.net
+Environment=VIKUNJA_DATABASE_HOST=localhost
+Environment=VIKUNJA_DATABASE_TYPE=postgres
+Environment=VIKUNJA_DATABASE_USER=vikunja
+Environment=VIKUNJA_DATABASE_DATABASE=vikunja
+Secret=todo_db_passwd,type=env,target=VIKUNJA_DATABASE_PASSWORD
+Secret=todo_jwtsecret,type=env,target=VIKUNJA_SERVICE_JWTSECRET
+Pod=todo.pod
+
+[Service]
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=default.target
