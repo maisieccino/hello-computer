@@ -33,6 +33,7 @@
     src: src/todo/config.yml.j2
     dest: /home/app/todo/config.yml
     mode: 0600
+  register: config_file
 
 - name: Ensure systemd definitions
   become: true
@@ -40,6 +41,15 @@
     dest: "/etc/containers/systemd/users/{{ todo_user.uid }}"
     src: src/todo/systemd/
   register: systemd_files
+
+- name: Enable Linger for todo user
+  become: true
+  ansible.builtin.command:
+    argv:
+      - /usr/bin/loginctl
+      - enable-linger
+      - "todo"
+    creates: "/var/lib/systemd/linger/todo"
 
 - name: Ensure secrets
   become: true
@@ -61,10 +71,11 @@
   ansible.builtin.systemd_service:
     name: todo.service
     daemon_reload: true
-    state: started
+    state: "{{ should_restart | ternary('restarted', 'started') }}"
     enabled: true
     scope: user
-  when: systemd_files.changed
+  vars:
+    should_restart: "{{ systemd_files.changed or config_file.changed }}"
 
 - name: Serve to Tailnet
   become: true
