@@ -4,3 +4,11 @@ scrape_configs:
     metrics_path: '/api/v1/metrics'
     static_configs:
       - targets: ['todo.corvus-buri.ts.net:3456']
+  - job_name: 'node_pi'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['localhost:9100']
+  - job_name: 'node_optiflex'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['optiflex.corvus-buri.ts.net:9100']

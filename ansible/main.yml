@@ -44,8 +44,10 @@
       ansible.builtin.include_tasks:
         file: tasks/todo.yml
 
-- name: Prmetheus
+- name: Prometheus
   hosts: pi
+  vars_files:
+    - vault.yml
   tasks:
     - name: Prometheus
       ansible.builtin.include_tasks:

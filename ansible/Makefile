@@ -12,6 +12,12 @@ apply-optiflex:
 		-l optiflex \
 		-i inventory.yml --skip-tags init main.yml
 
+apply-pi:
+	poetry run ansible-playbook \
+		--vault-id 'ansible_vault_pi@vault-pass-client' \
+		-l pi \
+		-i inventory.yml --skip-tags init main.yml
+
 check:
 	poetry run ansible-playbook -C \
 		--vault-id 'ansible_vault_pi@vault-pass-client' \

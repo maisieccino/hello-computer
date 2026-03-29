@@ -4,6 +4,7 @@
     pkg:
       - acl
       - btop
+      - prometheus-node-exporter
 
 - name: Disable podman auto update
   become: true

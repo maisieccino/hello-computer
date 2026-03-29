@@ -1,18 +1,37 @@
-- name: Prometheus package
+- name: Grafana APT repository
+  become: true
+  block:
+    - name: Grafana GPG key
+      ansible.builtin.get_url:
+        url: https://apt.grafana.com/gpg-full.key
+        dest: /etc/apt/keyrings/grafana.asc
+
+    - name: somerepo | apt source
+      ansible.builtin.apt_repository:
+        repo: "deb [signed-by=/etc/apt/keyrings/grafana.asc] https://apt.grafana.com stable main"
+        state: present
+
+- name: Prometheus and Grafana packages
   become: true
   apt:
     pkg:
       - prometheus
+      - prometheus-node-exporter
+      - grafana
 
-# TODO: Node exporters
-# TODO: Grafana service
-
-- name: Ensure config file
+- name: Ensure Prometheus config file
   become: true
   ansible.builtin.template:
     src: src/prometheus.yml.j2
     dest: /etc/prometheus/prometheus.yml
-  register: config_file
+  register: prom_config
+
+- name: Ensure Grafana config file
+  become: true
+  ansible.builtin.template:
+    src: src/grafana/grafana.ini.j2
+    dest: /etc/grafana/grafana.ini
+  register: grafana_config
 
 - name: Prometheus started
   become: true
@@ -22,4 +41,19 @@
     state: "{{ should_restart | ternary('restarted', 'started') }}"
     enabled: true
   vars:
-    should_restart: "{{ config_file.changed }}"
+    should_restart: "{{ prom_config.changed }}"
+
+- name: Grafana started
+  become: true
+  ansible.builtin.systemd_service:
+    name: grafana-server.service
+    daemon_reload: true
+    state: "{{ should_restart | ternary('restarted', 'started') }}"
+    enabled: true
+  vars:
+    should_restart: "{{ grafana_config.changed }}"
+
+- name: Serve Grafana to Tailnet
+  become: true
+  ansible.builtin.shell: |
+    tailscale serve --service=svc:grafana --https=443 --yes 9080
