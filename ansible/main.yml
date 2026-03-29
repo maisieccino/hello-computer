@@ -43,3 +43,10 @@
     - name: todo (Vikunja)
       ansible.builtin.include_tasks:
         file: tasks/todo.yml
+
+- name: Prmetheus
+  hosts: pi
+  tasks:
+    - name: Prometheus
+      ansible.builtin.include_tasks:
+        file: tasks/prometheus.yml

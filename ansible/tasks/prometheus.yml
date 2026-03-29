@@ -1,0 +1,25 @@
+- name: Prometheus package
+  become: true
+  apt:
+    pkg:
+      - prometheus
+
+# TODO: Node exporters
+# TODO: Grafana service
+
+- name: Ensure config file
+  become: true
+  ansible.builtin.template:
+    src: src/prometheus.yml.j2
+    dest: /etc/prometheus/prometheus.yml
+  register: config_file
+
+- name: Prometheus started
+  become: true
+  ansible.builtin.systemd_service:
+    name: prometheus.service
+    daemon_reload: true
+    state: "{{ should_restart | ternary('restarted', 'started') }}"
+    enabled: true
+  vars:
+    should_restart: "{{ config_file.changed }}"

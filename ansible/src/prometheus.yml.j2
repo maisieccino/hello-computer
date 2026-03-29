@@ -1,0 +1,6 @@
+scrape_configs:
+  - job_name: 'todo'
+    scrape_interval: 5s
+    metrics_path: '/api/v1/metrics'
+    static_configs:
+      - targets: ['todo.corvus-buri.ts.net:3456']
