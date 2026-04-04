@@ -1,0 +1,27 @@
+[Unit]
+Description=Wallabag DB Container
+Requires=news-pod.service
+After=news-pod.service
+StartLimitIntervalSec=300
+StartLimitBurst=5
+
+[Container]
+AutoUpdate=registry
+ContainerName=postgres
+Image=docker.io/library/postgres:18
+Volume=/home/app/wallabag/db:/var/lib/postgresql:z,U
+Environment=POSTGRES_USER=wallabag
+Environment=POSTGRES_DB=wallabag
+Secret=news_db_passwd,type=env,target=POSTGRES_PASSWORD
+HealthCmd=pg_isready -h localhost -U wallabag
+HealthInterval=10s
+HealthStartPeriod=30s
+UserNS=keep-id:uid=999,gid=999
+Pod=news.pod
+
+[Service]
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=default.target

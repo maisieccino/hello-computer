@@ -44,6 +44,15 @@
       ansible.builtin.include_tasks:
         file: tasks/todo.yml
 
+- name: news
+  hosts: optiflex
+  vars_files:
+    - vault.yml
+  tasks:
+    - name: news (Wallabag)
+      ansible.builtin.include_tasks:
+        file: tasks/news.yml
+
 - name: Prometheus
   hosts: pi
   vars_files:

@@ -1,63 +1,84 @@
-- name: News user present
+- name: Wallabg user present
   become: true
   ansible.builtin.user:
-    name: news
+    name: wallabag
     shell: /bin/bash
-  register: news_user
+  register: wallabag_user
 
 - name: Ensure news directory
   become: true
   ansible.builtin.file:
-    path: /home/app/news
+    path: /home/app/wallabag
     state: directory
-    owner: news
-    group: news
+    owner: wallabag
+    group: wallabag
     mode: 0755
 
-- name: Ensure todo directory
+- name: Ensure wallabag directory
   become: true
   ansible.builtin.file:
-    path: /home/app/news/images
+    path: /home/app/wallabag/{{ item }}
     state: directory
-    owner: news
-    group: news
+    owner: wallabag
+    group: wallabag
     mode: 0770
+  with_items:
+    - images
+    - db
 
 - name: Ensure systemd definitions
   become: true
   ansible.builtin.copy:
-    dest: "/etc/containers/systemd/users/{{ news_user.uid }}"
+    dest: "/etc/containers/systemd/users/{{ wallabag_user.uid }}"
     src: src/news/systemd/
   register: systemd_files
 
-- name: Enable Linger for news user
+- name: Enable Linger for wallabag user
   become: true
   ansible.builtin.command:
     argv:
       - /usr/bin/loginctl
       - enable-linger
-      - "news"
-    creates: "/var/lib/systemd/linger/news"
+      - "wallabag"
+    creates: "/var/lib/systemd/linger/wallabag"
 
 - name: Ensure secrets
   become: true
-  become_user: news
+  become_user: wallabag
   containers.podman.podman_secret:
     state: present
     name: "{{ item.name }}"
     data: "{{ item.value }}"
   no_log: true
   with_items:
-    - name: todo_db_passwd
-      value: "{{ todo_db_passwd }}"
-    - name: todo_jwtsecret
-      value: "{{ todo_jwt_secret }}"
+    - name: news_db_passwd
+      value: "{{ news_db_passwd }}"
+    - name: news_secret
+      value: "{{ news_secret }}"
+    - name: miniflux_db_passwd
+      value: "{{ miniflux_db_passwd }}"
+    - name: miniflux_db_url
+      value: "{{ miniflux_db_url }}"
+    - name: miniflux_admin_passwd
+      value: "{{ miniflux_admin_passwd }}"
+    - name: miniflux_oauth2_client_id
+      value: "{{ miniflux_oauth2_client_id }}"
+    - name: miniflux_oauth2_client_secret
+      value: "{{ miniflux_oauth2_client_secret }}"
+
+# https://github.com/wallabag/docker/issues/412#issuecomment-2955985641
+- name: Report if wallabag service exists
+  become: true
+  become_user: wallabag
+  ansible.builtin.shell: |
+    systemctl --user list-unit-files wallabag.service >/dev/null && echo 0 || echo 1
+  register: wallabag_service_exists
 
 - name: Wallabag started
   become: true
-  become_user: news
+  become_user: wallabag
   ansible.builtin.systemd_service:
-    name: todo.service
+    name: wallabag.service
     daemon_reload: true
     state: "{{ should_restart | ternary('restarted', 'started') }}"
     enabled: true
@@ -65,7 +86,38 @@
   vars:
     should_restart: "{{ systemd_files.changed or config_file.changed }}"
 
+- name: Initialise Wallabag
+  become: true
+  become_user: wallabag
+  ansible.builtin.shell: |
+    podman exec -ti wallabag php bin/console wallabag:install --env=prod -n
+  # Only on first run.
+  when: wallabag_service_exists.stdout == 1
+
 - name: Serve to Tailnet
   become: true
   ansible.builtin.shell: |
-    tailscale serve --service=svc:todo --https=443 --yes localhost:3456
+    tailscale serve --service=svc:news --https=443 --yes localhost:8672
+    tailscale serve --service=svc:rss --https=443 --yes localhost:8673
+
+# - name: Setup miniflux DB user
+#   become: true
+#   become_user: wallabag
+#   ansible.builtin.shell: |
+#     if ! podman exec -t postgres psql -U wallabag -lqt | cut -d\| -f 1 | grep -qw miniflux; then
+#       podman exec -t postgres psql -U wallabag -c "create database miniflux;"
+#       podman exec -t postgres psql -U wallabag -c "create user miniflux with encrypted password '{{ miniflux_db_passwd }}';"
+#       podman exec -t postgres psql -U wallabag -c "grant all privileges on database miniflux to miniflux;"
+#     fi
+
+- name: Miniflux started
+  become: true
+  become_user: wallabag
+  ansible.builtin.systemd_service:
+    name: miniflux.service
+    daemon_reload: true
+    state: "{{ should_restart | ternary('restarted', 'started') }}"
+    enabled: true
+    scope: user
+  vars:
+    should_restart: "{{ systemd_files.changed or config_file.changed }}"

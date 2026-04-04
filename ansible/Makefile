@@ -36,4 +36,4 @@ vault.yml:
 push-vault.yml:
 	pass-cli item update \
 		--item-title ansible_vault_pi \
-		--field vault.yml=$$(cat vault.yml | base64)
+		--field vault.yml="$$(cat vault.yml | base64)"
