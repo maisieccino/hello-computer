@@ -22,6 +22,7 @@ Environment=OAUTH2_OIDC_DISCOVERY_ENDPOINT=https://login.maisie.dog/
 Environment=OAUTH2_REDIRECT_URL=https://rss.corvus-buri.ts.net/oauth2/oidc/callback
 Environment=OAUTH2_USER_CREATION=1
 Environment=METRICS_COLLECTOR=1
+Environment=INTEGRATION_ALLOW_PRIVATE_NETWORKS=1
 Secret=miniflux_db_url,type=env,target=DATABASE_URL
 Secret=miniflux_admin_passwd,type=env,target=ADMIN_PASSWORD
 Secret=miniflux_oauth2_client_id,type=env,target=OAUTH2_CLIENT_ID
@@ -34,4 +35,3 @@ RestartSec=10
 
 [Install]
 WantedBy=default.target
-
