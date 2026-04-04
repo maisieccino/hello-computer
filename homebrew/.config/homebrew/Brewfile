@@ -74,7 +74,7 @@ unless is_work?
   cask "figma"
   cask "google-chrome"
   cask "keybase"
-  cask "mactex-no-gui"
+  # cask "mactex-no-gui"
   cask "obsidian"
   cask "quarto"
   cask "signal"

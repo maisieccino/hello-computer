@@ -69,6 +69,8 @@ if [[ -f "/opt/homebrew/bin/brew" ]]; then
   export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
+HOMEBREW_NO_ENV_HINTS=1
+
 # PyEnv
 if (stat "${HOME}/.pyenv/bin" >/dev/null 2>/dev/null); then
   export PATH="${HOME}/.pyenv/bin:${PATH}"

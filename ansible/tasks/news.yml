@@ -1,0 +1,71 @@
+- name: News user present
+  become: true
+  ansible.builtin.user:
+    name: news
+    shell: /bin/bash
+  register: news_user
+
+- name: Ensure news directory
+  become: true
+  ansible.builtin.file:
+    path: /home/app/news
+    state: directory
+    owner: news
+    group: news
+    mode: 0755
+
+- name: Ensure todo directory
+  become: true
+  ansible.builtin.file:
+    path: /home/app/news/images
+    state: directory
+    owner: news
+    group: news
+    mode: 0770
+
+- name: Ensure systemd definitions
+  become: true
+  ansible.builtin.copy:
+    dest: "/etc/containers/systemd/users/{{ news_user.uid }}"
+    src: src/news/systemd/
+  register: systemd_files
+
+- name: Enable Linger for news user
+  become: true
+  ansible.builtin.command:
+    argv:
+      - /usr/bin/loginctl
+      - enable-linger
+      - "news"
+    creates: "/var/lib/systemd/linger/news"
+
+- name: Ensure secrets
+  become: true
+  become_user: news
+  containers.podman.podman_secret:
+    state: present
+    name: "{{ item.name }}"
+    data: "{{ item.value }}"
+  no_log: true
+  with_items:
+    - name: todo_db_passwd
+      value: "{{ todo_db_passwd }}"
+    - name: todo_jwtsecret
+      value: "{{ todo_jwt_secret }}"
+
+- name: Wallabag started
+  become: true
+  become_user: news
+  ansible.builtin.systemd_service:
+    name: todo.service
+    daemon_reload: true
+    state: "{{ should_restart | ternary('restarted', 'started') }}"
+    enabled: true
+    scope: user
+  vars:
+    should_restart: "{{ systemd_files.changed or config_file.changed }}"
+
+- name: Serve to Tailnet
+  become: true
+  ansible.builtin.shell: |
+    tailscale serve --service=svc:todo --https=443 --yes localhost:3456
