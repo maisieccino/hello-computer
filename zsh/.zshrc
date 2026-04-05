@@ -179,14 +179,13 @@ export TFENV_ARCH=amd64
 eval "$(zoxide init zsh)"
 
 # Carapace shell completion
-if (which carapace >/dev/null) then
-  autoload -Uz compinit
-  compinit
-  export CARAPACE_BRIDGES='cobra,kitten,zsh'
-  zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
-  source <(carapace _carapace)
-fi
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+# if (which carapace >/dev/null) then
+#   autoload -Uz compinit
+#   compinit
+#   export CARAPACE_BRIDGES='cobra,kitten,zsh'
+#   zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
+#   source <(carapace _carapace)
+# fi
 
 eval "$(starship init zsh)"
 
