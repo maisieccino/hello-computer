@@ -13,6 +13,12 @@
     state: stopped
     enabled: false
 
+- name: Ensure Node exporter env file
+  become: true
+  ansible.builtin.template:
+    src: src/node-exporter-env.j2
+    dest: /etc/default/prometheus-node-exporter
+
 - name: Ensure app directory
   become: true
   ansible.builtin.file:

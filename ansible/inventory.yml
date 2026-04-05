@@ -1,7 +1,7 @@
 ungrouped:
   hosts:
     pi:
-      ansible_host: maisiepi.local
+      ansible_host: maisiepi
       ansible_ssh_private_key_file: ~/.ssh/pi
     optiflex:
       ansible_host: optiflex

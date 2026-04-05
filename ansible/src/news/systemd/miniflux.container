@@ -17,11 +17,14 @@ Environment=ADMIN_USERNAME=admin
 Environment=BASE_URL=https://rss.corvus-buri.ts.net
 Environment=DISABLE_LOCAL_AUTH=true
 Environment=OAUTH2_PROVIDER=oidc
-Environment=OAUTH2_PROVIDER_NAME=maisie.dog
+Environment=OAUTH2_OIDC_PROVIDER_NAME=maisie.dog
 Environment=OAUTH2_OIDC_DISCOVERY_ENDPOINT=https://login.maisie.dog/
 Environment=OAUTH2_REDIRECT_URL=https://rss.corvus-buri.ts.net/oauth2/oidc/callback
 Environment=OAUTH2_USER_CREATION=1
 Environment=METRICS_COLLECTOR=1
+Environment=METRICS_ALLOWED_NETWORKS=0.0.0.0/0
+Environment=METRICS_PASSWORD=metrics
+Environment=METRICS_USERNAME=metrics
 Environment=INTEGRATION_ALLOW_PRIVATE_NETWORKS=1
 Secret=miniflux_db_url,type=env,target=DATABASE_URL
 Secret=miniflux_admin_passwd,type=env,target=ADMIN_PASSWORD

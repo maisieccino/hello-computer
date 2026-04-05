@@ -20,6 +20,7 @@ Environment=SYMFONY__ENV__DATABASE_USER=wallabag
 Environment=SYMFONY__ENV__DOMAIN_NAME=https://news.corvus-buri.ts.net
 Environment=SYMFONY__ENV__DATABASE_TABLE_PREFIX="wallabag_"
 Environment=SYMFONY__ENV__FOSUSER_REGISTRATION=false
+Environment=PHP_MEMORY_LIMIT=1G
 Secret=news_db_passwd,type=env,target=POSTGRES_PASSWORD
 Secret=news_db_passwd,type=env,target=SYMFONY__ENV__DATABASE_PASSWORD
 Secret=news_secret,type=env,target=SYMFONY__ENV__SECRET

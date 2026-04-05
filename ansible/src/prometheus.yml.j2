@@ -4,6 +4,14 @@ scrape_configs:
     metrics_path: '/api/v1/metrics'
     static_configs:
       - targets: ['todo.corvus-buri.ts.net:3456']
+  - job_name: 'miniflux'
+    scrape_interval: 5s
+    metrics_path: '/metrics'
+    basic_auth:
+      username: metrics
+      password: metrics
+    static_configs:
+      - targets: ['rss.corvus-buri.ts.net']
   - job_name: 'node_pi'
     scrape_interval: 5s
     static_configs:

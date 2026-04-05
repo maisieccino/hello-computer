@@ -26,6 +26,12 @@
     dest: /etc/prometheus/prometheus.yml
   register: prom_config
 
+- name: Ensure Node exporter env file
+  become: true
+  ansible.builtin.template:
+    src: src/node-exporter-env.j2
+    dest: /etc/default/prometheus-node-exporter
+
 - name: Ensure Grafana config file
   become: true
   ansible.builtin.template:
