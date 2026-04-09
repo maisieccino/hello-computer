@@ -61,7 +61,7 @@ cask "kitty"
 if is_work?
   tap "mdogan/zulu"
   cask "zulu-jdk21"
-  brew "go@1.25"
+  brew "go@1.26"
   brew "pillow" # For images in ranger!
 end
 
