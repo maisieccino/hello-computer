@@ -48,6 +48,7 @@ brew "the_silver_searcher"
 brew "tmux"
 brew "tree"
 brew "tree-sitter-cli"
+brew "vdirsyncer", restart_service: :changed
 brew "wget"
 brew "yq"
 brew "z"

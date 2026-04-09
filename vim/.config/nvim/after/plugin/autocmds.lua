@@ -26,7 +26,11 @@ local imb = function(e) -- init molten buffer
       end
     end
     if kernel_name ~= nil and vim.tbl_contains(kernels, kernel_name) then
-      vim.cmd(("MoltenInit %s"):format(kernel_name))
+      if util.is_work() then
+        vim.cmd(("MoltenInit http://localhost:8080?kernel_name=%s"):format(kernel_name))
+      else
+        vim.cmd(("MoltenInit %s"):format(kernel_name))
+      end
     end
     vim.cmd("MoltenImportOutput")
     require("quarto").activate()

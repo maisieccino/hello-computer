@@ -1,11 +1,11 @@
 local util = require("util")
-local vim = vim
-local vutil = require("vim.lsp.util")
-local commands = require("bqls.commands")
 
 if not util.is_work() then
   return {}
 end
+
+local vutil = require("vim.lsp.util")
+local commands = require("bqls.commands")
 
 local function virtual_text_document_handler(uri, res, client_id)
   if not res then

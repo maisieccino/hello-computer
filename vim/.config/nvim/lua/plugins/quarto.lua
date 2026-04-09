@@ -83,7 +83,7 @@ return {
     },
   },
   {
-    "benlubas/molten-nvim",
+    "maisieccino/molten-nvim",
     ft = function()
       if vim.api.nvim_buf_get_name(0):match(".*ipynb") then
         return { "quarto", "markdown", "python" }
