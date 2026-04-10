@@ -5,6 +5,7 @@ return {
     ft = { "quarto", "markdown", "python" },
     dependencies = {
       "jmbuhr/otter.nvim",
+      "kitagry/bqls.nvim",
     },
     opts = {
       lspFeatures = {
