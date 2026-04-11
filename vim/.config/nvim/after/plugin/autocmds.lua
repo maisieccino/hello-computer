@@ -137,9 +137,9 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost" }, {
 })
 
 vim.api.nvim_create_autocmd("BufEnter", {
-  pattern = { "*.md" },
+  pattern = { "*.ipynb" },
   callback = function(opts)
-    require("otter").activate({ "markdown", "yaml" })
+    require("otter").activate()
   end,
   group = vim.api.nvim_create_augroup("md_otter", {}),
 })
