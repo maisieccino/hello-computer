@@ -41,18 +41,67 @@ EOF
 
 # Proton pass
 pp() {
-  echo "Fetching items..." >&2
+  FZF_EXEC="${FZF_EXEC:-fzf}"
 
-  passes=$(
-    pass-cli item list --output=json --filter-state=active --sort-by=created-desc |
-    jq -r '.items[] | [.id, .content.title] | @tsv'
+  if [ -n "$1" ]; then
+    _matching_filter="[.items[] | select(.content.content.Login.urls | any(.[]; contains(\"${1}\")))]"
+  echo "Fetching items for '${1}'..." >&2
+  else
+    _matching_filter="[.items[]]"
+    echo "Fetching items..." >&2
+  fi
+
+  _passes=$(
+    pass-cli item list \
+      --filter-type=login \
+      --output=json \
+      --filter-state=active \
+      --sort-by=created-desc
   )
 
-  res=$(fzf --prompt="Passwords" -d'\t' \
-    --with-nth='{2}' --accept-nth='{1}' \
-    --preview='pass-cli item view --item-id {1}' <<< "$passes")
+  _matching=$(jq "${_matching_filter}" <<< "${_passes}")
 
-  pass-cli item view --item-id "${res}"
+  if [[ $(jq length <<< "${_matching}") -eq "1" ]]; then
+    res=$(jq '.[0].id' <<< "${_matching}")
+    pass-cli item view --item-id "${res}" --output=json
+    return 0
+  elif [[ $(jq length <<< "${_matching}") -ne "0" ]]; then
+    _passes="${_matching}"
+  else
+    _passes=$(jq '[.items[]]' <<< "${_passes}")
+  fi
+
+  _items=$(jq -r '.[] | [.id, .content.title, .content.content.Login.totp_uri // ""] | @tsv' <<< "${_passes}")
+
+  _preview_filter=$(cat <<EOF
+"## " + .item.content.title
++ "\n\n"
++ "Username: " + .item.content.content.Login.username + "\n\n"
++ "Email: " + .item.content.content.Login.email + "\n\n"
++ "Created at: " + .item.create_time + "\n\n"
++ "Modified at: " + .item.modify_time + "\n\n"
++ "### URLs\n\n" + ([.item.content.content.Login.urls[] | "- " + . ] | join("\n"))
+EOF
+)
+  _preview_script="CLICOLOR_FORCE=1 pass-cli item view --item-id {1} --output=json | jq -r '${_preview_filter}' | glow"
+
+  # res=$(${FZF_EXEC} --prompt="Passwords" -d'\t' \
+  #   --with-nth='{2}' --accept-nth='{1}' \
+  #   --preview="CLICOLOR_FORCE=1 pass-cli item view --item-id {1} --output=json | jq -r '${_preview_filter}' | glow" \
+  #   <<< "$_items")
+  res=$(${FZF_EXEC} --prompt="Passwords " -d'\t' \
+    --with-nth='{2}' --accept-nth='{1}' \
+    --preview='pass-cli item view --item-id={1}' \
+    --footer="ENTER: select, CTRL-T: Copy OTP" \
+    --bind "ctrl-T:execute(pass-cli totp generate {3} | wl-copy)" \
+    <<< "$_items")
+
+  if [ $? -ne 0 ] || [ -z "${res}" ]; then
+    echo "Nothing selected" >&2
+    return 1
+  fi
+
+  pass-cli item view --item-id "${res}" --output=json
 }
 
 save-link() {

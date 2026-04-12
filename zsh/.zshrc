@@ -224,4 +224,12 @@ fi
 # use fs key provider for the proton pass cli
 export PROTON_PASS_KEY_PROVIDER=fs
 
+export BIGQUERYRC=~/.bigqueryrc
+
+_acc_name=$(gcloud auth list --filter=status:ACTIVE --format="value(account)")
+legacy_adc_file="$HOME/.config/gcloud/legacy_credentials/${_acc_name}/adc.json"
+if [ -f "${legacy_adc_file}" ]; then
+  export GOOGLE_APPLICATION_CREDENTIALS="${legacy_adc_file}"
+fi
+
 # zprof

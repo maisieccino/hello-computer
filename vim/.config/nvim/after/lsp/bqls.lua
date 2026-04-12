@@ -1,8 +1,8 @@
 local util = require("util")
 
-if not util.is_work() then
-  return {}
-end
+-- if not util.is_work() then
+--   return {}
+-- end
 
 local vutil = require("vim.lsp.util")
 local commands = require("bqls.commands")
@@ -56,7 +56,7 @@ end
 ---@type vim.lsp.Config
 return {
   init_options = {
-    project_id = "monzo-analytics",
+    project_id = util.is_work() and "monzo-analytics" or "sandbox-492920",
   },
   on_init = function(client)
     client.server_capabilities.documentFormattingProvider = false
