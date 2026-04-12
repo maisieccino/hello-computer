@@ -101,7 +101,11 @@ local function get_imgs()
           )
         ]]
     )
-    local tree = ts.get_parser():children()["yaml"]:trees()[1]
+    local yaml_parser = ts.get_parser():children()["yaml"]
+    if yaml_parser == nil then
+      return nil
+    end
+    local tree = yaml_parser:trees()[1]
     if tree == nil then
       vim.print("no tree found")
       return
