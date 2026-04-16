@@ -69,6 +69,15 @@ return {
     end,
   },
   {
+    "jmbuhr/otter.nvim",
+    opts = {
+      ignore_pattern = {
+        -- ipython cell magic (lines starting with %) and shell commands (lines starting with !)
+        python = "^(%s*[%%!].*)",
+      },
+    },
+  },
+  {
     "3rd/image.nvim",
     ft = function()
       if vim.api.nvim_buf_get_name(0):match(".*ipynb") then

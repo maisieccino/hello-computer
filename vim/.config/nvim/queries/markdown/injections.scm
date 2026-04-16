@@ -13,19 +13,22 @@
 ; Ensures magic strings are injected with their language.
 (fenced_code_block
   (info_string
-    (language) @lang
-    (#match? @lang "python")
+    ; (language) @lang
+    ; (#match? @lang "python")
+    (language) @injection.language
+    (#match? @injection.language "python")
   )
-  (code_fence_content) @injection.content @injection.language
+  (code_fence_content) @injection.content ;@injection.language
+  ; (code_fence_content) @injection.content @injection.language
   ; Match a magic directive.
   ; e.g. %%sql
   ; or escaped with a comment - # %%shell
-  (#lua-match? @injection.language "^#?%s*%%%%(%a+).*\n")
+  ; (#lua-match? @injection.language "^#?%s*%%%%(%a+).*\n")
   ; Start content at line after comment
-  (#offset! @injection.content 1 0 0 0)
-  (#gsub! @injection.language "^#?%s*%%%%(%a+).*$" "%1")
+  ; (#offset! @injection.content 1 0 0 0)
+  ; (#gsub! @injection.language "^#?%s*%%%%(%a+).*$" "%1")
   ; If %%bigquery magic, hardcode to sql
-  (#gsub! @injection.language "bigquery" "sql")
+  ; (#gsub! @injection.language "bigquery" "sql")
 )
 
 ; Other python code blocks that don't contain

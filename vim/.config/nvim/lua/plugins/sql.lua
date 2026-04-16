@@ -39,6 +39,7 @@ return {
     "mfussenegger/nvim-lint",
     ft = "sql",
     opts = {
+      events = { "BufWritePost" },
       linters = {
         sqlfluff = {
           args = { "lint", "--format=json" },
