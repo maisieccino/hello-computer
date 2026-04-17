@@ -15,7 +15,6 @@ return {
   {
     "neotest",
     dependencies = { "nvim-neotest/neotest-jest", "fredrikaverpil/neotest-golang", "nvim-treesitter" },
-    commit = "52fca6717ef972113ddd6ca223e30ad0abb2800c",
     keys = {
       {
         "<leader>tT",
