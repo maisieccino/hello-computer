@@ -34,11 +34,13 @@ fi
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
+zstyle ':fzf-tab:*' use-fzf-default-opts yes
 # zstyle ':fzf-tab:complete:cd:*' fzf-preview 'CLICOLOR_force=1 tree -L1 $realpath'
 # zstyle ':fzf-tab:complete:ls:*' fzf-preview '~/bin/fzf-preview.sh $realpath'
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:*' fzf-flags --border=horizontal
+zstyle ':fzf-tab:*' fzf-min-height '10'
 
 fpath=(/usr/local/share/zsh-completions $fpath)
 
@@ -115,7 +117,19 @@ else
 fi
 
 # FZF
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+fzf_opts=(
+  --style=minimal
+  --layout=reverse
+  --color=dark
+  --color=fg:-1,fg+:#f9fbff,bg:-1,bg+:#252525
+  --color=hl:#f8e081,hl+:#f8e081
+  --color=info:#6e6f70,footer:#6e6f70
+  --color=marker:#c8a5ff
+  --color=pointer:#f16da6:regular
+  --color=prompt:#33b1ff,spinner:#08bdba
+  --color=border:#353535
+)
+export FZF_DEFAULT_OPTS="${fzf_opts[*]}"
 [ -f /usr/share/doc/fzf/examples/key-bindings.zsh ] && source /usr/share/doc/fzf/examples/key-bindings.zsh
 [ -f /usr/share/doc/fzf/examples/completion.zsh ] && source /usr/share/doc/fzf/examples/completion.zsh
 
@@ -226,10 +240,13 @@ export PROTON_PASS_KEY_PROVIDER=fs
 
 export BIGQUERYRC=~/.bigqueryrc
 
-_acc_name=$(gcloud auth list --filter=status:ACTIVE --format="value(account)")
-legacy_adc_file="$HOME/.config/gcloud/legacy_credentials/${_acc_name}/adc.json"
-if [ -f "${legacy_adc_file}" ]; then
-  export GOOGLE_APPLICATION_CREDENTIALS="${legacy_adc_file}"
+
+if (command -v gcloud &>/dev/null); then
+  _acc_name=$(gcloud auth list --filter=status:ACTIVE --format="value(account)")
+  legacy_adc_file="$HOME/.config/gcloud/legacy_credentials/${_acc_name}/adc.json"
+  if [ -f "${legacy_adc_file}" ]; then
+    export GOOGLE_APPLICATION_CREDENTIALS="${legacy_adc_file}"
+  fi
 fi
 
 # zprof
