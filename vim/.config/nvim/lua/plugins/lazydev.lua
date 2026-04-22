@@ -4,6 +4,7 @@ return {
     "folke/lazydev.nvim",
     ft = "lua", -- only load on lua files
     opts = {
+      checkThirdParty = false,
       library = {
         { path = "LazyVim" },
         { path = "snacks.nvim" },
