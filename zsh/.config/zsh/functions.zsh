@@ -7,7 +7,6 @@ alias pr="nvim -c 'Octo pr'"
 alias syncnotes="git add . && git commit -m \"Sync mac $(date -I)\" && git push"
 
 # Git aliases
-alias git=hub
 alias gst="git status"
 alias gp="git push"
 alias gl="git pull"
