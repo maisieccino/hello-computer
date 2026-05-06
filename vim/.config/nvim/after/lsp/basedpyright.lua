@@ -14,6 +14,39 @@ local function set_python_path(command)
   end
 end
 
+local function check_poetry()
+  local clients = vim.lsp.get_clients({
+    bufnr = vim.api.nvim_get_current_buf(),
+    name = "basedpyright",
+  })
+  for _, client in ipairs(clients) do
+    if client.settings and client.settings.python then
+      if client.settings.python.pythonPath and client.settings.python.pythonPath:match("pypoetry") then
+        vim.notify("nothing to do", "debug")
+        return
+      end
+    end
+  end
+
+  local which_python = vim
+    .system({
+      "which",
+      "python",
+    })
+    :wait(1000)
+  if which_python.code ~= 0 then
+    return
+  end
+  local path = which_python.stdout
+  if path == nil then
+    return
+  end
+  if path:match("pypoetry") then
+    vim.notify("Updating python path to" .. path, "debug")
+    set_python_path(path)
+  end
+end
+
 ---@type vim.lsp.Config
 return {
   root_markers = {
@@ -27,12 +60,16 @@ return {
   },
   filetypes = { "python" },
   settings = {
-    analysis = {
-      autoImportCompletions = true,
-      autoSearchPaths = true,
-      diagnosticMode = "workspace",
-      useLibraryCodeForTypes = true,
-      typeCheckingMode = "off",
+    basedpyright = {
+      analysis = {
+        autoImportCompletions = true,
+        autoSearchPaths = true,
+        diagnosticMode = "openFilesOnly",
+        typeCheckingMode = "off",
+      },
+    },
+    python = {
+      venvPath = "/Users/maisiebell/Library/Caches/pypoetry/virtualenvs/",
     },
   },
   on_attach = function(client, bufnr)
@@ -41,5 +78,6 @@ return {
       nargs = 1,
       complete = "file",
     })
+    vim.schedule(check_poetry)
   end,
 }
