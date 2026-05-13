@@ -15,6 +15,6 @@ disabled = false
 [custom.tenancy]
 command = "~/bin/tenancy_prompt.sh"
 when = '''which tenancy'''
-format = '[$output](bold green)'
+format = "[$output](bold green)"
 ignore_timeout = true
 disabled = true
