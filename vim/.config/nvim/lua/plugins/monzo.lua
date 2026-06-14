@@ -45,9 +45,9 @@ return {
       adapters = {
         ["neotest-jest"] = {
           jestCommand = "yarn test",
-          jestConfigFile = function(file)
-            return util.git_root_dir(file) .. "/jest.config.js"
-          end,
+          -- jestConfigFile = function(file)
+          --   return util.local_root_dir(file) .. "/jest.config.js"
+          -- end,
           jest_test_discovery = true,
           env = { CI = true },
           cwd = function(file)

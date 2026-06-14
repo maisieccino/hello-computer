@@ -1,3 +1,4 @@
+---@type LazySpec[]
 return {
   -- Pretty window for navigating LSP locations
   {
