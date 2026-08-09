@@ -5,7 +5,6 @@ end
 brew "bat"
 brew "chafa" # Generate ASCII images
 brew "ctags"
-brew "doctl" # DigitalOcean CLI
 brew "eza"
 brew "fd" # Better find tools
 brew "ffmpeg"
@@ -53,6 +52,7 @@ if is_work?
 end
 
 unless is_work?
+  brew "doctl" # DigitalOcean CLI
   brew "exiftool"  # Strip exif data from images
   brew "fnm"  # Better nvm
   brew "go"

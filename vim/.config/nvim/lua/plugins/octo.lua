@@ -10,14 +10,13 @@ return {
   },
   {
     name = "octo.nvim",
-    url = "https://github.com/maisieccino/octo.nvim",
-    branch = "snacks-inline-images",
+    -- url = "https://github.com/maisieccino/octo.nvim",
+    -- branch = "snacks-inline-images",
+    url = "https://github.com/pwntester/octo.nvim",
     cmd = "Octo",
     event = { { event = "BufReadCmd", pattern = "octo://*" } },
     opts = {
-      -- Fixes issues with diffs being wrong(?)
-      -- use_local_fs = true,
-      use_local_fs = false,
+      use_local_fs = true,
       enable_builtin = true,
       default_to_projects_v2 = true,
       picker = "snacks",
