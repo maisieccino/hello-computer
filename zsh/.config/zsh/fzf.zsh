@@ -61,6 +61,7 @@ pp() {
       --filter-type=login \
       --output=json \
       --filter-state=active \
+      --show-secrets \
       --sort-by=created-desc
   )
 

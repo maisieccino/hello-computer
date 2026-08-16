@@ -17,6 +17,7 @@
       - podman-compose
       - python3
       - pipx
+      - systemd-container
 
 - name: Ensure docker.io registry
   ansible.builtin.copy:
