@@ -39,6 +39,11 @@ EOF
   local res = $(echo ${list} | fzf)
 }
 
+diffbrowse() {
+  git diff --name-only |\
+    fzf --preview='git diff --color {}'
+}
+
 # Proton pass
 pp() {
   FZF_EXEC="${FZF_EXEC:-fzf}"
