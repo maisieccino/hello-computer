@@ -2,14 +2,7 @@ local util = require("util")
 
 local function sync_notes()
   vim.schedule(function()
-    vim.notify("Syncing with git...")
-    local cmd = vim.system({ "zsh", vim.fn.expand("./bin/syncnotes.zsh") }, {}, function(out)
-      if out.code == 0 then
-        vim.notify("Sync complete.")
-      else
-        vim.notify("Sync failed.", "error")
-      end
-    end)
+    vim.notify("Triggering Obsidian sync not yet implemented...")
   end)
 end
 
@@ -109,7 +102,7 @@ return {
     ft = "markdown",
     -- @type fun(LazyPlugin):boolean
     cond = function()
-      return string.match(vim.fn.getcwd(), "notes")
+      return string.match(vim.fn.getcwd(), "obsidian")
     end,
     keys = {
       { "<localleader>ot", "<cmd>Obsidian today<CR>", desc = "Daily note (today)" },
@@ -129,8 +122,8 @@ return {
       legacy_commands = false,
       workspaces = {
         {
-          name = "personal",
-          path = "~/github.com/maisieccino/notes",
+          name = "Personal",
+          path = "~/obsidian/Personal",
         },
       },
       ui = { enable = false },

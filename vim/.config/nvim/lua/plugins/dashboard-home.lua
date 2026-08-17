@@ -11,7 +11,7 @@ return {
     table.insert(
       opts.dashboard.preset.keys,
       2,
-      { icon = "󰹕 ", key = "o", desc = "Open Notes", action = ":e ~/github.com/maisieccino/notes/Home.md" }
+      { icon = "󰹕 ", key = "o", desc = "Open Notes", action = ":e ~/obsidian/Personal/Home.md" }
     )
     opts.dashboard.sections = {
       {
