@@ -1,5 +1,6 @@
 {
   "trustedtaps": [
-    "mdogan/zulu"
+    "mdogan/zulu",
+    "protonpass/tap"
   ]
 }

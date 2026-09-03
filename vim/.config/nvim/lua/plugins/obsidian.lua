@@ -186,7 +186,9 @@ return {
           return tostring(os.time()) .. "-" .. suffix
         end
       end,
-      preferred_link_style = "wiki",
+      link = {
+        style = "wiki",
+      },
       wiki_link_func = "use_alias_only",
       completion = {
         blink = true,

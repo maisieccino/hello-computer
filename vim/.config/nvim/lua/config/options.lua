@@ -37,16 +37,19 @@ end
 opt.sessionoptions:remove({ "blank", "buffers", "terminal" })
 opt.sessionoptions:append({ "globals", "skiprtp" })
 
-opt.formatoptions = opt.formatoptions
-  - "a" -- auto formatting paragraphs
-  - "t" -- auto wrap textwidth
-  + "c" -- auto wrap comments
-  + "q" -- allow formatting comments w/ gq
-  + "o" -- continue comments on o/O. remove with ctrl+u
-  + "r" -- continue comment when <enter> in insert
-  + "n" -- indent lists nicely
-  + "j" -- tidy up comments
-  - "2" -- don't indent first line of para
+opt.formatoptions:remove({
+  "a", -- auto formatting paragraphs
+  "t", -- auto wrap textwidth
+  "2", -- don't indent first line of para
+})
+opt.formatoptions:append({
+  "c", -- auto wrap comments
+  "q", -- allow formatting comments w/ gq
+  "o", -- continue comments on o/O. remove with ctrl+u
+  "r", -- continue comment when <enter> in insert
+  "n", -- indent lists nicely
+  "j", -- tidy up comments
+})
 
 opt.fillchars = {
   foldopen = "", -- 󰅀 

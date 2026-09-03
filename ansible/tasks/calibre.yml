@@ -26,6 +26,15 @@
   user:
     name: calibre
 
+- name: Enable Linger for calibre user
+  become: true
+  ansible.builtin.command:
+    argv:
+      - /usr/bin/loginctl
+      - enable-linger
+      - "calibre"
+    creates: "/var/lib/systemd/linger/calibre"
+
 - name: Calibre systemd unit definition
   become: true
   ansible.builtin.copy:
