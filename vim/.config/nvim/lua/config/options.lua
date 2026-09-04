@@ -45,8 +45,12 @@ opt.formatoptions:remove({
 opt.formatoptions:append({
   "c", -- auto wrap comments
   "q", -- allow formatting comments w/ gq
-  "o", -- continue comments on o/O. remove with ctrl+u
+})
+opt.formatoptions:append({
   "r", -- continue comment when <enter> in insert
+  "o", -- continue comments on o/O. remove with ctrl+u
+})
+opt.formatoptions:append({
   "n", -- indent lists nicely
   "j", -- tidy up comments
 })

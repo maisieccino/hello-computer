@@ -11,3 +11,5 @@ okteto
 telepresence.log
 __debug_bin*
 .live-plugins
+
+**/.claude/settings.local.json
