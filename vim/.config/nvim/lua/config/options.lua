@@ -30,8 +30,7 @@ opt.tabclose:append({ "uselast" })
 
 -- TODO: Remove once moved to a real plugin
 if util.is_work() then
-  -- opt.rtp:append(vim.fn.expand("~/src/github.com/monzo/wearedev-pin/tools/editors/nvim/pin.nvim"))
-  opt.rtp:append(vim.fn.expand("~/src/github.com/monzo/wearedev/tools/editors/nvim/pin.nvim"))
+  opt.rtp:append(vim.fn.expand("~/src/github.com/monzo/worktrees/wearedev/c/tools/editors/nvim/pin.nvim"))
 end
 
 opt.sessionoptions:remove({ "blank", "buffers", "terminal" })

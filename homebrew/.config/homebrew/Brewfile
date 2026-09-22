@@ -4,6 +4,7 @@ end
 
 brew "bat"
 brew "chafa" # Generate ASCII images
+brew "container"
 brew "ctags"
 brew "eza"
 brew "fd" # Better find tools
@@ -45,10 +46,12 @@ cask "font-fantasque-sans-mono-nerd-font"
 cask "font-iosevka-nerd-font"
 cask "kitty"
 
+tap "aviator-co/tap"
+brew "aviator-co/tap/av"
+
 if is_work?
   tap "mdogan/zulu"
   cask "zulu-jdk21"
-  brew "go@1.26"
 end
 
 unless is_work?
@@ -68,7 +71,6 @@ unless is_work?
   cask "1password"
   cask "1password-cli"
   cask "blender"
-  cask "container"
   cask "calibre"
   cask "figma"
   cask "google-chrome"

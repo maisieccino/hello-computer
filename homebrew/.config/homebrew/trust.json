@@ -1,6 +1,13 @@
 {
   "trustedtaps": [
+    "aviator-co/tap",
     "mdogan/zulu",
     "protonpass/tap"
+  ],
+  "trustedcasks": [
+    "mdogan/zulu/zulu-jdk21"
+  ],
+  "trustedformulae": [
+    "aviator-co/tap/av"
   ]
 }
