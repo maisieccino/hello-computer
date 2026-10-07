@@ -50,6 +50,9 @@ return {
   },
   {
     "mason.nvim",
+    cond = function()
+      return not util.is_work()
+    end,
     opts = {
       ensure_installed = {
         "golangci-lint",
