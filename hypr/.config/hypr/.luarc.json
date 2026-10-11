@@ -1,0 +1,15 @@
+{
+  "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
+  "runtime": {
+    "path": ["?.lua", "?/init.lua"],
+    "special": {
+      "__require": "require"
+    }
+  },
+  "diagnostics": {
+    "globals": ["hl"]
+  },
+  "workspace": {
+    "library": ["/usr/share/hypr/stubs"]
+  }
+}
